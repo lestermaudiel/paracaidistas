@@ -1,6 +1,6 @@
 {
-    "name": "mindef/demo",
-    "description": "Proyecto MVC demo",
+    "name": "mindef/proyecto1",
+    "description": "Primer proyecto de MVC",
     "type": "project",
     "config": {
         "platform-check": false
@@ -14,7 +14,7 @@
         }
     },
     "require": {
-        "mpdf/mpdf": "^8.1",
+        "mpdf/mpdf": "*",
         "phpmailer/phpmailer": "^6.6",
         "dompdf/dompdf": "^2.0",
         "vlucas/phpdotenv": "^5.5"
