@@ -39,6 +39,9 @@
                             <li>
                                 <a class="dropdown-item nav-link text-white " href="/paracaidistas/tiposalto"><i class="ms-lg-0 ms-2 bi bi-plus-circle me-2"></i>Tipos de Saltos</a>
                             </li>
+                            <li>
+                                <a class="dropdown-item nav-link text-white " href="/paracaidistas/zonasalto"><i class="ms-lg-0 ms-2 bi bi-plus-circle me-2"></i>Zona de Saltos</a>
+                            </li>
                         </ul>
                     </div> 
 

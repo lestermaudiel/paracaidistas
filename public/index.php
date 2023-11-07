@@ -5,6 +5,7 @@ use MVC\Router;
 use Controllers\AppController;
 use Controllers\TiposParacaidasController; 
 use Controllers\TipoSaltoController; 
+use Controllers\ZonaSaltoController;
 
 $router = new Router();
 $router->setBaseURL('/' . $_ENV['APP_NAME']);
@@ -17,12 +18,19 @@ $router->post('/API/tiposparacaidas/eliminar', [TiposParacaidasController::class
 $router->get('/API/tiposparacaidas/buscar', [TiposParacaidasController::class, 'buscarAPI']); 
 
 
-
 $router->get('/tiposalto', [TipoSaltoController::class, 'index']); 
 $router->post('/API/tiposalto/guardar', [TipoSaltoController::class, 'guardarAPI']); 
 $router->post('/API/tiposalto/modificar', [TipoSaltoController::class, 'modificarAPI']); 
 $router->post('/API/tiposalto/eliminar', [TipoSaltoController::class, 'eliminarAPI']); 
 $router->get('/API/tiposalto/buscar', [TipoSaltoController::class, 'buscarAPI']); 
+
+
+$router->get('/zonasalto', [ZonaSaltoController::class, 'index']);
+$router->post('/API/zonasalto/guardar', [ZonaSaltoController::class, 'guardarAPI']);
+$router->post('/API/zonasalto/modificar', [ZonaSaltoController::class, 'modificarAPI']);
+$router->post('/API/zonasalto/eliminar', [ZonaSaltoController::class, 'eliminarAPI']);
+$router->get('/API/zonasalto/buscar', [ZonaSaltoController::class, 'buscarAPI']);
+
 
 // Comprueba y valida las rutas, que existan y les asigna las funciones del Controlador
 $router->comprobarRutas();
