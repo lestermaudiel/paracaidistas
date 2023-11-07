@@ -6,6 +6,7 @@ use Controllers\AppController;
 use Controllers\TiposParacaidasController; 
 use Controllers\TipoSaltoController; 
 use Controllers\ZonaSaltoController;
+use Controllers\AltimetroController;
 
 $router = new Router();
 $router->setBaseURL('/' . $_ENV['APP_NAME']);
@@ -31,6 +32,12 @@ $router->post('/API/zonasalto/modificar', [ZonaSaltoController::class, 'modifica
 $router->post('/API/zonasalto/eliminar', [ZonaSaltoController::class, 'eliminarAPI']);
 $router->get('/API/zonasalto/buscar', [ZonaSaltoController::class, 'buscarAPI']);
 
+
+$router->get('/altimetro', [AltimetroController::class, 'index']); 
+$router->post('/API/altimetro/guardar', [AltimetroController::class, 'guardarAPI']); 
+$router->post('/API/altimetro/modificar', [AltimetroController::class, 'modificarAPI']); 
+$router->post('/API/altimetro/eliminar', [AltimetroController::class, 'eliminarAPI']); 
+$router->get('/API/altimetro/buscar', [AltimetroController::class, 'buscarAPI']); 
 
 // Comprueba y valida las rutas, que existan y les asigna las funciones del Controlador
 $router->comprobarRutas();

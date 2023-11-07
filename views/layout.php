@@ -42,12 +42,14 @@
                             <li>
                                 <a class="dropdown-item nav-link text-white " href="/paracaidistas/zonasalto"><i class="ms-lg-0 ms-2 bi bi-plus-circle me-2"></i>Zona de Saltos</a>
                             </li>
+                            <li>
+                                <a class="dropdown-item nav-link text-white " href="/paracaidistas/altimetro"><i class="ms-lg-0 ms-2 bi bi-plus-circle me-2"></i>Altimetros</a>
+                            </li>
                         </ul>
                     </div> 
 
                 </ul> 
                 <div class="col-lg-1 d-grid mb-lg-0 mb-2">
-                    <!-- Ruta relativa desde el archivo donde se incluye menu.php -->
                     <a href="/paracaidistas/" class="btn btn-danger"><i class="bi bi-arrow-bar-left"></i>MENÚ</a>
                 </div>
             </div>

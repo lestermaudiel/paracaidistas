@@ -92,7 +92,6 @@ if (data.length > 0) {
     data.forEach(zonaSalto => {
         const tr = document.createElement('tr');
         
-        // Crea celdas para cada propiedad
         const td1 = document.createElement('td');
         td1.innerText = contador;
         const td2 = document.createElement('td');
