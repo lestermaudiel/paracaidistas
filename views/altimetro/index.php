@@ -27,7 +27,7 @@
 <div class="row justify-content-center" id="divTabla">
     <div class="col-lg-8">
         <h2>Listado de Altímetros</h2>
-        <table class="table table-bordered table-hover" id="tablaAltímetro">
+        <table class="table table-bordered table-hover" id="tablaAltimetro">
             <thead class="table-dark">
                 <tr>
                     <th>NO.</th>
