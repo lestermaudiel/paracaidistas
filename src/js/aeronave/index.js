@@ -16,19 +16,16 @@ btnCancelar.parentElement.style.display = 'none';
 
 const guardar = async (evento) => {
     evento.preventDefault();
-
-    const requiredFields = ['aer_desc_aeronave', 'aer_tip_ala']; // Campos obligatorios
-
-    if (!validarFormulario(formulario, requiredFields)) {
+    if (!validarFormulario(formulario, ['aer_desc_aeronave', 'aer_tip_ala'])) {
         Toast.fire({
             icon: 'info',
-            text: 'Debe llenar todos los datos requeridos, incluyendo el tipo de aeronave'
+            text: 'Debe llenar todos los datos'
         });
         return;
     }
 
     const body = new FormData(formulario);
-    body.delete('aer_tip_registro');
+    body.delete('aeronave_id');
     const url = '/paracaidistas/API/aeronave/guardar';
     const config = {
         method: 'POST',
@@ -38,7 +35,7 @@ const guardar = async (evento) => {
     try {
         const respuesta = await fetch(url, config);
         const data = await respuesta.json();
-        
+
         const { codigo, mensaje, detalle } = data;
         let icon = 'info';
         switch (codigo) {
@@ -59,20 +56,19 @@ const guardar = async (evento) => {
 
         Toast.fire({
             icon,
-            text: mensaje,
+            text: mensaje
         });
     } catch (error) {
         console.log(error);
     }
 };
 
-
 const buscar = async () => {
-    const aer_desc_aeronave = formulario.aer_desc_aeronave.value;
-    
-    const url = `/paracaidistas/API/aeronave/buscar?&aer_desc_aeronave=${aer_desc_aeronave}`;
+    let aer_desc_aeronave = formulario.aer_desc_aeronave.value;
+    let aer_tip_ala = formulario.aer_tip_ala.value;
+    const url = `/paracaidistas/API/aeronave/buscar?aer_desc_aeronave=${aer_desc_aeronave}&aer_tip_ala=${aer_tip_ala}`;
     const config = {
-        method: 'GET',
+        method: 'GET'
     };
 
     try {
@@ -92,9 +88,10 @@ const buscar = async () => {
                 const td2 = document.createElement('td');
                 td2.innerText = aeronave.aer_desc_aeronave;
                 const td3 = document.createElement('td');
-                td3.innerText = aeronave.aer_tip_ala;  
+                td3.innerText = aeronave.aer_tip_ala;
                 const td4 = document.createElement('td');
-
+                const td5 = document.createElement('td');
+                
                 const buttonModificar = document.createElement('button');
                 const buttonEliminar = document.createElement('button');
 
@@ -106,13 +103,15 @@ const buscar = async () => {
                 buttonModificar.addEventListener('click', () => colocarDatos(aeronave));
                 buttonEliminar.addEventListener('click', () => eliminar(aeronave.aer_tip_registro));
 
-                td3.appendChild(buttonModificar);
-                td4.appendChild(buttonEliminar);
+                td4.appendChild(buttonModificar);
+                td5.appendChild(buttonEliminar);
 
                 tr.appendChild(td1);
                 tr.appendChild(td2);
                 tr.appendChild(td3);
                 tr.appendChild(td4);
+                tr.appendChild(td5);
+                
 
                 fragment.appendChild(tr);
 
@@ -122,7 +121,7 @@ const buscar = async () => {
             const tr = document.createElement('tr');
             const td = document.createElement('td');
             td.innerText = 'No existen registros';
-            td.colSpan = 6;  
+            td.colSpan = 5;
             tr.appendChild(td);
             fragment.appendChild(tr);
         }
@@ -131,11 +130,12 @@ const buscar = async () => {
     } catch (error) {
         console.log(error);
     }
-}
-    
+};
+
 const colocarDatos = (datos) => {
     formulario.aer_desc_aeronave.value = datos.aer_desc_aeronave;
-    formulario.aer_tip_registro.value = datos.aer_tip_registro;
+    formulario.aer_tip_ala.value = datos.aer_tip_ala;
+    formulario.aeronave_id.value = datos.aer_tip_registro;
 
     btnGuardar.disabled = true;
     btnGuardar.parentElement.style.display = 'none';
@@ -157,7 +157,6 @@ const cancelarAccion = () => {
     btnModificar.parentElement.style.display = 'none';
     btnCancelar.disabled = true;
     btnCancelar.parentElement.style.display = 'none';
-
     divTabla.style.display = '';
 };
 
@@ -174,7 +173,7 @@ const modificar = async () => {
     const url = '/paracaidistas/API/aeronave/modificar';
     const config = {
         method: 'POST',
-        body,
+        body
     };
 
     try {
@@ -202,7 +201,7 @@ const modificar = async () => {
 
         Toast.fire({
             icon,
-            text: mensaje,
+            text: mensaje
         });
     } catch (error) {
         console.log(error);
@@ -212,7 +211,7 @@ const modificar = async () => {
 const eliminar = async (id) => {
     if (await confirmacion('warning', '¿Desea eliminar este registro?')) {
         const body = new FormData();
-        body.append('aer_tip_registro', id);
+        body.append('aeronave_id', id);
         const url = '/paracaidistas/API/aeronave/eliminar';
         const config = {
             method: 'POST',
@@ -222,7 +221,6 @@ const eliminar = async (id) => {
         try {
             const respuesta = await fetch(url, config);
             const data = await respuesta.json();
-            console.log(data);
 
             const { codigo, mensaje, detalle } = data;
             let icon = 'info';
@@ -243,7 +241,7 @@ const eliminar = async (id) => {
 
             Toast.fire({
                 icon,
-                text: mensaje,
+                text: mensaje
             });
         } catch (error) {
             console.log(error);
