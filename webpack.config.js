@@ -10,6 +10,7 @@ module.exports = {
     'js/tiposalto/index': './src/js/tiposalto/index.js',
     'js/zonasalto/index': './src/js/zonasalto/index.js',
     'js/altimetro/index': './src/js/altimetro/index.js',
+    'js/pista/index': './src/js/pista/index.js',
   },
   output: {
     filename: '[name].js',

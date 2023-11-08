@@ -45,6 +45,48 @@
                             <li>
                                 <a class="dropdown-item nav-link text-white " href="/paracaidistas/altimetro"><i class="ms-lg-0 ms-2 bi bi-plus-circle me-2"></i>Altimetros</a>
                             </li>
+                            <li>
+                                <a class="dropdown-item nav-link text-white " href="/paracaidistas/pista"><i class="ms-lg-0 ms-2 bi bi-plus-circle me-2"></i>Pistas de Aterrizaje</a>
+                            </li>
+                        </ul>
+                    </div> 
+                    <div class="nav-item dropdown " >
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                            <i class="bi bi-person-add me-2"></i>Pesonal Civil
+                        </a>
+                        <ul class="dropdown-menu  dropdown-menu-dark "id="dropwdownRevision" style="margin: 0;">
+                            <li>
+                                <a class="dropdown-item nav-link text-white " href="/paracaidistas/persona"><i class="ms-lg-0 ms-2 bi bi-plus-circle me-2"></i>Personal Civil</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item nav-link text-white " href="/paracaidistas/manifiestocivil"><i class="ms-lg-0 ms-2 bi bi-filetype-pdf me-2"></i>Manifiesto Civil</a>
+                            </li>
+                        </ul>
+                    </div> 
+                    <div class="nav-item dropdown " >
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                            <i class="bi bi-filetype-pdf me-2"></i>Manifieto
+                        </a>
+                        <ul class="dropdown-menu  dropdown-menu-dark "id="dropwdownRevision" style="margin: 0;">
+                            <li>
+                                <a class="dropdown-item nav-link text-white " href="/paracaidistas/manifiesto"><i class="ms-lg-0 ms-2 bi bi-plus-circle me-2"></i>Crear Manifiesto</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item nav-link text-white " href="/paracaidistas/manifiestolista"><i class="ms-lg-0 ms-2 bi bi-filetype-pdf me-2"></i>Lista de Manifiestos</a>
+                            </li>
+                        </ul>
+                    </div> 
+                    <div class="nav-item dropdown " >
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                            <i class="bi bi-person-arms-up me-2"></i>Saltos
+                        </a>
+                        <ul class="dropdown-menu  dropdown-menu-dark "id="dropwdownRevision" style="margin: 0;">
+                            <li>
+                                <a class="dropdown-item nav-link text-white " href="/paracaidistas/saltomilitar"><i class="ms-lg-0 ms-2 bi bi-person-fill me-2"></i>Saltos Mitares</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item nav-link text-white " href="/paracaidistas/saltocivil"><i class="ms-lg-0 ms-2 bi bi-filetype-pdf me-2"></i>Saltos Civiles</a>
+                            </li>
                         </ul>
                     </div> 
 
