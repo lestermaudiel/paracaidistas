@@ -48,6 +48,9 @@
                             <li>
                                 <a class="dropdown-item nav-link text-white " href="/paracaidistas/pista"><i class="ms-lg-0 ms-2 bi bi-plus-circle me-2"></i>Pistas de Aterrizaje</a>
                             </li>
+                            <li>
+                                <a class="dropdown-item nav-link text-white " href="/paracaidistas/aeronave"><i class="ms-lg-0 ms-2 bi bi-plus-circle me-2"></i>Aeronaves</a>
+                            </li>
                         </ul>
                     </div> 
                     <div class="nav-item dropdown " >

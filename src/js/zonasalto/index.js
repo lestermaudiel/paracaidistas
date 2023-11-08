@@ -87,68 +87,68 @@ const buscar = async () => {
         console.log(data);
         // ...
         // ...
-if (data.length > 0) {
-    let contador = 1;
-    data.forEach(zonaSalto => {
-        const tr = document.createElement('tr');
-        
-        const td1 = document.createElement('td');
-        td1.innerText = contador;
-        const td2 = document.createElement('td');
-        td2.innerText = zonaSalto.zona_salto_nombre;
-        const td3 = document.createElement('td');
-        td3.innerText = zonaSalto.zona_salto_latitud;
-        const td4 = document.createElement('td');
-        td4.innerText = zonaSalto.zona_salto_longitud;
-        const td5 = document.createElement('td');
-        td5.innerText = zonaSalto.zona_salto_direc_latitud;
-        const td6 = document.createElement('td');
-        td6.innerText = zonaSalto.zona_salto_direc_longitud;
-        const td7 = document.createElement('td');
-        const td8 = document.createElement('td');
+        if (data.length > 0) {
+            let contador = 1;
+            data.forEach(zonaSalto => {
+                const tr = document.createElement('tr');
 
-        // Agrega botones a las celdas
-        const buttonModificar = document.createElement('button');
-        const buttonEliminar = document.createElement('button');
-        buttonModificar.classList.add('btn', 'btn-warning');
-        buttonEliminar.classList.add('btn', 'btn-danger');
-        buttonModificar.textContent = 'Modificar';
-        buttonEliminar.textContent = 'Eliminar';
+                const td1 = document.createElement('td');
+                td1.innerText = contador;
+                const td2 = document.createElement('td');
+                td2.innerText = zonaSalto.zona_salto_nombre;
+                const td3 = document.createElement('td');
+                td3.innerText = zonaSalto.zona_salto_latitud;
+                const td4 = document.createElement('td');
+                td4.innerText = zonaSalto.zona_salto_longitud;
+                const td5 = document.createElement('td');
+                td5.innerText = zonaSalto.zona_salto_direc_latitud;
+                const td6 = document.createElement('td');
+                td6.innerText = zonaSalto.zona_salto_direc_longitud;
+                const td7 = document.createElement('td');
+                const td8 = document.createElement('td');
 
-        // Asigna eventos a los botones
-        buttonModificar.addEventListener('click', () => colocarDatos(zonaSalto));
-        buttonEliminar.addEventListener('click', () => eliminar(zonaSalto.zona_salto_id));
+                // Agrega botones a las celdas
+                const buttonModificar = document.createElement('button');
+                const buttonEliminar = document.createElement('button');
+                buttonModificar.classList.add('btn', 'btn-warning');
+                buttonEliminar.classList.add('btn', 'btn-danger');
+                buttonModificar.textContent = 'Modificar';
+                buttonEliminar.textContent = 'Eliminar';
 
-        // Agrega botones a las celdas
-        td7.appendChild(buttonModificar);
-        td8.appendChild(buttonEliminar);
+                // Asigna eventos a los botones
+                buttonModificar.addEventListener('click', () => colocarDatos(zonaSalto));
+                buttonEliminar.addEventListener('click', () => eliminar(zonaSalto.zona_salto_id));
 
-        // Agrega las celdas a la fila
-        tr.appendChild(td1);
-        tr.appendChild(td2);
-        tr.appendChild(td3);
-        tr.appendChild(td4);
-        tr.appendChild(td5);
-        tr.appendChild(td6);
-        tr.appendChild(td7);
-        tr.appendChild(td8);
+                // Agrega botones a las celdas
+                td7.appendChild(buttonModificar);
+                td8.appendChild(buttonEliminar);
 
-        // Agrega la fila a la tabla
-        fragment.appendChild(tr);
+                // Agrega las celdas a la fila
+                tr.appendChild(td1);
+                tr.appendChild(td2);
+                tr.appendChild(td3);
+                tr.appendChild(td4);
+                tr.appendChild(td5);
+                tr.appendChild(td6);
+                tr.appendChild(td7);
+                tr.appendChild(td8);
 
-        contador++;
-    });
-} else {
-    const tr = document.createElement('tr');
-    const td = document.createElement('td');
-    td.innerText = 'No existen registros';
-    td.colSpan = 5;
-    tr.appendChild(td);
-    fragment.appendChild(tr);
-}
+                // Agrega la fila a la tabla
+                fragment.appendChild(tr);
 
-tablaZonaSalto.tBodies[0].appendChild(fragment);
-// ...
+                contador++;
+            });
+        } else {
+            const tr = document.createElement('tr');
+            const td = document.createElement('td');
+            td.innerText = 'No existen registros';
+            td.colSpan = 5;
+            tr.appendChild(td);
+            fragment.appendChild(tr);
+        }
+
+        tablaZonaSalto.tBodies[0].appendChild(fragment);
+        // ...
 
 
         if (data.length > 0) {
@@ -295,7 +295,7 @@ const eliminar = async (id) => {
     if (await confirmacion('warning', '¿Desea eliminar este registro?')) {
         const body = new FormData();
         body.append('zona_salto_id', id)
-        const url = '/paracaidistas/API/zonasalto/eliminar'; 
+        const url = '/paracaidistas/API/zonasalto/eliminar';
         const config = {
             method: 'POST',
             body
@@ -304,7 +304,7 @@ const eliminar = async (id) => {
             const respuesta = await fetch(url, config);
             const data = await respuesta.json();
             console.log(data);
-            
+
             const { codigo, mensaje, detalle } = data;
             let icon = 'info';
             switch (codigo) {
