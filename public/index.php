@@ -9,6 +9,7 @@ use Controllers\ZonaSaltoController;
 use Controllers\AltimetroController;
 use Controllers\PistaController;
 use Controllers\AeronaveController;
+use Controllers\CivilController;
 
 $router = new Router();
 $router->setBaseURL('/' . $_ENV['APP_NAME']);
@@ -49,6 +50,12 @@ $router->post('/API/aeronave/guardar', [AeronaveController::class, 'guardarAPI']
 $router->post('/API/aeronave/modificar', [AeronaveController::class, 'modificarAPI']);
 $router->post('/API/aeronave/eliminar', [AeronaveController::class, 'eliminarAPI']);
 $router->get('/API/aeronave/buscar', [AeronaveController::class, 'buscarAPI']);
+
+$router->get('/civil', [CivilController::class, 'index']);
+$router->post('/API/civil/guardar', [CivilController::class, 'guardarAPI']);
+$router->post('/API/civil/modificar', [CivilController::class, 'modificarAPI']);
+$router->post('/API/civil/eliminar', [CivilController::class, 'eliminarAPI']);
+$router->get('/API/civil/buscar', [CivilController::class, 'buscarAPI']);
 
 $router->comprobarRutas();
 ?>

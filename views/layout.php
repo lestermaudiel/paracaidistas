@@ -69,7 +69,7 @@
                         </a>
                         <ul class="dropdown-menu  dropdown-menu-dark " id="dropwdownRevision" style="margin: 0;">
                             <li>
-                                <a class="dropdown-item nav-link text-white " href="/paracaidistas/persona"><i
+                                <a class="dropdown-item nav-link text-white " href="/paracaidistas/civil"><i
                                         class="ms-lg-0 ms-2 bi bi-plus-circle me-2"></i>Personal Civil</a>
                             </li>
                             <li>
