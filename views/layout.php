@@ -42,6 +42,10 @@
                                         class="ms-lg-0 ms-2 bi bi-plus-circle me-2"></i>Tipos de Paracaidas</a>
                             </li>
                             <li>
+                                <a class="dropdown-item nav-link text-white " href="/paracaidistas/paracaidas"><i
+                                        class="ms-lg-0 ms-2 bi bi-plus-circle me-2"></i>Paracaidas</a>
+                            </li>
+                            <li>
                                 <a class="dropdown-item nav-link text-white " href="/paracaidistas/tiposalto"><i
                                         class="ms-lg-0 ms-2 bi bi-plus-circle me-2"></i>Tipos de Saltos</a>
                             </li>
@@ -65,7 +69,7 @@
                     </div>
                     <div class="nav-item dropdown ">
                         <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
-                            <i class="bi bi-person-add me-2"></i>Pesonal Civil
+                            <i class="bi bi-person-add me-2"></i>Personal Civil
                         </a>
                         <ul class="dropdown-menu  dropdown-menu-dark " id="dropwdownRevision" style="margin: 0;">
                             <li>
