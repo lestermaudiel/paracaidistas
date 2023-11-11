@@ -63,7 +63,6 @@ class AltimetroController
             ]);
         }
     }
-    
 
     public static function modificarAPI()
     {

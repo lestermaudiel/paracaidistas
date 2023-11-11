@@ -7,6 +7,10 @@
                 <label for="altimetro_serie">Número de Serie</label>
                 <input type="text" name="altimetro_serie" id="altimetro_serie" class="form-control">
             </div>
+            <div class="col">
+                <label for="altimetro_marca">Marca</label>
+                <input type="text" name="altimetro_marca" id="altimetro_marca" class="form-control">
+            </div>
         </div>
         <div class="row mb-3">
             <div class="col">
@@ -32,6 +36,7 @@
                 <tr>
                     <th>NO.</th>
                     <th>NÚMERO DE SERIE</th>
+                    <th>MARCA</th>
                     <th>MODIFICAR</th>
                     <th>ELIMINAR</th>
                 </tr>
