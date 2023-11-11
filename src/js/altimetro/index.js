@@ -88,7 +88,8 @@ const buscar = async () => {
                 const td2 = document.createElement('td');
                 td2.innerText = altimetro.altimetro_serie;
                 const td3 = document.createElement('td');
-                td2.innerText = altimetro.altimetro_marca;
+                console.log(altimetro.altimetro_marca)
+                td3.innerText = altimetro.altimetro_marca;
                 const td4 = document.createElement('td');
                 const td5 = document.createElement('td');
     
