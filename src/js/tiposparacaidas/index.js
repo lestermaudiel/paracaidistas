@@ -31,10 +31,7 @@ const datatable = new Datatable('#tablaTipop', {
             title: 'Tipo de paracaidas',
             data: 'tipo_par_descripcion',
         },
-        {
-            title: 'Tipo de paracaidas',
-            data: 'tipo_par_id',
-        },
+        
         {
             title: 'MODIFICAR',
             data: 'tipo_par_id',
