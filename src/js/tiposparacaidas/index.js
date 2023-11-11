@@ -30,15 +30,20 @@ const datatable = new Datatable('#tablaTipop', {
             data: 'tipo_par_descripcion',
         },
         {
+            title: 'Lote de paraidas',
+            data: 'tipo_par_lote',
+        },
+        {
             title : 'MODIFICAR',
             data: 'tipo_par_id',
             searchable : false,
             orderable : false,
-            render : (data, type, row, meta) => `<button class="btn btn-warning" data-id='${data}' data-tipo='${row["tipo_par_descripcion"]}'>Modificar</button>`
+            render : (data, type, row, meta) => `<button class="btn btn-warning" data-id='${data}' data-tipo-par-lote='${row["tipo_par_lote"]}' data-tipo-par-descripcion='${row["tipo_par_descripcion"]}'
+            >Modificar</button>`
         },
         {
             title: 'ELIMINAR',
-            data: 'habitacion_id',
+            data: 'tipo_par_id',  
             searchable: false,
             orderable: false,
             render: (data) => {
@@ -49,8 +54,8 @@ const datatable = new Datatable('#tablaTipop', {
                     eliminar(data);
                 });
                 return btnEliminar.outerHTML;
-            },
-        },
+            },            
+        },        
     ],
 });
 
@@ -144,34 +149,36 @@ const cancelarAccion = () => {
 
 const traeDatos = (e) => {
     const button = e.target;
-    const id = button.dataset.id
-    const tipo = button.dataset.tipo
+    const id = button.dataset.id;
+    const tipo_par_lote = button.dataset.tipoParLote;
+    const tipo_par_descripcion = button.dataset.tipoParDescripcion;
 
     const dataset = {
-        id, 
-        tipo
+        id,
+        tipo_par_lote,
+        tipo_par_descripcion,
+    };
+
+    colocarDatos(dataset);
 };
 
-colocarDatos(dataset);
-
-};
 
 const colocarDatos = (dataset) => {
-    formulario.tipo_par_descripcion.value = dataset.tipo;
+    formulario.tipo_par_lote.value = dataset.tipo_par_lote;  
+    formulario.tipo_par_descripcion.value = dataset.tipo_par_descripcion; 
     formulario.tipo_par_id.value = dataset.id;
-    
-    btnGuardar.disabled = true
-    btnGuardar.parentElement.style.display = 'none'
-    btnBuscar.disabled = true
-    btnBuscar.parentElement.style.display = 'none'
-    btnModificar.disabled = false
-    btnModificar.parentElement.style.display = ''
-    btnCancelar.disabled = false
-    btnCancelar.parentElement.style.display = ''
+
+    btnGuardar.disabled = true;
+    btnGuardar.parentElement.style.display = 'none';
+    btnBuscar.disabled = true;
+    btnBuscar.parentElement.style.display = 'none';
+    btnModificar.disabled = false;
+    btnModificar.parentElement.style.display = '';
+    btnCancelar.disabled = false;
+    btnCancelar.parentElement.style.display = '';
     //divTabla.style.display = 'none'
-    
-    
 }
+
 
 const modificar = async () => {
     if(!validarFormulario(formulario)){
@@ -234,10 +241,8 @@ const eliminar = async (tipo_par_id) => {
         try {
             const respuesta = await fetch(url, config);
             const data = await respuesta.json();
-            console.log(data);
 
             const { codigo, mensaje, detalle } = data;
-
             let icon = 'info';
             switch (codigo) {
                 case 1:
@@ -260,9 +265,14 @@ const eliminar = async (tipo_par_id) => {
             });
         } catch (error) {
             console.log(error);
+            Toast.fire({
+                icon: 'error',
+                text: 'Error al intentar eliminar el registro.'
+            });
         }
     }
 };
+
 
 buscar();
 datatable.on('click','.btn-warning', traeDatos )

@@ -75,7 +75,7 @@ function hasPermissionApi(array $permisos){
 }
 
 function getHeadersApi(){
-    return header("Content-type:application/json; charset=utf-8");
+    return header("Content-type:application/json; charset=UTF-8");
 }
 
 function asset($ruta){

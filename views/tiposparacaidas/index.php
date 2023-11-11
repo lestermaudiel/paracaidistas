@@ -1,3 +1,11 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
 <h1 class="text-center">Tipos de Paracaídas</h1>
 <div class="row justify-content-center mb-5">
     <form class="col-lg-8 border bg-light p-3" id="formularioTipoParacaidas">
@@ -35,5 +43,7 @@
         <table id="tablaTipop" class="table table-bordered table-hover">
         </table>
     </div>
-</div>
+</div>  
+</body>
+</html>
 <script src="<?= asset('./build/js/tiposparacaidas/index.js') ?>"></script>

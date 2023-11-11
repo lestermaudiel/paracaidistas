@@ -68,7 +68,7 @@ class TiposParacaidasController {
         try {
             $tipo_par_id = $_POST['tipo_par_id'];
             $tipoParacaidas = TiposParacaidas::find($tipo_par_id);
-            $tipoParacaidas->tipo_paracaidas_situacion = 0; // Asegúrate de usar la propiedad correcta
+            $tipoParacaidas->tipo_par_situacion = 0;
             $resultado = $tipoParacaidas->actualizar();
 
             if ($resultado['resultado'] == 1) {
@@ -95,7 +95,7 @@ class TiposParacaidasController {
         $tipo_par_lote = $_GET['tipo_par_lote'];
         $tipo_par_descripcion = $_GET['tipo_par_descripcion'];
 
-        $sql = "SELECT * FROM par_tipo_paracaidas WHERE tipo_par_id > 0 "; // Cambia el nombre de la tabla
+        $sql = "SELECT * FROM par_tipo_paracaidas WHERE tipo_par_id > 0 "; 
         if ($tipo_par_lote !== '') {
             $sql .= " AND tipo_par_lote LIKE '%$tipo_par_lote%' ";
         }
