@@ -10,6 +10,7 @@ use Controllers\AltimetroController;
 use Controllers\PistaController;
 use Controllers\AeronaveController;
 use Controllers\CivilController;
+use Controllers\ParacaidasController;  
 
 $router = new Router();
 $router->setBaseURL('/' . $_ENV['APP_NAME']);
@@ -56,6 +57,12 @@ $router->post('/API/civil/guardar', [CivilController::class, 'guardarAPI']);
 $router->post('/API/civil/modificar', [CivilController::class, 'modificarAPI']);
 $router->post('/API/civil/eliminar', [CivilController::class, 'eliminarAPI']);
 $router->get('/API/civil/buscar', [CivilController::class, 'buscarAPI']);
+
+$router->get('/paracaidas', [ParacaidasController::class, 'index']);
+$router->post('/API/paracaidas/guardar', [ParacaidasController::class, 'guardarAPI']);
+$router->post('/API/paracaidas/modificar', [ParacaidasController::class, 'modificarAPI']);
+$router->post('/API/paracaidas/eliminar', [ParacaidasController::class, 'eliminarAPI']);
+$router->get('/API/paracaidas/buscar', [ParacaidasController::class, 'buscarAPI']);
 
 $router->comprobarRutas();
 ?>

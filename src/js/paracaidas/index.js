@@ -9,6 +9,7 @@ const btnModificar = document.getElementById('btnModificar');
 const btnGuardar = document.getElementById('btnGuardar');
 const btnCancelar = document.getElementById('btnCancelar');
 const divTabla = document.getElementById('divTabla');
+const selectTipoParacaidas = document.getElementById('tipo_paracaidas'); // Ajusta el ID según tu formulario
 
 btnModificar.disabled = true;
 btnModificar.parentElement.style.display = 'none';
@@ -56,6 +57,35 @@ const datatable = new Datatable('#tablaAeronave', {
         },
     ],
 });
+
+// Función para cargar dinámicamente las opciones del tipo de paracaidas
+const cargarTiposParacaidas = async () => {
+    const url = '/paracaidistas/API/tiposparacaidas/buscar';
+    const config = {
+        method: 'GET',
+    };
+
+    try {
+        const respuesta = await fetch(url, config);
+        const data = await respuesta.json();
+
+        // Limpia las opciones actuales
+        selectTipoParacaidas.innerHTML = '';
+
+        // Añade una opción por cada tipo de paracaidas
+        data.forEach((tipo) => {
+            const option = document.createElement('option');
+            option.value = tipo.tipo_par_id;
+            option.text = tipo.tipo_par_descripcion;
+            selectTipoParacaidas.appendChild(option);
+        });
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+// Llama a la función para cargar los tipos de paracaidas al cargar la página
+cargarTiposParacaidas();
 
 const guardar = async (evento) => {
     evento.preventDefault();
@@ -144,7 +174,6 @@ const cancelarAccion = () => {
     btnCancelar.parentElement.style.display = 'none';
     divTabla.style.display = '';
 };
-
 const traeDatos = (e) => {
     const button = e.target;
     const id = button.dataset.id;
@@ -173,7 +202,7 @@ const colocarDatos = (dataset) => {
     btnModificar.parentElement.style.display = '';
     btnCancelar.disabled = false;
     btnCancelar.parentElement.style.display = '';
-}
+};
 
 const modificar = async () => {
     if (!validarFormulario(formulario)) {
@@ -221,7 +250,7 @@ const modificar = async () => {
     } catch (error) {
         console.log(error);
     }
-}
+};
 
 const eliminar = async (aer_tip_registro) => {
     if (await confirmacion('warning', '¿Desea eliminar este registro?')) {

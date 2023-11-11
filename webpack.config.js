@@ -13,6 +13,7 @@ module.exports = {
     'js/pista/index': './src/js/pista/index.js',
     'js/aeronave/index': './src/js/aeronave/index.js',
     'js/civil/index': './src/js/civil/index.js',
+    'js/paracaidas/index': './src/js/paracaidas/index.js',
 
   },
   output: {

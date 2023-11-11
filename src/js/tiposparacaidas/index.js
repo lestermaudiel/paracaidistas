@@ -4,13 +4,11 @@ import { lenguaje } from "../lenguaje";
 import Swal from "sweetalert2";
 import { validarFormulario, Toast, confirmacion } from "../funciones";
 
-const formulario = document.querySelector('form');
-
+const formulario = document.getElementById('formularioTipoParacaidas');
 const btnBuscar = document.getElementById('btnBuscar');
 const btnModificar = document.getElementById('btnModificar');
 const btnGuardar = document.getElementById('btnGuardar');
 const btnCancelar = document.getElementById('btnCancelar');
-const divTabla = document.getElementById('divTabla');
 
 btnModificar.disabled = true;
 btnModificar.parentElement.style.display = 'none';
@@ -26,38 +24,64 @@ const datatable = new Datatable('#tablaTipop', {
             render: () => contador++
         },
         {
-            title: 'Tipo de paracaidas',
-            data: 'tipo_par_descripcion',
-        },
-        {
             title: 'Lote de paraidas',
             data: 'tipo_par_lote',
         },
         {
-            title : 'MODIFICAR',
+            title: 'Tipo de paracaidas',
+            data: 'tipo_par_descripcion',
+        },
+        {
+            title: 'Tipo de paracaidas',
             data: 'tipo_par_id',
-            searchable : false,
-            orderable : false,
-            render : (data, type, row, meta) => `<button class="btn btn-warning" data-id='${data}' data-tipo-par-lote='${row["tipo_par_lote"]}' data-tipo-par-descripcion='${row["tipo_par_descripcion"]}'
-            >Modificar</button>`
+        },
+        {
+            title: 'MODIFICAR',
+            data: 'tipo_par_id',
+            searchable: false,
+            orderable: false,
+            render: (data, type, row, meta) => {
+                console.log(row['tipo_par_lote'])
+                return `<button class="btn btn-warning" data-id='${data}' data-lote='${row['tipo_par_lote']}' data-descripcion='${row['tipo_par_descripcion']}'>Modificar</button>`}
         },
         {
             title: 'ELIMINAR',
-            data: 'tipo_par_id',  
+            data: 'tipo_par_id',
             searchable: false,
             orderable: false,
-            render: (data) => {
-                const btnEliminar = document.createElement('button');
-                btnEliminar.classList.add('btn', 'btn-danger');
-                btnEliminar.textContent = 'Eliminar';
-                btnEliminar.addEventListener('click', () => {
-                    eliminar(data);
-                });
-                return btnEliminar.outerHTML;
-            },            
-        },        
+            render: (data, type, row, meta) => `<button class="btn btn-danger" data-id='${data}'>Eliminar</button>`
+        },
     ],
 });
+
+const buscar = async () => {
+    let tipo_par_lote = formulario.tipo_par_lote.value;
+    let tipo_par_descripcion = formulario.tipo_par_descripcion.value;
+    console.log(tipo_par_lote)
+    console.log(tipo_par_descripcion)
+    const url = `/paracaidistas/API/tiposparacaidas/buscar?tipo_par_lote=${tipo_par_lote}&tipo_par_descripcion=${tipo_par_descripcion}`;
+    const config = {
+        method: 'GET'
+    };
+
+    try {
+        const respuesta = await fetch(url, config);
+        const data = await respuesta.json();
+        console.log(data)
+        datatable.clear().draw();
+        if (data) {
+            contador = 1;
+            datatable.rows.add(data).draw();
+        } else {
+            Toast.fire({
+                title: 'No se encontraron registros',
+                icon: 'info'
+            });
+        }
+    } catch (error) {
+        console.log(error);
+    }
+};
 
 const guardar = async (evento) => {
     evento.preventDefault();
@@ -70,7 +94,9 @@ const guardar = async (evento) => {
     }
 
     const body = new FormData(formulario);
-    body.delete('tipo_par_id');
+    for (var pair of body.entries()) {
+        console.log(pair[0] + ', ' + pair[1]);
+    }
     const url = '/paracaidistas/API/tiposparacaidas/guardar';
     const config = {
         method: 'POST',
@@ -108,131 +134,13 @@ const guardar = async (evento) => {
         console.log(error);
     }
 };
-
-const buscar = async () => {
-    let tipo_par_lote = formulario.tipo_par_lote.value;
-    let tipo_par_descripcion = formulario.tipo_par_descripcion.value;
-    const url = `/paracaidistas/API/tiposparacaidas/buscar?tipo_par_lote=${tipo_par_lote}&tipo_par_descripcion=${tipo_par_descripcion}`;
-    const config = {
-        method: 'GET'
-    };
-
-    try {
-        const respuesta = await fetch(url, config);
-        const data = await respuesta.json();
-        datatable.clear().draw();
-        if (data) {
-            contador = 1;
-            datatable.rows.add(data).draw();
-        } else {
-            Toast.fire({
-                title: 'No se encontraron registros',
-                icon: 'info'
-            });
-        }
-    } catch (error) {
-        console.log(error);
-    }
-};
-
-const cancelarAccion = () => {
-    btnGuardar.disabled = false;
-    btnGuardar.parentElement.style.display = '';
-    btnBuscar.disabled = false;
-    btnBuscar.parentElement.style.display = '';
-    btnModificar.disabled = true;
-    btnModificar.parentElement.style.display = 'none';
-    btnCancelar.disabled = true;
-    btnCancelar.parentElement.style.display = 'none';
-    divTabla.style.display = '';
-};
-
-const traeDatos = (e) => {
+const eliminar = async (e) => {
     const button = e.target;
     const id = button.dataset.id;
-    const tipo_par_lote = button.dataset.tipoParLote;
-    const tipo_par_descripcion = button.dataset.tipoParDescripcion;
 
-    const dataset = {
-        id,
-        tipo_par_lote,
-        tipo_par_descripcion,
-    };
-
-    colocarDatos(dataset);
-};
-
-
-const colocarDatos = (dataset) => {
-    formulario.tipo_par_lote.value = dataset.tipo_par_lote;  
-    formulario.tipo_par_descripcion.value = dataset.tipo_par_descripcion; 
-    formulario.tipo_par_id.value = dataset.id;
-
-    btnGuardar.disabled = true;
-    btnGuardar.parentElement.style.display = 'none';
-    btnBuscar.disabled = true;
-    btnBuscar.parentElement.style.display = 'none';
-    btnModificar.disabled = false;
-    btnModificar.parentElement.style.display = '';
-    btnCancelar.disabled = false;
-    btnCancelar.parentElement.style.display = '';
-    //divTabla.style.display = 'none'
-}
-
-
-const modificar = async () => {
-    if(!validarFormulario(formulario)){
-        Toast.fire({
-            icon: 'info',
-            text: 'Debe llenar todos los datos'
-        });
-        return 
-    }
-
-    const body = new FormData(formulario)
-    const url = '/paracaidistas/API/tiposparacaidas/modificar';
-    const config = {
-        method : 'POST',
-        body
-    }
-
-    try {
-        // fetch(url, config).then( (respuesta) => respuesta.json() ).then(d => data = d)
-        const respuesta = await fetch(url, config)
-        const data = await respuesta.json();
-               
-        const {codigo, mensaje,detalle} = data;
-        let icon = 'success'
-        switch (codigo) {
-            case 1:
-                formulario.reset();
-                icon = 'success';
-                buscar();
-                //cancelarAccion();
-                break;
-        
-            case 0:
-                icon = 'error'
-                console.log(detalle)
-                break;
-        
-            default:
-                break;
-        }
-
-        Toast.fire({
-            icon,
-            text: mensaje
-        })
-
-    } catch (error) {
-        console.log(error);
-    }
-}
-const eliminar = async (tipo_par_id) => {
     if (await confirmacion('warning', '¿Desea eliminar este registro?')) {
         const body = new FormData();
-        body.append('tipo_par_id', tipo_par_id);
+        body.append('tipo_par_id', id);
         const url = '/paracaidistas/API/tiposparacaidas/eliminar';
         const config = {
             method: 'POST',
@@ -241,6 +149,7 @@ const eliminar = async (tipo_par_id) => {
         try {
             const respuesta = await fetch(url, config);
             const data = await respuesta.json();
+            // console.log(data);
 
             const { codigo, mensaje, detalle } = data;
             let icon = 'info';
@@ -265,18 +174,108 @@ const eliminar = async (tipo_par_id) => {
             });
         } catch (error) {
             console.log(error);
-            Toast.fire({
-                icon: 'error',
-                text: 'Error al intentar eliminar el registro.'
-            });
         }
+
     }
 };
 
+const modificar = async (e) => {
+    e.preventDefault()
+    if (!validarFormulario(formulario, ['tipo_par_id'])) {
+        alert('Debe llenar todos los campos');
+        return;
+    }
+
+    const body = new FormData(formulario)
+    const url = '/paracaidistas/API/tiposparacaidas/modificar';
+    const config = {
+        method: 'POST',
+        body
+    }
+
+    try {
+        const respuesta = await fetch(url, config);
+        const data = await respuesta.json();
+        console.log(data);
+        const { codigo, mensaje, detalle } = data;
+        let icon = 'info';
+
+        switch (codigo) {
+            case 1:
+                formulario.reset();
+                icon = 'success';
+                buscar();
+                cancelarAccion();
+                break;
+
+            case 0:
+                icon = 'error'
+                console.log(detalle);
+                break;
+
+            default:
+                break;
+        }
+
+        Toast.fire({
+            icon,
+            text: mensaje
+        });
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+const traeDatos = (e) => {
+    const button = e.target;
+    const id = button.dataset.id;
+    const tipo_par_lote = button.dataset.lote;
+    const tipo_par_descripcion = button.dataset.descripcion;
+
+    const dataset = {
+        id,
+        tipo_par_lote,
+        tipo_par_descripcion,
+    };
+    console.log(dataset)
+
+    colocarDatos(dataset);
+};
+
+const colocarDatos = (dataset) => {
+    formulario.tipo_par_lote.value = dataset.tipo_par_lote;
+    formulario.tipo_par_descripcion.value = dataset.tipo_par_descripcion;
+    formulario.tipo_par_id.value = dataset.id;
+
+    btnGuardar.disabled = true;
+    btnGuardar.parentElement.style.display = 'none';
+    btnBuscar.disabled = true;
+    btnBuscar.parentElement.style.display = 'none';
+    btnModificar.disabled = false;
+    btnModificar.parentElement.style.display = '';
+    btnCancelar.disabled = false;
+    btnCancelar.parentElement.style.display = '';
+}
+
+const cancelarAccion = () => {
+    formulario.reset();
+    btnGuardar.disabled = false;
+    btnGuardar.parentElement.style.display = '';
+    btnBuscar.disabled = false;
+    btnBuscar.parentElement.style.display = '';
+    btnModificar.disabled = true;
+    btnModificar.parentElement.style.display = 'none';
+    btnCancelar.disabled = true;
+    btnCancelar.parentElement.style.display = 'none';
+};
+
+
 
 buscar();
-datatable.on('click','.btn-warning', traeDatos )
+
 formulario.addEventListener('submit', guardar);
 btnBuscar.addEventListener('click', buscar);
+datatable.on('click', '.btn-warning', traeDatos);
+datatable.on('click', '.btn-danger', eliminar);
 btnCancelar.addEventListener('click', cancelarAccion);
-btnModificar.addEventListener('click', modificar)
+btnModificar.addEventListener('click', modificar);
