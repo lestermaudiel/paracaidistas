@@ -1,19 +1,57 @@
-import { Dropdown } from "bootstrap";
+import Datatable from "datatables.net-bs5";
+import { lenguaje } from "../lenguaje";
 import Swal from "sweetalert2";
 import { validarFormulario, Toast, confirmacion } from "../funciones";
 
-const formulario = document.querySelector('form');
-const tablaTipoSalto = document.getElementById('tablaTipoSalto');
+const formulario = document.getElementById('formularioTipoSalto');
 const btnBuscar = document.getElementById('btnBuscar');
 const btnModificar = document.getElementById('btnModificar');
 const btnGuardar = document.getElementById('btnGuardar');
 const btnCancelar = document.getElementById('btnCancelar');
 const divTabla = document.getElementById('divTabla');
 
-btnModificar.disabled = true
-btnModificar.parentElement.style.display = 'none'
-btnCancelar.disabled = true
-btnCancelar.parentElement.style.display = 'none'
+btnModificar.disabled = true;
+btnModificar.parentElement.style.display = 'none';
+btnCancelar.disabled = true;
+btnCancelar.parentElement.style.display = 'none';
+let contador = 1;
+const datatable = new Datatable('#tablaTipoSalto', {
+    language: lenguaje,
+    data: null,
+    columns: [
+        {
+            title: 'NO.',
+            render: () => contador++
+        },
+        {
+            title: 'Detalle',
+            data: 'tipo_salto_detalle',
+        },
+        {
+            title: 'MODIFICAR',
+            data: 'tipo_salto_id',
+            searchable: false,
+            orderable: false,
+            render: (data, type, row, meta) => `<button class="btn btn-warning" data-id='${data}' data-tipo-salto-detalle='${row["tipo_salto_detalle"]}'
+            >Modificar</button>`
+        },
+        {
+            title: 'ELIMINAR',
+            data: 'tipo_salto_id',
+            searchable: false,
+            orderable: false,
+            render: (data) => {
+                const btnEliminar = document.createElement('button');
+                btnEliminar.classList.add('btn', 'btn-danger');
+                btnEliminar.textContent = 'Eliminar';
+                btnEliminar.addEventListener('click', () => {
+                    eliminar(data);
+                });
+                return btnEliminar.outerHTML;
+            },
+        },
+    ],
+});
 
 const guardar = async (evento) => {
     evento.preventDefault();
@@ -21,24 +59,21 @@ const guardar = async (evento) => {
         Toast.fire({
             icon: 'info',
             text: 'Debe llenar todos los datos'
-        })
-        return
+        });
+        return;
     }
 
     const body = new FormData(formulario);
     body.delete('tipo_salto_id');
-    const url = '/paracaidistas/API/tiposalto/guardar'; 
+    const url = '/paracaidistas/API/tiposalto/guardar'; // Ajusta la URL según tu configuración
     const config = {
         method: 'POST',
         body
-    }
+    };
 
     try {
         const respuesta = await fetch(url, config);
         const data = await respuesta.json();
-
-        console.log(data);
-        //return
 
         const { codigo, mensaje, detalle } = data;
         let icon = 'info';
@@ -70,8 +105,7 @@ const guardar = async (evento) => {
 
 const buscar = async () => {
     let tipo_salto_detalle = formulario.tipo_salto_detalle.value;
-
-    const url = `/paracaidistas/API/tiposalto/buscar?tipo_salto_detalle=${tipo_salto_detalle}`; 
+    const url = `/paracaidistas/API/tiposalto/buscar?tipo_salto_detalle=${tipo_salto_detalle}`;
     const config = {
         method: 'GET'
     };
@@ -79,95 +113,71 @@ const buscar = async () => {
     try {
         const respuesta = await fetch(url, config);
         const data = await respuesta.json();
-
-        tablaTipoSalto.tBodies[0].innerHTML = '';
-        const fragment = document.createDocumentFragment();
-        console.log(data);
-        //return;
-
-        if (data.length > 0) {
-            let contador = 1;
-            data.forEach(tipoSalto => {
-                const tr = document.createElement('tr');
-                const td1 = document.createElement('td');
-                const td2 = document.createElement('td');
-                const td3 = document.createElement('td');
-                const td4 = document.createElement('td');
-                const td5 = document.createElement('td');
-                const buttonModificar = document.createElement('button');
-                const buttonEliminar = document.createElement('button');
-
-                buttonModificar.classList.add('btn', 'btn-warning');
-                buttonEliminar.classList.add('btn', 'btn-danger');
-                buttonModificar.textContent = 'Modificar';
-                buttonEliminar.textContent = 'Eliminar';
-
-                buttonModificar.addEventListener('click', () => colocarDatos(tipoSalto));
-                buttonEliminar.addEventListener('click', () => eliminar(tipoSalto.tipo_salto_id));
-
-                td1.innerText = contador;
-                td2.innerText = tipoSalto.tipo_salto_detalle;
-
-                td4.appendChild(buttonModificar);
-                td5.appendChild(buttonEliminar);
-                tr.appendChild(td1);
-                tr.appendChild(td2);
-                tr.appendChild(td4);
-                tr.appendChild(td5);
-
-                fragment.appendChild(tr);
-                contador++;
-            });
+        datatable.clear().draw();
+        if (data) {
+            contador = 1;
+            datatable.rows.add(data).draw();
         } else {
-            const tr = document.createElement('tr');
-            const td = document.createElement('td');
-            td.innerText = 'No existen registros';
-            td.colSpan = 5;
-            tr.appendChild(td);
-            fragment.appendChild(tr);
+            Toast.fire({
+                title: 'No se encontraron registros',
+                icon: 'info'
+            });
         }
-
-        tablaTipoSalto.tBodies[0].appendChild(fragment)
     } catch (error) {
         console.log(error);
     }
-}
-
-const colocarDatos = (datos) => {
-    formulario.tipo_salto_detalle.value = datos.tipo_salto_detalle
-    formulario.tipo_salto_id.value = datos.tipo_salto_id
-
-    btnGuardar.disabled = true
-    btnGuardar.parentElement.style.display = 'none'
-    btnBuscar.disabled = true
-    btnBuscar.parentElement.style.display = 'none'
-    btnModificar.disabled = false
-    btnModificar.parentElement.style.display = ''
-    btnCancelar.disabled = false
-    btnCancelar.parentElement.style.display = ''
-    divTabla.style.display = 'none'
-}
+};
 
 const cancelarAccion = () => {
-    btnGuardar.disabled = false
-    btnGuardar.parentElement.style.display = ''
-    btnBuscar.disabled = false
-    btnBuscar.parentElement.style.display = ''
-    btnModificar.disabled = true
-    btnModificar.parentElement.style.display = 'none'
-    btnCancelar.disabled = true
-    btnCancelar.parentElement.style.display = 'none'
-    divTabla.style.display = ''
+    btnGuardar.disabled = false;
+    btnGuardar.parentElement.style.display = '';
+    btnBuscar.disabled = false;
+    btnBuscar.parentElement.style.display = '';
+    btnModificar.disabled = true;
+    btnModificar.parentElement.style.display = 'none';
+    btnCancelar.disabled = true;
+    btnCancelar.parentElement.style.display = 'none';
+    divTabla.style.display = '';
+};
+
+const traeDatos = (e) => {
+    const button = e.target;
+    const id = button.dataset.id;
+    const tipo_salto_detalle = button.dataset.tipoSaltoDetalle;
+
+    const dataset = {
+        id,
+        tipo_salto_detalle,
+    };
+
+    colocarDatos(dataset);
+};
+
+const colocarDatos = (dataset) => {
+    formulario.tipo_salto_detalle.value = dataset.tipo_salto_detalle;
+    formulario.tipo_salto_id.value = dataset.id;
+
+    btnGuardar.disabled = true;
+    btnGuardar.parentElement.style.display = 'none';
+    btnBuscar.disabled = true;
+    btnBuscar.parentElement.style.display = 'none';
+    btnModificar.disabled = false;
+    btnModificar.parentElement.style.display = '';
+    btnCancelar.disabled = false;
+    btnCancelar.parentElement.style.display = '';
 }
 
 const modificar = async () => {
     if (!validarFormulario(formulario)) {
-        alert('Debe llenar todos los campos');
+        Toast.fire({
+            icon: 'info',
+            text: 'Debe llenar todos los datos'
+        });
         return
     }
 
     const body = new FormData(formulario)
-    const url = '/paracaidistas/API/tiposparacaidas/modificar'; 
+    const url = '/paracaidistas/API/tiposalto/modificar'; // Ajusta la URL según tu configuración
     const config = {
         method: 'POST',
         body
@@ -178,18 +188,17 @@ const modificar = async () => {
         const data = await respuesta.json();
 
         const { codigo, mensaje, detalle } = data;
-        let icon = 'info';
+        let icon = 'success'
         switch (codigo) {
             case 1:
                 formulario.reset();
                 icon = 'success';
                 buscar();
-                cancelarAccion();
                 break;
 
             case 0:
-                icon = 'error';
-                // console.log(detalle);
+                icon = 'error'
+                console.log(detalle)
                 break;
 
             default:
@@ -199,40 +208,37 @@ const modificar = async () => {
         Toast.fire({
             icon,
             text: mensaje
-        });
+        })
 
     } catch (error) {
         console.log(error);
     }
 }
 
-const eliminar = async (tipoSaltoId) => {
+const eliminar = async (tipo_salto_id) => {
     if (await confirmacion('warning', '¿Desea eliminar este registro?')) {
         const body = new FormData();
-        body.append('tipo_salto_id', tipoSaltoId);
-
-        const url = '/paracaidistas/API/tiposalto/eliminar'; 
+        body.append('tipo_salto_id', tipo_salto_id);
+        const url = '/paracaidistas/API/tiposalto/eliminar'; // Ajusta la URL según tu configuración
         const config = {
             method: 'POST',
             body
-        }
-
+        };
         try {
-            const respuesta = await fetch(url, config)
+            const respuesta = await fetch(url, config);
             const data = await respuesta.json();
-            console.log(data);
 
             const { codigo, mensaje, detalle } = data;
-            let icon = 'info'
+            let icon = 'info';
             switch (codigo) {
                 case 1:
-                    icon = 'success'
+                    icon = 'success';
                     buscar();
                     break;
 
                 case 0:
-                    icon = 'error'
-                    console.log(detalle)
+                    icon = 'error';
+                    console.log(detalle);
                     break;
 
                 default:
@@ -242,16 +248,20 @@ const eliminar = async (tipoSaltoId) => {
             Toast.fire({
                 icon,
                 text: mensaje
-            })
-
+            });
         } catch (error) {
             console.log(error);
+            Toast.fire({
+                icon: 'error',
+                text: 'Error al intentar eliminar el registro.'
+            });
         }
     }
-}
+};
 
 buscar();
-formulario.addEventListener('submit', guardar)
-btnBuscar.addEventListener('click', buscar)
-btnCancelar.addEventListener('click', cancelarAccion)
-btnModificar.addEventListener('click', modificar)
+datatable.on('click', '.btn-warning', traeDatos);
+formulario.addEventListener('submit', guardar);
+btnBuscar.addEventListener('click', buscar);
+btnCancelar.addEventListener('click', cancelarAccion);
+btnModificar.addEventListener('click', modificar);
