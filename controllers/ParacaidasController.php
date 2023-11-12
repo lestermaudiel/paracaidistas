@@ -4,16 +4,18 @@ namespace Controllers;
 
 use Exception;
 use Model\Paracaidas;
-use Model\TipoParacaidas;
+use Model\TiposParacaidas;
 use MVC\Router;
 
 class ParacaidasController
 {
     public static function index(Router $router)
     {
-        $paracaidas = Paracaidas::all();
+        $tipoparacaidas = new TiposParacaidas();
+        $tipoparacaidas = $tipoparacaidas->getTipoParacaidas();
         $router->render('paracaidas/index', [
-            'paracaidas' => $paracaidas,
+            
+            'tipoParacaidas'  => $tipoparacaidas,
         ]);
     }
 
@@ -118,18 +120,7 @@ class ParacaidasController
         }
     }
 
-    // Función para obtener los tipos de paracaidas
-    public static function obtenerTiposParacaidasAPI()
-    {
-        try {
-            $tiposParacaidas = TipoParacaidas::all();
-            echo json_encode($tiposParacaidas);
-        } catch (Exception $e) {
-            echo json_encode([
-                'detalle' => $e->getMessage(),
-                'mensaje' => 'Ocurrió un error',
-                'codigo' => 0
-            ]);
-        }
     }
-}
+
+
+

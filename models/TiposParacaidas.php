@@ -18,4 +18,8 @@ class TiposParacaidas extends ActiveRecord {
         $this->tipo_par_descripcion = $args['tipo_par_descripcion'] ?? '';
         $this->tipo_par_situacion = $args['tipo_par_situacion'] ?? '1';
     }
+    public function getTipoParacaidas(){
+        $sql = "SELECT * from par_tipo_paracaidas where tipo_par_situacion = 1";
+        return $this->fetchArray($sql);
+    }
 }

@@ -15,10 +15,15 @@
             <div class="row mb-3">
                 <div class="col">
                     <label for="paraca_tipo">Tipo de Paracaídas</label>
-                    <!-- Aquí se carga el select con los tipos de paracaídas -->
+                    <!-- Aquí se carga el select con los tipoParacaidas de paracaídas -->
                     <select name="paraca_tipo" id="paraca_tipo" class="form-control">
-                        <!-- Las opciones se cargarán dinámicamente desde JavaScript -->
-                    </select>
+                                <option value="">Selecione un Tipo</option>
+                                <?php foreach ($tipoParacaidas as $tipo): ?>
+                                    <option value="<?= $tipo['tip_par_id'] ?>">
+                                        <?= $tipo['tipo_par_descripcion'] ?>
+                                    </option>
+                                <?php endforeach ?>
+                            </select>
                 </div>
             </div>
             <div class="row mb-3">
