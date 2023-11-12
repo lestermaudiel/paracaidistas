@@ -3,7 +3,8 @@
 namespace Controllers;
 
 use Exception;
-use Model\Paracaidas;  
+use Model\Paracaidas;
+use Model\TipoParacaidas;
 use MVC\Router;
 
 class ParacaidasController
@@ -44,12 +45,11 @@ class ParacaidasController
 
     public static function buscarAPI()
     {
-        $paraca_cupula = $_GET['paraca_cupula'];
+        $paraca_tipo = $_GET['paraca_tipo'];
 
-        $sql = "SELECT * FROM par_paracaidas WHERE paraca_situacion = 1";
-
-        if (!empty($paraca_cupula)) {
-            $sql .= " AND paraca_cupula LIKE '%$paraca_cupula%'";
+        $sql = "SELECT * FROM par_paracaidas WHERE paraca_situacion = 1 ";
+        if ($paraca_tipo != '') {
+            $sql .= "AND paraca_tipo = $paraca_tipo ";
         }
 
         try {
@@ -95,7 +95,6 @@ class ParacaidasController
         try {
             $paraca_id = $_POST['paraca_id'];
             $paracaidas = Paracaidas::find($paraca_id);
-
             $paracaidas->paraca_situacion = 0;
             $resultado = $paracaidas->actualizar();
 
@@ -110,6 +109,21 @@ class ParacaidasController
                     'codigo' => 0
                 ]);
             }
+        } catch (Exception $e) {
+            echo json_encode([
+                'detalle' => $e->getMessage(),
+                'mensaje' => 'Ocurrió un error',
+                'codigo' => 0
+            ]);
+        }
+    }
+
+    // Función para obtener los tipos de paracaidas
+    public static function obtenerTiposParacaidasAPI()
+    {
+        try {
+            $tiposParacaidas = TipoParacaidas::all();
+            echo json_encode($tiposParacaidas);
         } catch (Exception $e) {
             echo json_encode([
                 'detalle' => $e->getMessage(),

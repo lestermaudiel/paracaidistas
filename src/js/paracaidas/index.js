@@ -3,20 +3,21 @@ import { lenguaje } from "../lenguaje";
 import Swal from "sweetalert2";
 import { validarFormulario, Toast, confirmacion } from "../funciones";
 
-const formulario = document.getElementById('formularioAeronave');
+const formulario = document.getElementById('formularioParacaidas');
 const btnBuscar = document.getElementById('btnBuscar');
 const btnModificar = document.getElementById('btnModificar');
 const btnGuardar = document.getElementById('btnGuardar');
 const btnCancelar = document.getElementById('btnCancelar');
 const divTabla = document.getElementById('divTabla');
-const selectTipoParacaidas = document.getElementById('tipo_paracaidas'); // Ajusta el ID según tu formulario
+const selectTipoParacaidas = document.getElementById('tipo_paracaidas');
 
 btnModificar.disabled = true;
 btnModificar.parentElement.style.display = 'none';
 btnCancelar.disabled = true;
 btnCancelar.parentElement.style.display = 'none';
 let contador = 1;
-const datatable = new Datatable('#tablaAeronave', {
+
+const datatable = new Datatable('#tablaParacaidas', {
     language: lenguaje,
     data: null,
     columns: [
@@ -25,24 +26,44 @@ const datatable = new Datatable('#tablaAeronave', {
             render: () => contador++
         },
         {
-            title: 'Descripción de Aeronave',
-            data: 'aer_desc_aeronave',
+            title: 'Tipo de Paracaídas',
+            data: 'tipo_par_descripcion',
         },
         {
-            title: 'Tipo de Ala',
-            data: 'aer_tip_ala',
+            title: 'Cúpula',
+            data: 'paraca_cupula',
+        },
+        {
+            title: 'Arnés',
+            data: 'paraca_arnes',
+        },
+        {
+            title: 'Fecha de Fabricación',
+            data: 'paraca_fecha_fabricacion',
+        },
+        {
+            title: 'Fecha de Caducidad',
+            data: 'paraca_fecha_caducidad',
+        },
+        {
+            title: 'Saltos Totales',
+            data: 'paraca_saltos_total',
+        },
+        {
+            title: 'Saltos en Uso',
+            data: 'paraca_saltos_uso',
         },
         {
             title: 'MODIFICAR',
-            data: 'aer_tip_registro',
+            data: 'paraca_id',
             searchable: false,
             orderable: false,
-            render: (data, type, row, meta) => `<button class="btn btn-warning" data-id='${data}' data-aer-desc-aeronave='${row["aer_desc_aeronave"]}' data-aer-tip-ala='${row["aer_tip_ala"]}'
+            render: (data, type, row, meta) => `<button class="btn btn-warning" data-id='${data}' data-paraca-cupula='${row["paraca_cupula"]}' data-paraca-arnes='${row["paraca_arnes"]}' data-paraca-fecha-fabricacion='${row["paraca_fecha_fabricacion"]}' data-paraca-fecha-caducidad='${row["paraca_fecha_caducidad"]}' data-paraca-saltos-total='${row["paraca_saltos_total"]}' data-paraca-saltos-uso='${row["paraca_saltos_uso"]}' data-tipo-par-id='${row["paraca_tipo"]}'
             >Modificar</button>`
         },
         {
             title: 'ELIMINAR',
-            data: 'aer_tip_registro',
+            data: 'paraca_id',
             searchable: false,
             orderable: false,
             render: (data) => {
@@ -58,9 +79,8 @@ const datatable = new Datatable('#tablaAeronave', {
     ],
 });
 
-// Función para cargar dinámicamente las opciones del tipo de paracaidas
 const cargarTiposParacaidas = async () => {
-    const url = '/paracaidistas/API/tiposparacaidas/buscar';
+    const url = '/paracaidistas/API/paracaidas/obtenerTiposParacaidas';
     const config = {
         method: 'GET',
     };
@@ -69,10 +89,8 @@ const cargarTiposParacaidas = async () => {
         const respuesta = await fetch(url, config);
         const data = await respuesta.json();
 
-        // Limpia las opciones actuales
         selectTipoParacaidas.innerHTML = '';
 
-        // Añade una opción por cada tipo de paracaidas
         data.forEach((tipo) => {
             const option = document.createElement('option');
             option.value = tipo.tipo_par_id;
@@ -84,12 +102,11 @@ const cargarTiposParacaidas = async () => {
     }
 };
 
-// Llama a la función para cargar los tipos de paracaidas al cargar la página
 cargarTiposParacaidas();
 
 const guardar = async (evento) => {
     evento.preventDefault();
-    if (!validarFormulario(formulario, ['aer_desc_aeronave', 'aer_tip_ala'])) {
+    if (!validarFormulario(formulario, ['paraca_cupula', 'paraca_arnes', 'paraca_fecha_fabricacion', 'paraca_fecha_caducidad', 'paraca_saltos_total', 'paraca_saltos_uso', 'tipo_paracaidas'])) {
         Toast.fire({
             icon: 'info',
             text: 'Debe llenar todos los datos'
@@ -98,8 +115,8 @@ const guardar = async (evento) => {
     }
 
     const body = new FormData(formulario);
-    body.delete('aeronave_id');
-    const url = '/paracaidistas/API/aeronave/guardar'; // Ajusta la URL según tu configuración
+    body.delete('paraca_id');
+    const url = '/paracaidistas/API/paracaidas/guardar';
     const config = {
         method: 'POST',
         body
@@ -138,9 +155,8 @@ const guardar = async (evento) => {
 };
 
 const buscar = async () => {
-    let aer_desc_aeronave = formulario.aer_desc_aeronave.value;
-    let aer_tip_ala = formulario.aer_tip_ala.value;
-    const url = `/paracaidistas/API/aeronave/buscar?aer_desc_aeronave=${aer_desc_aeronave}&aer_tip_ala=${aer_tip_ala}`;
+    let tipo_paracaidas = formulario.tipo_paracaidas.value;
+    const url = `/paracaidistas/API/paracaidas/buscar?paraca_tipo=${tipo_paracaidas}`;
     const config = {
         method: 'GET'
     };
@@ -174,25 +190,41 @@ const cancelarAccion = () => {
     btnCancelar.parentElement.style.display = 'none';
     divTabla.style.display = '';
 };
+
 const traeDatos = (e) => {
     const button = e.target;
     const id = button.dataset.id;
-    const aer_desc_aeronave = button.dataset.aerDescAeronave;
-    const aer_tip_ala = button.dataset.aerTipAla;
+    const paraca_cupula = button.dataset.paracaCupula;
+    const paraca_arnes = button.dataset.paracaArnes;
+    const paraca_fecha_fabricacion = button.dataset.paracaFechaFabricacion;
+    const paraca_fecha_caducidad = button.dataset.paracaFechaCaducidad;
+    const paraca_saltos_total = button.dataset.paracaSaltosTotal;
+    const paraca_saltos_uso = button.dataset.paracaSaltosUso;
+    const tipo_par_id = button.dataset.tipoParId;
 
     const dataset = {
         id,
-        aer_desc_aeronave,
-        aer_tip_ala,
+        paraca_cupula,
+        paraca_arnes,
+        paraca_fecha_fabricacion,
+        paraca_fecha_caducidad,
+        paraca_saltos_total,
+        paraca_saltos_uso,
+        tipo_par_id,
     };
 
     colocarDatos(dataset);
 };
 
 const colocarDatos = (dataset) => {
-    formulario.aer_desc_aeronave.value = dataset.aer_desc_aeronave;
-    formulario.aer_tip_ala.value = dataset.aer_tip_ala;
-    formulario.aeronave_id.value = dataset.id;
+    formulario.paraca_cupula.value = dataset.paraca_cupula;
+    formulario.paraca_arnes.value = dataset.paraca_arnes;
+    formulario.paraca_fecha_fabricacion.value = dataset.paraca_fecha_fabricacion;
+    formulario.paraca_fecha_caducidad.value = dataset.paraca_fecha_caducidad;
+    formulario.paraca_saltos_total.value = dataset.paraca_saltos_total;
+    formulario.paraca_saltos_uso.value = dataset.paraca_saltos_uso;
+    formulario.tipo_paracaidas.value = dataset.tipo_par_id;
+    formulario.paraca_id.value = dataset.id;
 
     btnGuardar.disabled = true;
     btnGuardar.parentElement.style.display = 'none';
@@ -205,7 +237,7 @@ const colocarDatos = (dataset) => {
 };
 
 const modificar = async () => {
-    if (!validarFormulario(formulario)) {
+    if (!validarFormulario(formulario, ['paraca_cupula', 'paraca_arnes', 'paraca_fecha_fabricacion', 'paraca_fecha_caducidad', 'paraca_saltos_total', 'paraca_saltos_uso', 'tipo_paracaidas'])) {
         Toast.fire({
             icon: 'info',
             text: 'Debe llenar todos los datos'
@@ -214,7 +246,7 @@ const modificar = async () => {
     }
 
     const body = new FormData(formulario)
-    const url = '/paracaidistas/API/aeronave/modificar'; // Ajusta la URL según tu configuración
+    const url = '/paracaidistas/API/paracaidas/modificar';
     const config = {
         method: 'POST',
         body
@@ -252,11 +284,11 @@ const modificar = async () => {
     }
 };
 
-const eliminar = async (aer_tip_registro) => {
+const eliminar = async (paraca_id) => {
     if (await confirmacion('warning', '¿Desea eliminar este registro?')) {
         const body = new FormData();
-        body.append('aer_tip_registro', aer_tip_registro);
-        const url = '/paracaidistas/API/aeronave/eliminar'; // Ajusta la URL según tu configuración
+        body.append('paraca_id', paraca_id);
+        const url = '/paracaidistas/API/paracaidas/eliminar';
         const config = {
             method: 'POST',
             body
