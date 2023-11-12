@@ -1,5 +1,4 @@
 <?php
-
 namespace Controllers;
 
 use Exception;
@@ -45,13 +44,12 @@ class AltimetroController
     public static function buscarAPI()
     {
         $altimetro_serie = $_GET['altimetro_serie'];
-    
-        $sql = "SELECT * FROM par_altimetro WHERE altimetro_situacion = 1";
-    
-        if (!empty($altimetro_serie)) {
-            $sql .= " AND altimetro_serie LIKE '%$altimetro_serie%'";
+
+        $sql = "SELECT * FROM par_altimetro where altimetro_situacion = 1 ";
+        if ($altimetro_serie != '') {
+            $sql .= " and altimetro_serie like '%$altimetro_serie%' ";
         }
-    
+
         try {
             $altimetros = Altimetro::fetchArray($sql);
             echo json_encode($altimetros);
@@ -95,7 +93,6 @@ class AltimetroController
         try {
             $altimetro_id = $_POST['altimetro_id'];
             $altimetro = Altimetro::find($altimetro_id);
-
             $altimetro->altimetro_situacion = 0;
             $resultado = $altimetro->actualizar();
 
