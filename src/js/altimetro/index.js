@@ -1,3 +1,4 @@
+import { Dropdown } from "bootstrap";
 import Datatable from "datatables.net-bs5";
 import { lenguaje } from "../lenguaje";
 import Swal from "sweetalert2";

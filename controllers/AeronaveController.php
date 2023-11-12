@@ -45,13 +45,12 @@ class AeronaveController
     public static function buscarAPI()
     {
         $aer_desc_aeronave = $_GET['aer_desc_aeronave'];
-    
-        $sql = "SELECT * FROM fag_tip_aeronave WHERE aer_tip_situacion = '1'";
-    
-        if (!empty($aer_desc_aeronave)) {
-            $sql .= " AND aer_desc_aeronave LIKE '%$aer_desc_aeronave%'";
+
+        $sql = "SELECT * FROM fag_tip_aeronave where aer_tip_situacion = '1' ";
+        if ($aer_desc_aeronave != '') {
+            $sql .= " and aer_desc_aeronave like '%$aer_desc_aeronave%' ";
         }
-    
+
         try {
             $aeronaves = Aeronave::fetchArray($sql);
             echo json_encode($aeronaves);
@@ -63,7 +62,6 @@ class AeronaveController
             ]);
         }
     }
-    
 
     public static function modificarAPI()
     {
@@ -96,7 +94,6 @@ class AeronaveController
         try {
             $aer_tip_registro = $_POST['aer_tip_registro'];
             $aeronave = Aeronave::find($aer_tip_registro);
-
             $aeronave->aer_tip_situacion = '0';
             $resultado = $aeronave->actualizar();
 
