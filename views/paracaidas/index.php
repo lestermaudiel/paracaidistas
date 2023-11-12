@@ -20,32 +20,32 @@
                         <!-- Las opciones se cargarán dinámicamente desde JavaScript -->
                     </select>
                 </div>
+            </div>
+            <div class="row mb-3">
                 <div class="col">
                     <label for="paraca_cupula">Cúpula</label>
                     <input type="text" name="paraca_cupula" id="paraca_cupula" class="form-control">
                 </div>
-            </div>
-            <div class="row mb-3">
                 <div class="col">
                     <label for="paraca_arnes">Arnés</label>
                     <input type="text" name="paraca_arnes" id="paraca_arnes" class="form-control">
                 </div>
+            </div>
+            <div class="row mb-3">
                 <div class="col">
                     <label for="paraca_fecha_fabricacion">Fecha de Fabricación</label>
                     <input type="date" name="paraca_fecha_fabricacion" id="paraca_fecha_fabricacion" class="form-control">
                 </div>
-            </div>
-            <div class="row mb-3">
                 <div class="col">
                     <label for="paraca_fecha_caducidad">Fecha de Caducidad</label>
                     <input type="date" name="paraca_fecha_caducidad" id="paraca_fecha_caducidad" class="form-control">
                 </div>
+            </div>
+            <div class="row mb-3">
                 <div class="col">
                     <label for="paraca_saltos_total">Saltos Totales</label>
                     <input type="number" name="paraca_saltos_total" id="paraca_saltos_total" class="form-control">
                 </div>
-            </div>
-            <div class="row mb-3">
                 <div class="col">
                     <label for="paraca_saltos_uso">Saltos en Uso</label>
                     <input type="number" name="paraca_saltos_uso" id="paraca_saltos_uso" class="form-control">
