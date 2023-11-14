@@ -13,9 +13,9 @@ const divTabla = document.getElementById('divTabla');
 const selectTipoParacaidas = document.getElementById('paraca_tipo');
 
 btnModificar.disabled = true;
-btnModificar.parentElement.style.display = 'none';
+btnModificar.style.display = 'none';
 btnCancelar.disabled = true;
-btnCancelar.parentElement.style.display = 'none';
+btnCancelar.style.display = 'none';
 let contador = 1;
 const datatable = new Datatable('#tablaParacaidas', {
     language: lenguaje,
@@ -46,12 +46,20 @@ const datatable = new Datatable('#tablaParacaidas', {
             data: 'paraca_fecha_caducidad',
         },
         {
+            title: 'Dias restantes',
+            data: 'tiempo_restante',
+        },
+        {
             title: 'Saltos Totales',
             data: 'paraca_saltos_total',
         },
         {
             title: 'Saltos en Uso',
             data: 'paraca_saltos_uso',
+        },
+        {
+            title: 'Saltos Disponibles',
+            data: 'saltos_disponibles',
         },
         {
             title: 'MODIFICAR',
@@ -68,14 +76,13 @@ const datatable = new Datatable('#tablaParacaidas', {
             data: 'paraca_id',
             searchable: false,
             orderable: false,
-            render: (data) => {
-                render: (data) => `<button class="btn btn-danger" data-id='${data}'>Eliminar</button>`
-            },
-        },
-        ],
-    }
+            render: (data) => { return `<button class="btn btn-danger" data-id='${data}'>Eliminar</button>` }
 
-            );
+        },
+    ],
+}
+
+);
 
 // Función para cargar dinámicamente las opciones del tipo de paracaídas
 const cargarTiposParacaidas = async () => {
@@ -104,7 +111,7 @@ const cargarTiposParacaidas = async () => {
 };
 
 // Llama a la función para cargar los tipos de paracaídas al cargar la página
-cargarTiposParacaidas();
+// cargarTiposParacaidas();
 
 const buscar = async () => {
     let paraca_tipo = formulario.paraca_tipo.value;
@@ -134,7 +141,7 @@ const buscar = async () => {
 
 const guardar = async (evento) => {
     evento.preventDefault();
-    if (!validarFormulario(formulario, ['paraca_tipo', 'paraca_cupula', 'paraca_arnes', 'paraca_fecha_fabricacion', 'paraca_fecha_caducidad', 'paraca_saltos_total', 'paraca_saltos_uso'])) {
+    if (!validarFormulario(formulario, ['paraca_id'])) {
         Toast.fire({
             icon: 'info',
             text: 'Debe llenar todos los datos'
@@ -188,7 +195,7 @@ const eliminar = async (paraca_id) => {
     if (await confirmacion('warning', '¿Desea eliminar este registro?')) {
         const body = new FormData();
         body.append('paraca_id', paraca_id);
-        const url = '/paracaidistas/API/paracaidas/eliminar'; 
+        const url = '/paracaidistas/API/paracaidas/eliminar';
         const config = {
             method: 'POST',
             body
@@ -240,7 +247,7 @@ const modificar = async (e) => {
     }
 
     const body = new FormData(formulario);
-    const url = '/paracaidistas/API/paracaidas/modificar'; 
+    const url = '/paracaidistas/API/paracaidas/modificar';
     const config = {
         method: 'POST',
         body
@@ -288,7 +295,7 @@ const cancelarAccion = () => {
     btnModificar.parentElement.style.display = 'none';
     btnCancelar.disabled = true;
     btnCancelar.parentElement.style.display = 'none';
-    divTabla.style.display = '';
+    // divTabla.style.display = '';
     // Limpia el formulario al cancelar
     formulario.reset();
 };
@@ -405,3 +412,4 @@ selectTipoParacaidas.addEventListener('change', () => {
 
 // Event listener para el formulario
 formulario.addEventListener('submit', guardar);
+buscar();

@@ -49,7 +49,14 @@ class ParacaidasController
     {
         $paraca_tipo = $_GET['paraca_tipo'];
 
-        $sql = "SELECT * FROM par_paracaidas WHERE paraca_situacion = 1 ";
+        $sql = "SELECT 
+                    *,
+                    paraca_saltos_total-paraca_saltos_uso saltos_disponibles,
+                    paraca_fecha_caducidad - TODAY || ' DIAS' tiempo_restante,
+                    tipo_par_descripcion
+                FROM par_paracaidas 
+                INNER JOIN par_tipo_paracaidas ON paraca_tipo = tipo_par_id
+                WHERE paraca_situacion = 1";
         if ($paraca_tipo != '') {
             $sql .= "AND paraca_tipo = $paraca_tipo ";
         }

@@ -4,28 +4,40 @@ namespace Model;
 
 class Civil extends ActiveRecord
 {
-    public static $tabla = 'paraca_paracaidistas_civil';
-    public static $columnasDB = ['paracaidista_civil_dpi', 'paracaidista_civil_nombre', 'paracaidista_civil_apellidos', 'paracaidista_civil_telefono', 'paracaidista_civil_direccion', 'paracaidista_civil_correo_electronico', 'paracaidista_civil_saltos', 'paracaidista_civil_situacion'];
-    public static $idTabla = 'paracaidista_civil_dpi';
+    public static $tabla = 'par_paraca_civil';
+    public static $columnasDB = [
+        'paraca_civil_dpi',
+        'paraca_civil_nom1',
+        'paraca_civil_nom2',
+        'paraca_civil_ape1',
+        'paraca_civil_ape2',
+        'paraca_civil_tel',
+        'paraca_civil_direc',
+        'paraca_civil_email',
+        'paraca_civil_situacion'
+    ];
+    public static $idTabla = 'paraca_civil_dpi';
 
-    public $paracaidista_civil_dpi;
-    public $paracaidista_civil_nombre;
-    public $paracaidista_civil_apellidos;
-    public $paracaidista_civil_telefono;
-    public $paracaidista_civil_direccion;
-    public $paracaidista_civil_correo_electronico;
-    public $paracaidista_civil_saltos;
-    public $paracaidista_civil_situacion;
+    public $paraca_civil_dpi;
+    public $paraca_civil_nom1;
+    public $paraca_civil_nom2;
+    public $paraca_civil_ape1;
+    public $paraca_civil_ape2;
+    public $paraca_civil_tel;
+    public $paraca_civil_direc;
+    public $paraca_civil_email;
+    public $paraca_civil_situacion;
 
     public function __construct($args = [])
     {
-        $this->paracaidista_civil_dpi = $args['paracaidista_civil_dpi'] ?? null;
-        $this->paracaidista_civil_nombre = $args['paracaidista_civil_nombre'] ?? '';
-        $this->paracaidista_civil_apellidos = $args['paracaidista_civil_apellidos'] ?? '';
-        $this->paracaidista_civil_telefono = $args['paracaidista_civil_telefono'] ?? '';
-        $this->paracaidista_civil_direccion = $args['paracaidista_civil_direccion'] ?? '';
-        $this->paracaidista_civil_correo_electronico = $args['paracaidista_civil_correo_electronico'] ?? '';
-        $this->paracaidista_civil_saltos = $args['paracaidista_civil_saltos'] ?? 0;
-        $this->paracaidista_civil_situacion = $args['paracaidista_civil_situacion'] ?? 1;
+        $this->paraca_civil_dpi = $args['paraca_civil_dpi'] ?? null;
+        $this->paraca_civil_nom1 = $args['paraca_civil_nom1'] ?? '';
+        $this->paraca_civil_nom2 = $args['paraca_civil_nom2'] ?? '';
+        $this->paraca_civil_ape1 = $args['paraca_civil_ape1'] ?? '';
+        $this->paraca_civil_ape2 = $args['paraca_civil_ape2'] ?? '';
+        $this->paraca_civil_tel = $args['paraca_civil_tel'] ?? '';
+        $this->paraca_civil_direc = $args['paraca_civil_direc'] ?? '';
+        $this->paraca_civil_email = $args['paraca_civil_email'] ?? '';
+        $this->paraca_civil_situacion = $args['paraca_civil_situacion'] ?? '1';
     }
 }

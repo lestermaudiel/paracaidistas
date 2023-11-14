@@ -1,5 +1,4 @@
 <?php
-
 namespace Controllers;
 
 use Exception;
@@ -44,39 +43,11 @@ class CivilController
 
     public static function buscarAPI()
     {
-        $paracaidista_civil_dpi = $_GET['paracaidista_civil_dpi'];
-        $paracaidista_civil_nombre = $_GET['paracaidista_civil_nombre'];
-        $paracaidista_civil_apellidos = $_GET['paracaidista_civil_apellidos'];
-        $paracaidista_civil_telefono = $_GET['paracaidista_civil_telefono'];
-        $paracaidista_civil_direccion = $_GET['paracaidista_civil_direccion'];
-        $paracaidista_civil_correo_electronico = $_GET['paracaidista_civil_correo_electronico'];
-        $paracaidista_civil_saltos = $_GET['paracaidista_civil_saltos'];
+        $paraca_civil_dpi = $_GET['paraca_civil_dpi'];
 
-        
-        
-        $sql = "SELECT * FROM paraca_paracaidistas_civil WHERE paracaidista_civil_situacion = 1 ";
-
-        if ($paracaidista_civil_dpi != '') {
-            $sql .= "AND paracaidista_civil_dpi = $paracaidista_civil_dpi' ";
-        }
-        if ($paracaidista_civil_nombre != '') {
-            $sql .= "AND paracaidista_civil_nombre LIKE '%$paracaidista_civil_nombre%' ";
-        }
-        if ($paracaidista_civil_apellidos != '') {
-            $sql .= "AND paracaidista_civil_apellidos LIKE '%$paracaidista_civil_apellidos%' ";
-        }
-
-        if ($paracaidista_civil_telefono != '') {
-            $sql .= "AND paracaidista_civil_telefono LIKE '%$paracaidista_civil_telefono%' ";
-        }
-        if ($paracaidista_civil_direccion != '') {
-            $sql .= "AND paracaidista_civil_direccion LIKE '%$paracaidista_civil_direccion%' ";
-        }
-        if ($paracaidista_civil_correo_electronico != '') {
-            $sql .= "AND paracaidista_civil_correo_electronico LIKE '%$paracaidista_civil_correo_electronico%' ";
-        }
-        if ($paracaidista_civil_saltos != '') {
-            $sql .= "AND paracaidista_civil_saltos = $paracaidista_civil_saltos' ";
+        $sql = "SELECT * FROM par_paraca_civil where paraca_civil_situacion = 1 ";
+        if ($paraca_civil_dpi != '') {
+            $sql .= " and paraca_civil_dpi like '%$paraca_civil_dpi%' ";
         }
 
         try {
@@ -120,10 +91,9 @@ class CivilController
     public static function eliminarAPI()
     {
         try {
-            $paracaidista_civil_dpi = $_POST['paracaidista_civil_dpi'];
-            $civil = Civil::find($paracaidista_civil_dpi);
-
-            $civil->paracaidista_civil_situacion = 0;
+            $paraca_civil_dpi = $_POST['paraca_civil_dpi'];
+            $civil = Civil::find($paraca_civil_dpi);
+            $civil->paraca_civil_situacion = 0;
             $resultado = $civil->actualizar();
 
             if ($resultado['resultado'] == 1) {

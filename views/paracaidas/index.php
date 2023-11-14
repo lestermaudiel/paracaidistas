@@ -18,7 +18,7 @@
                     <select name="paraca_tipo" id="paraca_tipo" class="form-control">
                                 <option value="">Selecione un Tipo</option>
                                 <?php foreach ($tipoParacaidas as $tipo): ?>
-                                    <option value="<?= $tipo['tip_par_id'] ?>">
+                                    <option value="<?= $tipo['tipo_par_id'] ?>">
                                         <?= $tipo['tipo_par_descripcion'] ?>
                                     </option>
                                 <?php endforeach ?>
@@ -75,23 +75,7 @@
         <div class="col-lg-8">
             <h2>Listado de Paracaídas</h2>
             <table class="table table-bordered table-hover" id="tablaParacaidas">
-                <thead class="table-dark">
-                    <tr>
-                        <th>NO.</th>
-                        <th>Tipo de Paracaídas</th>
-                        <th>Cúpula</th>
-                        <th>Arnés</th>
-                        <th>Fecha de Fabricación</th>
-                        <th>Fecha de Caducidad</th>
-                        <th>Saltos Totales</th>
-                        <th>Saltos en Uso</th>
-                        <th>MODIFICAR</th>
-                        <th>ELIMINAR</th>
-                    </tr>
-                </thead>
-                <tbody>
-    
-                </tbody>
+                
             </table>
         </div>
     </div>
