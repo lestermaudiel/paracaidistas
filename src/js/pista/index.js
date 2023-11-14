@@ -18,7 +18,6 @@ btnCancelar.parentElement.style.display = 'none';
 let contador = 1;
 
 const datatable = new Datatable('#tablaZonaSalto', {
-    // Configuración de la tabla DataTable
     language: lenguaje,
     data: null,
     columns: [

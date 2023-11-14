@@ -15,7 +15,6 @@
             <div class="row mb-3">
                 <div class="col">
                     <label for="paraca_tipo">Tipo de Paracaídas</label>
-                    <!-- Aquí se carga el select con los tipoParacaidas de paracaídas -->
                     <select name="paraca_tipo" id="paraca_tipo" class="form-control">
                                 <option value="">Selecione un Tipo</option>
                                 <?php foreach ($tipoParacaidas as $tipo): ?>

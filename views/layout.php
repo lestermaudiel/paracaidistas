@@ -77,8 +77,8 @@
                                         class="ms-lg-0 ms-2 bi bi-plus-circle me-2"></i>Personal Civil</a>
                             </li>
                             <li>
-                                <a class="dropdown-item nav-link text-white " href="/paracaidistas/manifiestocivil"><i
-                                        class="ms-lg-0 ms-2 bi bi-filetype-pdf me-2"></i>Manifiesto Civil</a>
+                                <a class="dropdown-item nav-link text-white " href="/paracaidistas/saltocivil"><i
+                                        class="ms-lg-0 ms-2 bi bi-filetype-pdf me-2"></i>Control de Saltos Civil</a>
                             </li>
                         </ul>
                     </div>
@@ -99,16 +99,16 @@
                     </div>
                     <div class="nav-item dropdown ">
                         <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
-                            <i class="bi bi-person-arms-up me-2"></i>Saltos
+                            <i class="bi bi-person-arms-up me-2"></i>Cartillas
                         </a>
                         <ul class="dropdown-menu  dropdown-menu-dark " id="dropwdownRevision" style="margin: 0;">
                             <li>
-                                <a class="dropdown-item nav-link text-white " href="/paracaidistas/saltomilitar"><i
-                                        class="ms-lg-0 ms-2 bi bi-person-fill me-2"></i>Saltos Mitares</a>
+                                <a class="dropdown-item nav-link text-white " href="/paracaidistas/cartillaenganchado"><i
+                                        class="ms-lg-0 ms-2 bi bi-person-fill me-2"></i>Cartilla Salto Enganchado</a>
                             </li>
                             <li>
-                                <a class="dropdown-item nav-link text-white " href="/paracaidistas/saltocivil"><i
-                                        class="ms-lg-0 ms-2 bi bi-filetype-pdf me-2"></i>Saltos Civiles</a>
+                                <a class="dropdown-item nav-link text-white " href="/paracaidistas/cartillalibre"><i
+                                        class="ms-lg-0 ms-2 bi bi-filetype-pdf me-2"></i>Cartilla Salto Libre</a>
                             </li>
                         </ul>
                     </div>

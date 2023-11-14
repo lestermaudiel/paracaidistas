@@ -58,9 +58,10 @@ const datatable = new Datatable('#tablaParacaidas', {
             data: 'paraca_id',
             searchable: false,
             orderable: false,
-            render: (data, type, row, meta) => `<button class="btn btn-warning" data-id='${data}' data-tipo-par-id='${row["paraca_tipo"]}' data-paraca-cupula='${row["paraca_cupula"]}' data-paraca-arnes='${row["paraca_arnes"]}'
+            render: (data, type, row, meta) => {
+                return `<button class="btn btn-warning" data-id='${data}' data-tipo-par-id='${row["paraca_tipo"]}' data-paraca-cupula='${row["paraca_cupula"]}' data-paraca-arnes='${row["paraca_arnes"]}'
             data-paraca-fecha-fabricacion='${row["paraca_fecha_fabricacion"]}' data-paraca-fecha-caducidad='${row["paraca_fecha_caducidad"]}' data-paraca-saltos-total='${row["paraca_saltos_total"]}' data-paraca-saltos-uso='${row["paraca_saltos_uso"]}'
-            >Modificar</button>`
+            >Modificar</button>`}
         },
         {
             title: 'ELIMINAR',
@@ -68,17 +69,13 @@ const datatable = new Datatable('#tablaParacaidas', {
             searchable: false,
             orderable: false,
             render: (data) => {
-                const btnEliminar = document.createElement('button');
-                btnEliminar.classList.add('btn', 'btn-danger');
-                btnEliminar.textContent = 'Eliminar';
-                btnEliminar.addEventListener('click', () => {
-                    eliminar(data);
-                });
-                return btnEliminar.outerHTML;
+                render: (data) => `<button class="btn btn-danger" data-id='${data}'>Eliminar</button>`
             },
         },
-    ],
-});
+        ],
+    }
+
+            );
 
 // Función para cargar dinámicamente las opciones del tipo de paracaídas
 const cargarTiposParacaidas = async () => {
@@ -108,6 +105,32 @@ const cargarTiposParacaidas = async () => {
 
 // Llama a la función para cargar los tipos de paracaídas al cargar la página
 cargarTiposParacaidas();
+
+const buscar = async () => {
+    let paraca_tipo = formulario.paraca_tipo.value;
+    let paraca_cupula = formulario.paraca_cupula.value;
+    const url = `/paracaidistas/API/paracaidas/buscar?paraca_tipo=${paraca_tipo}&paraca_cupula=${paraca_cupula}`;
+    const config = {
+        method: 'GET'
+    };
+
+    try {
+        const respuesta = await fetch(url, config);
+        const data = await respuesta.json();
+        datatable.clear().draw();
+        if (data) {
+            contador = 1;
+            datatable.rows.add(data).draw();
+        } else {
+            Toast.fire({
+                title: 'No se encontraron registros',
+                icon: 'info'
+            });
+        }
+    } catch (error) {
+        console.log(error);
+    }
+};
 
 const guardar = async (evento) => {
     evento.preventDefault();
@@ -158,31 +181,104 @@ const guardar = async (evento) => {
         console.log(error);
     }
 };
-const buscar = async () => {
-    let paraca_tipo = formulario.paraca_tipo.value;
-    let paraca_cupula = formulario.paraca_cupula.value;
-    const url = `/paracaidistas/API/paracaidas/buscar?paraca_tipo=${paraca_tipo}&paraca_cupula=${paraca_cupula}`;
+
+const eliminar = async (paraca_id) => {
+    const button = e.target;
+    const id = button.dataset.id;
+    if (await confirmacion('warning', '¿Desea eliminar este registro?')) {
+        const body = new FormData();
+        body.append('paraca_id', paraca_id);
+        const url = '/paracaidistas/API/paracaidas/eliminar'; 
+        const config = {
+            method: 'POST',
+            body
+        };
+
+        try {
+            const respuesta = await fetch(url, config);
+            const data = await respuesta.json();
+
+            const { codigo, mensaje, detalle } = data;
+            let icon = 'info';
+            switch (codigo) {
+                case 1:
+                    buscar();
+                    icon = 'success';
+                    break;
+
+                case 0:
+                    icon = 'error';
+                    console.log(detalle);
+                    break;
+
+                default:
+                    break;
+            }
+
+            Toast.fire({
+                icon,
+                text: mensaje
+            });
+        } catch (error) {
+            console.log(error);
+            Toast.fire({
+                icon: 'error',
+                text: 'Error al intentar eliminar el registro.'
+            });
+        }
+    }
+};
+
+const modificar = async (e) => {
+    e.preventDefault()
+    if (!validarFormulario(formulario, ['paraca_id'])) {
+        Toast.fire({
+            icon: 'info',
+            text: 'Debe llenar todos los datos'
+        });
+        return;
+    }
+
+    const body = new FormData(formulario);
+    const url = '/paracaidistas/API/paracaidas/modificar'; 
     const config = {
-        method: 'GET'
+        method: 'POST',
+        body
     };
 
     try {
         const respuesta = await fetch(url, config);
         const data = await respuesta.json();
-        datatable.clear().draw();
-        if (data) {
-            contador = 1;
-            datatable.rows.add(data).draw();
-        } else {
-            Toast.fire({
-                title: 'No se encontraron registros',
-                icon: 'info'
-            });
+
+        const { codigo, mensaje, detalle } = data;
+        let icon = 'success';
+        switch (codigo) {
+            case 1:
+                formulario.reset();
+                icon = 'success';
+                buscar();
+                break;
+
+            case 0:
+                icon = 'error';
+                console.log(detalle);
+                break;
+
+            default:
+                break;
         }
+
+        Toast.fire({
+            icon,
+            text: mensaje
+        });
+
     } catch (error) {
         console.log(error);
     }
 };
+
+
 const cancelarAccion = () => {
     btnGuardar.disabled = false;
     btnGuardar.parentElement.style.display = '';
@@ -241,98 +337,6 @@ const colocarDatos = (dataset) => {
     btnModificar.parentElement.style.display = '';
     btnCancelar.disabled = false;
     btnCancelar.parentElement.style.display = '';
-};
-const modificar = async () => {
-    if (!validarFormulario(formulario)) {
-        Toast.fire({
-            icon: 'info',
-            text: 'Debe llenar todos los datos'
-        });
-        return;
-    }
-
-    const body = new FormData(formulario);
-    const url = '/paracaidistas/API/paracaidas/modificar'; // Ajusta la URL según tu configuración
-    const config = {
-        method: 'POST',
-        body
-    };
-
-    try {
-        const respuesta = await fetch(url, config);
-        const data = await respuesta.json();
-
-        const { codigo, mensaje, detalle } = data;
-        let icon = 'success';
-        switch (codigo) {
-            case 1:
-                formulario.reset();
-                icon = 'success';
-                buscar();
-                break;
-
-            case 0:
-                icon = 'error';
-                console.log(detalle);
-                break;
-
-            default:
-                break;
-        }
-
-        Toast.fire({
-            icon,
-            text: mensaje
-        });
-
-    } catch (error) {
-        console.log(error);
-    }
-};
-
-const eliminar = async (paraca_id) => {
-    if (await confirmacion('warning', '¿Desea eliminar este registro?')) {
-        const body = new FormData();
-        body.append('paraca_id', paraca_id);
-        const url = '/paracaidistas/API/paracaidas/eliminar'; // Ajusta la URL según tu configuración
-        const config = {
-            method: 'POST',
-            body
-        };
-
-        try {
-            const respuesta = await fetch(url, config);
-            const data = await respuesta.json();
-
-            const { codigo, mensaje, detalle } = data;
-            let icon = 'info';
-            switch (codigo) {
-                case 1:
-                    buscar();
-                    icon = 'success';
-                    break;
-
-                case 0:
-                    icon = 'error';
-                    console.log(detalle);
-                    break;
-
-                default:
-                    break;
-            }
-
-            Toast.fire({
-                icon,
-                text: mensaje
-            });
-        } catch (error) {
-            console.log(error);
-            Toast.fire({
-                icon: 'error',
-                text: 'Error al intentar eliminar el registro.'
-            });
-        }
-    }
 };
 
 
