@@ -71,8 +71,8 @@
             </div>
         </form>
     </div>
-    <div class="row justify-content-center" id="divTabla">
-        <div class="col-lg-8">
+    <div class="row justify-content-center">
+        <div class="col table-responsive" style="max-width: 80%; padding: 10px;">
             <h2>Listado de Paracaídas</h2>
             <table class="table table-bordered table-hover" id="tablaParacaidas">
                 
