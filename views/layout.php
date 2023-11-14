@@ -74,11 +74,30 @@
                         <ul class="dropdown-menu  dropdown-menu-dark " id="dropwdownRevision" style="margin: 0;">
                             <li>
                                 <a class="dropdown-item nav-link text-white " href="/paracaidistas/civil"><i
-                                        class="ms-lg-0 ms-2 bi bi-plus-circle me-2"></i>Personal Civil</a>
+                                        class="ms-lg-0 ms-2 bi bi-plus-circle me-2"></i>Registro de Personal Civil</a>
                             </li>
                             <li>
                                 <a class="dropdown-item nav-link text-white " href="/paracaidistas/saltocivil"><i
                                         class="ms-lg-0 ms-2 bi bi-filetype-pdf me-2"></i>Control de Saltos Civil</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="nav-item dropdown ">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                            <i class="bi bi-person-add me-2"></i>PARACAIDISTAS
+                        </a>
+                        <ul class="dropdown-menu  dropdown-menu-dark " id="dropwdownRevision" style="margin: 0;">
+                            <li>
+                                <a class="dropdown-item nav-link text-white " href="/paracaidistas/paracaidista"><i
+                                        class="ms-lg-0 ms-2 bi bi-plus-circle me-2"></i>Registro de Paracaidistas</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item nav-link text-white " href="/paracaidistas/saltoenganchado"><i
+                                        class="ms-lg-0 ms-2 bi bi-filetype-pdf me-2"></i>Control de Saltos Enganchado</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item nav-link text-white " href="/paracaidistas/saltolibre"><i
+                                        class="ms-lg-0 ms-2 bi bi-filetype-pdf me-2"></i>Control de Saltos Libre</a>
                             </li>
                         </ul>
                     </div>

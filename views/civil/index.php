@@ -4,21 +4,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Paracaidistas Civiles</title>
+    <title>Mantenimiento de Civiles</title>
 </head>
 
 <body>
-    <h1 class="text-center">Paracaidistas Civiles</h1>
+    <h1 class="text-center">Mantenimiento de Civiles</h1>
     <div class="row justify-content-center mb-5">
-        <form class="col-lg-8 border bg-light p-3" id="formularioParacaidistaCivil">
+        <form class="col-lg-8 border bg-light p-3" id="formularioCivil">
+            <input type="hidden" name="paraca_civil_dpi" id="paraca_civil_dpi">
+            
             <div class="row mb-3">
                 <div class="col">
                     <label for="paraca_civil_dpi">DPI</label>
-                    <input type="text" name="paraca_civil_dpi" id="paraca_civil_dpi" class="form-control">
+                    <input type="text" name="paraca_civil_dpi" id="paraca_civil_dpi" class="form-control" placeholder="Ingrese DPI">
                 </div>
             </div>
+
             <div class="row mb-3">
-            <div class="col">
+                <div class="col">
                     <label for="paraca_civil_nom1">Primer Nombre</label>
                     <input type="text" name="paraca_civil_nom1" id="paraca_civil_nom1" class="form-control">
                 </div>
@@ -43,19 +46,14 @@
                     <input type="text" name="paraca_civil_tel" id="paraca_civil_tel" class="form-control">
                 </div>
                 <div class="col">
-                    <label for="paraca_civil_direc">Dirección</label>
-                    <input type="text" name="paraca_civil_direc" id="paraca_civil_direc" class="form-control">
-                </div>
-            </div>
-            <div class="row mb-3">
-                <div class="col">
                     <label for="paraca_civil_email">Correo Electrónico</label>
-                    <input type="email" name="paraca_civil_email" id="paraca_civil_email" class="form-control">
+                    <input type="text" name="paraca_civil_email" id="paraca_civil_email" class="form-control">
                 </div>
             </div>
+            
             <div class="row mb-3">
                 <div class="col">
-                    <button type="submit" form="formularioParacaidistaCivil" id="btnGuardar" class="btn btn-primary w-100">Guardar</button>
+                    <button type="submit" form="formularioCivil" id="btnGuardar" class="btn btn-primary w-100">Guardar</button>
                 </div>
                 <div class="col">
                     <button type="button" id="btnModificar" class="btn btn-warning w-100">Modificar</button>
@@ -70,27 +68,13 @@
         </form>
     </div>
     <div class="row justify-content-center">
-        
-    <div class="col table-responsive" style="max-width: 80%; padding: 10px;">
-            <h2>Listado de Paracaidistas Civiles</h2>
-            <table class="table table-bordered table-hover" id="tablaParacaidistaCivil">
-                <thead class="table-dark">
-                    <tr>
-                        <th>DPI</th>
-                        <th>Nombre</th>
-                        <th>Apellido</th>
-                        <th>Teléfono</th>
-                        <th>Correo Electrónico</th>
-                        <th>MODIFICAR</th>
-                        <th>ELIMINAR</th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
+        <div class="col table-responsive" style="max-width: 80%; padding: 10px;">
+            <h2>Listado de Civiles</h2>
+            <table class="table table-bordered table-hover" id="tablaCivil">
             </table>
         </div>
     </div>
-    <script src="<?= asset('./build/js/civil/index.js') ?>"></script>
 </body>
 
 </html>
+<script src="<?= asset('./build/js/civil/index.js') ?>"></script>

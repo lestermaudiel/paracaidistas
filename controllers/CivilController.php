@@ -1,4 +1,5 @@
 <?php
+
 namespace Controllers;
 
 use Exception;
@@ -9,9 +10,9 @@ class CivilController
 {
     public static function index(Router $router)
     {
-        $civil = Civil::all();
+        $civils = Civil::all();
         $router->render('civil/index', [
-            'civil' => $civil,
+            'civils' => $civils,
         ]);
     }
 
@@ -43,16 +44,16 @@ class CivilController
 
     public static function buscarAPI()
     {
-        $paraca_civil_dpi = $_GET['paraca_civil_dpi'];
+        $civil_dpi = $_GET['civil_dpi'];
 
         $sql = "SELECT * FROM par_paraca_civil where paraca_civil_situacion = 1 ";
-        if ($paraca_civil_dpi != '') {
-            $sql .= " and paraca_civil_dpi like '%$paraca_civil_dpi%' ";
+        if ($civil_dpi != '') {
+            $sql .= " and paraca_civil_dpi like '%$civil_dpi%' ";
         }
 
         try {
-            $civil = Civil::fetchArray($sql);
-            echo json_encode($civil);
+            $civils = Civil::fetchArray($sql);
+            echo json_encode($civils);
         } catch (Exception $e) {
             echo json_encode([
                 'detalle' => $e->getMessage(),
@@ -91,8 +92,8 @@ class CivilController
     public static function eliminarAPI()
     {
         try {
-            $paraca_civil_dpi = $_POST['paraca_civil_dpi'];
-            $civil = Civil::find($paraca_civil_dpi);
+            $civil_dpi = $_POST['paraca_civil_dpi'];
+            $civil = Civil::find($civil_dpi);
             $civil->paraca_civil_situacion = 0;
             $resultado = $civil->actualizar();
 

@@ -11,6 +11,7 @@ use Controllers\PistaController;
 use Controllers\AeronaveController;
 use Controllers\CivilController;
 use Controllers\ParacaidasController;  
+use Controllers\ManifiestoController;  
 
 $router = new Router();
 $router->setBaseURL('/' . $_ENV['APP_NAME']);
@@ -63,6 +64,13 @@ $router->post('/API/paracaidas/guardar', [ParacaidasController::class, 'guardarA
 $router->post('/API/paracaidas/modificar', [ParacaidasController::class, 'modificarAPI']);
 $router->post('/API/paracaidas/eliminar', [ParacaidasController::class, 'eliminarAPI']);
 $router->get('/API/paracaidas/buscar', [ParacaidasController::class, 'buscarAPI']);
+
+$router->get('/manifiesto', [ManifiestoController::class, 'index']);
+$router->post('/API/manifiesto/guardar', [ManifiestoController::class, 'guardarAPI']);
+$router->post('/API/manifiesto/modificar', [ManifiestoController::class, 'modificarAPI']);
+$router->post('/API/manifiesto/eliminar', [ManifiestoController::class, 'eliminarAPI']);
+$router->get('/API/manifiesto/buscar', [ManifiestoController::class, 'buscarAPI']);
+
 
 $router->comprobarRutas();
 ?>

@@ -4,7 +4,7 @@ import { lenguaje } from "../lenguaje";
 import Swal from "sweetalert2";
 import { validarFormulario, Toast, confirmacion } from "../funciones";
 
-const formulario = document.getElementById('formularioParacaidistaCivil');
+const formulario = document.getElementById('formularioCivil');
 const btnBuscar = document.getElementById('btnBuscar');
 const btnModificar = document.getElementById('btnModificar');
 const btnGuardar = document.getElementById('btnGuardar');
@@ -17,25 +17,25 @@ btnCancelar.parentElement.style.display = 'none';
 
 let contador = 1;
 
-const datatable = new Datatable('#tablaParacaidistaCivil', {
-
+const datatable = new Datatable('#tablaCivil', {
+    // Configuración de la tabla DataTable
     language: lenguaje,
     data: null,
     columns: [
         { title: 'NO', render: () => contador++ },
         { title: 'DPI', data: 'paraca_civil_dpi' },
-        { title: 'Nombre', render: (data, type, row, meta) => `${row['paraca_civil_nom1']} ${row['paraca_civil_nom2']}` },
-        { title: 'Apellido', render: (data, type, row, meta) => `${row['paraca_civil_ape1']} ${row['paraca_civil_ape2']}` },
+        { title: 'Primer Nombre', data: 'paraca_civil_nom1' },
+        { title: 'Segundo Nombre', data: 'paraca_civil_nom2' },
+        { title: 'Primer Apellido', data: 'paraca_civil_ape1' },
+        { title: 'Segundo Apellido', data: 'paraca_civil_ape2' },
         { title: 'Teléfono', data: 'paraca_civil_tel' },
-        { title: 'Correo Electrónico', data: 'paraca_civil_email' },
+        { title: 'Dirección', data: 'paraca_civil_direc' },
+        { title: 'Email', data: 'paraca_civil_email' },
         { title: 'MODIFICAR', data: 'paraca_civil_dpi', searchable: false, orderable: false,
           render: (data, type, row, meta) => {
-            return `<button class="btn btn-warning" data-id='${data}' 
-                     data-nom1='${row['paraca_civil_nom1']}' data-nom2='${row['paraca_civil_nom2']}'
-                     data-ape1='${row['paraca_civil_ape1']}' data-ape2='${row['paraca_civil_ape2']}'
-                     data-tel='${row['paraca_civil_tel']}' data-direc='${row['paraca_civil_direc']}'
-                     data-email='${row['paraca_civil_email']}' data-situacion='${row['paraca_civil_situacion']}'
-                     >Modificar</button>` }
+            return `<button class="btn btn-warning" data-id='${data}' data-dpi='${row['paraca_civil_dpi']}' data-nom1='${row['paraca_civil_nom1']}' 
+            data-nom2='${row['paraca_civil_nom2']}' data-ape1='${row['paraca_civil_ape1']}' data-ape2='${row['paraca_civil_ape2']}' 
+            data-tel='${row['paraca_civil_tel']}' data-direc='${row['paraca_civil_direc']}' data-email='${row['paraca_civil_email']}'>Modificar</button>` }
         },
         { title: 'ELIMINAR', 
         data: 'paraca_civil_dpi',
@@ -48,7 +48,7 @@ const datatable = new Datatable('#tablaParacaidistaCivil', {
 const buscar = async () => {
     let paraca_civil_dpi = formulario.paraca_civil_dpi.value;
 
-    const url = `/paracaidistas/API/civil/buscar?paraca_civil_dpi=${paraca_civil_dpi}`;
+    const url = `/paracaidistas/API/civil/buscar?civil_dpi=${paraca_civil_dpi}`;
     const config = {
         method: 'GET'
     };
@@ -215,6 +215,7 @@ const modificar = async (e) => {
 const traeDatos = (e) => {
     const button = e.target;
     const id = button.dataset.id;
+    const dpi = button.dataset.dpi;
     const nom1 = button.dataset.nom1;
     const nom2 = button.dataset.nom2;
     const ape1 = button.dataset.ape1;
@@ -225,6 +226,7 @@ const traeDatos = (e) => {
 
     const dataset = {
         id,
+        dpi,
         nom1,
         nom2,
         ape1,
@@ -238,7 +240,7 @@ const traeDatos = (e) => {
 };
 
 const colocarDatos = (dataset) => {
-    formulario.paraca_civil_dpi.value = dataset.id;
+    formulario.paraca_civil_dpi.value = dataset.dpi;
     formulario.paraca_civil_nom1.value = dataset.nom1;
     formulario.paraca_civil_nom2.value = dataset.nom2;
     formulario.paraca_civil_ape1.value = dataset.ape1;

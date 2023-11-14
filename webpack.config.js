@@ -14,6 +14,7 @@ module.exports = {
     'js/aeronave/index': './src/js/aeronave/index.js',
     'js/civil/index': './src/js/civil/index.js',
     'js/paracaidas/index': './src/js/paracaidas/index.js',
+    'js/manifiesto/index': './src/js/manifiesto/index.js',
 
   },
   output: {
