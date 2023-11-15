@@ -190,8 +190,9 @@ const guardar = async (evento) => {
 };
 
 const eliminar = async (paraca_id) => {
-    button = e.target;
-    id = button.dataset.id;
+    const button = e.target;
+    const id = button.dataset.id;
+
     if (await confirmacion('warning', '¿Desea eliminar este registro?')) {
         const body = new FormData();
         body.append('paraca_id', paraca_id);
@@ -356,57 +357,6 @@ datatable.on('click', '.btn-warning', traeDatos);
 
 
 
-// // Event listener para el botón de buscar
-// formularioParacaidas.addEventListener('submit', (e) => {
-//     e.preventDefault();
-//     buscar();
-// });
-
-// Event listener para el botón de cancelar
-// btnCancelar.addEventListener('click', () => {
-//     cancelarAccion();
-//     cargarTiposParacaidas(); // Recargar los tipos de paracaídas al cancelar
-// });
-
-// // Event listener para el botón de modificar (traer datos)
-// btnModificar.addEventListener('click', () => {
-//     const paraca_id = formularioParacaidas.paraca_id.value;
-//     const paraca_tipo = formularioParacaidas.paraca_tipo.value;
-//     const paraca_cupula = formularioParacaidas.paraca_cupula.value;
-//     const paraca_arnes = formularioParacaidas.paraca_arnes.value;
-//     const paraca_fecha_fabricacion = formularioParacaidas.paraca_fecha_fabricacion.value;
-//     const paraca_fecha_caducidad = formularioParacaidas.paraca_fecha_caducidad.value;
-//     const paraca_saltos_total = formularioParacaidas.paraca_saltos_total.value;
-//     const paraca_saltos_uso = formularioParacaidas.paraca_saltos_uso.value;
-
-//     const dataset = {
-//         id: paraca_id,
-//         paraca_tipo,
-//         paraca_cupula,
-//         paraca_arnes,
-//         paraca_fecha_fabricacion,
-//         paraca_fecha_caducidad,
-//         paraca_saltos_total,
-//         paraca_saltos_uso,
-//     };
-
-//     colocarDatos(dataset);
-// });
-
-// // Event listener para el botón de modificar
-// btnModificar.addEventListener('click', () => {
-//     modificar();
-// });
-
-// // Event listener para el botón de eliminar
-// tablaParacaidas.addEventListener('click', (e) => {
-//     const target = e.target;
-
-//     if (target.classList.contains('btn-danger')) {
-//         const paraca_id = target.dataset.id;
-//         eliminar(paraca_id);
-//     }
-// });
 
 // Carga los tipos de paracaídas al cambiar la opción del select
 selectTipoParacaidas.addEventListener('change', () => {
