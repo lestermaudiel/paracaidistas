@@ -27,7 +27,7 @@ class Civil extends ActiveRecord
 
     public function __construct($args = [])
     {
-        $this->paraca_civil_dpi = $args['paraca_civil_dpi'] ?? null;
+        $this->paraca_civil_dpi = $args['paraca_civil_dpi'] ?? '';
         $this->paraca_civil_nom1 = $args['paraca_civil_nom1'] ?? '';
         $this->paraca_civil_nom2 = $args['paraca_civil_nom2'] ?? '';
         $this->paraca_civil_ape1 = $args['paraca_civil_ape1'] ?? '';

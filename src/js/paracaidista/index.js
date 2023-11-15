@@ -4,7 +4,7 @@ import { lenguaje } from "../lenguaje";
 import Swal from "sweetalert2";
 import { validarFormulario, Toast, confirmacion } from "../funciones";
 
-const formulario = document.getElementById('formularioCivil');
+const formulario = document.getElementById('formularioAltimetro');
 const btnBuscar = document.getElementById('btnBuscar');
 const btnModificar = document.getElementById('btnModificar');
 const btnGuardar = document.getElementById('btnGuardar');
@@ -17,28 +17,20 @@ btnCancelar.parentElement.style.display = 'none';
 
 let contador = 1;
 
-const datatable = new Datatable('#tablaCivil', {
+const datatable = new Datatable('#tablaAltimetro', {
     // Configuración de la tabla DataTable
     language: lenguaje,
     data: null,
     columns: [
         { title: 'NO', render: () => contador++ },
-        { title: 'No. DPI', data: 'paraca_civil_dpi' },
-        { title: 'Primer Nombre', data: 'paraca_civil_nom1' },
-        { title: 'Segundo Nombre', data: 'paraca_civil_nom2' },
-        { title: 'Primer Apellido', data: 'paraca_civil_ape1' },
-        { title: 'Segundo Apellido', data: 'paraca_civil_ape2' },
-        { title: 'Teléfono', data: 'paraca_civil_tel' },
-        { title: 'Dirección', data: 'paraca_civil_direc' },
-        { title: 'Email', data: 'paraca_civil_email' },
-        { title: 'MODIFICAR', data: 'paraca_civil_dpi', searchable: false, orderable: false,
+        { title: 'Número de Serie', data: 'altimetro_serie' },
+        { title: 'Marca', data: 'altimetro_marca' },
+        { title: 'MODIFICAR', data: 'altimetro_id', searchable: false, orderable: false,
           render: (data, type, row, meta) => {
-            return `<button class="btn btn-warning" data-id='${data}' data-dpi='${row['paraca_civil_dpi']}' data-nom1='${row['paraca_civil_nom1']}' 
-            data-nom2='${row['paraca_civil_nom2']}' data-ape1='${row['paraca_civil_ape1']}' data-ape2='${row['paraca_civil_ape2']}' 
-            data-tel='${row['paraca_civil_tel']}' data-direc='${row['paraca_civil_direc']}' data-email='${row['paraca_civil_email']}'>Modificar</button>` }
+            return `<button class="btn btn-warning" data-id='${data}' data-serie='${row['altimetro_serie']}' data-marca='${row['altimetro_marca']}'>Modificar</button>` }
         },
         { title: 'ELIMINAR', 
-        data: 'paraca_civil_dpi',
+        data: 'altimetro_id',
         searchable: false, orderable: false,
           render: (data) => `<button class="btn btn-danger" data-id='${data}'>Eliminar</button>` 
         },
@@ -46,9 +38,9 @@ const datatable = new Datatable('#tablaCivil', {
 });
 
 const buscar = async () => {
-    let paraca_civil_dpi = formulario.paraca_civil_dpi.value;
+    let altimetro_serie = formulario.altimetro_serie.value;
 
-    const url = `/paracaidistas/API/civil/buscar?paraca_civil_dpi=${paraca_civil_dpi}`;
+    const url = `/paracaidistas/API/altimetro/buscar?altimetro_serie=${altimetro_serie}`;
     const config = {
         method: 'GET'
     };
@@ -72,10 +64,9 @@ const buscar = async () => {
     }
 };
 
-
 const guardar = async (evento) => {
     evento.preventDefault();
-    if (!validarFormulario(formulario, ['paraca_civil_dpi'])) {
+    if (!validarFormulario(formulario, ['altimetro_id'])) {
         Toast.fire({
             icon: 'info',
             text: 'Debe llenar todos los datos'
@@ -84,7 +75,7 @@ const guardar = async (evento) => {
     }
 
     const body = new FormData(formulario);
-    const url = '/paracaidistas/API/civil/guardar';
+    const url = '/paracaidistas/API/altimetro/guardar';
     const config = {
         method: 'POST',
         body
@@ -128,8 +119,8 @@ const eliminar = async (e) => {
 
     if (await confirmacion('warning', '¿Desea eliminar este registro?')) {
         const body = new FormData();
-        body.append('paraca_civil_dpi', id);
-        const url = '/paracaidistas/API/civil/eliminar';
+        body.append('altimetro_id', id);
+        const url = '/paracaidistas/API/altimetro/eliminar';
         const config = {
             method: 'POST',
             body
@@ -168,13 +159,13 @@ const eliminar = async (e) => {
 
 const modificar = async (e) => {
     e.preventDefault()
-    if (!validarFormulario(formulario, ['paraca_civil_dpi'])) {
+    if (!validarFormulario(formulario, ['altimetro_id'])) {
         alert('Debe llenar todos los campos');
         return;
     }
 
     const body = new FormData(formulario)
-    const url = '/paracaidistas/API/civil/modificar';
+    const url = '/paracaidistas/API/altimetro/modificar';
     const config = {
         method: 'POST',
         body
@@ -216,39 +207,22 @@ const modificar = async (e) => {
 const traeDatos = (e) => {
     const button = e.target;
     const id = button.dataset.id;
-    const dpi = button.dataset.dpi;
-    const nom1 = button.dataset.nom1;
-    const nom2 = button.dataset.nom2;
-    const ape1 = button.dataset.ape1;
-    const ape2 = button.dataset.ape2;
-    const tel = button.dataset.tel;
-    const direc = button.dataset.direc;
-    const email = button.dataset.email;
+    const serie = button.dataset.serie;
+    const marca = button.dataset.marca;
 
     const dataset = {
         id,
-        dpi,
-        nom1,
-        nom2,
-        ape1,
-        ape2,
-        tel,
-        direc,
-        email,
+        serie,
+        marca,
     };
 
     colocarDatos(dataset);
 };
 
 const colocarDatos = (dataset) => {
-    formulario.paraca_civil_dpi.value = dataset.dpi;
-    formulario.paraca_civil_nom1.value = dataset.nom1;
-    formulario.paraca_civil_nom2.value = dataset.nom2;
-    formulario.paraca_civil_ape1.value = dataset.ape1;
-    formulario.paraca_civil_ape2.value = dataset.ape2;
-    formulario.paraca_civil_tel.value = dataset.tel;
-    formulario.paraca_civil_direc.value = dataset.direc;
-    formulario.paraca_civil_email.value = dataset.email;
+    formulario.altimetro_serie.value = dataset.serie;
+    formulario.altimetro_marca.value = dataset.marca;
+    formulario.altimetro_id.value = dataset.id;
 
     btnGuardar.disabled = true;
     btnGuardar.parentElement.style.display = 'none';

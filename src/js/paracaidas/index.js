@@ -3,19 +3,19 @@ import Datatable from "datatables.net-bs5";
 import { lenguaje } from "../lenguaje";
 import Swal from "sweetalert2";
 import { validarFormulario, Toast, confirmacion } from "../funciones";
-
+0
 const formulario = document.getElementById('formularioParacaidas');
 const btnBuscar = document.getElementById('btnBuscar');
 const btnModificar = document.getElementById('btnModificar');
 const btnGuardar = document.getElementById('btnGuardar');
 const btnCancelar = document.getElementById('btnCancelar');
-const divTabla = document.getElementById('divTabla');
+//const divTabla = document.getElementById('divTabla');
 const selectTipoParacaidas = document.getElementById('paraca_tipo');
 
 btnModificar.disabled = true;
-btnModificar.style.display = 'none';
+btnModificar.parentElement.style.display = 'none';
 btnCancelar.disabled = true;
-btnCancelar.style.display = 'none';
+btnCancelar.parentElement.style.display = 'none';
 let contador = 1;
 const datatable = new Datatable('#tablaParacaidas', {
     language: lenguaje,
@@ -76,7 +76,7 @@ const datatable = new Datatable('#tablaParacaidas', {
             data: 'paraca_id',
             searchable: false,
             orderable: false,
-            render: (data) => { return `<button class="btn btn-danger" data-id='${data}'>Eliminar</button>` }
+            render: (data) => `<button class="btn btn-danger" data-id='${data}'>Eliminar</button>` 
 
         },
     ],
@@ -190,8 +190,8 @@ const guardar = async (evento) => {
 };
 
 const eliminar = async (paraca_id) => {
-    const button = e.target;
-    const id = button.dataset.id;
+    button = e.target;
+    id = button.dataset.id;
     if (await confirmacion('warning', '¿Desea eliminar este registro?')) {
         const body = new FormData();
         body.append('paraca_id', paraca_id);
@@ -286,19 +286,7 @@ const modificar = async (e) => {
 };
 
 
-const cancelarAccion = () => {
-    btnGuardar.disabled = false;
-    btnGuardar.parentElement.style.display = '';
-    btnBuscar.disabled = false;
-    btnBuscar.parentElement.style.display = '';
-    btnModificar.disabled = true;
-    btnModificar.parentElement.style.display = 'none';
-    btnCancelar.disabled = true;
-    btnCancelar.parentElement.style.display = 'none';
-    // divTabla.style.display = '';
-    // Limpia el formulario al cancelar
-    formulario.reset();
-};
+
 const traeDatos = (e) => {
     const button = e.target;
     const id = button.dataset.id;
@@ -318,7 +306,7 @@ const traeDatos = (e) => {
         paraca_fecha_fabricacion,
         paraca_fecha_caducidad,
         paraca_saltos_total,
-        paraca_saltos_uso,
+        paraca_saltos_uso
     };
 
     colocarDatos(dataset);
@@ -346,70 +334,87 @@ const colocarDatos = (dataset) => {
     btnCancelar.parentElement.style.display = '';
 };
 
-
+const cancelarAccion = () => {
+    formulario.reset();
+    btnGuardar.disabled = false;
+    btnGuardar.parentElement.style.display = '';
+    btnBuscar.disabled = false;
+    btnBuscar.parentElement.style.display = '';
+    btnModificar.disabled = true;
+    btnModificar.parentElement.style.display = 'none';
+    btnCancelar.disabled = true;
+    btnCancelar.parentElement.style.display = 'none';
+};
 // Event listeners
-btnGuardar.addEventListener('click', guardar);
+
 btnBuscar.addEventListener('click', buscar);
 btnCancelar.addEventListener('click', cancelarAccion);
 btnModificar.addEventListener('click', modificar);
+datatable.on('click', '.btn-danger', eliminar);
+formulario.addEventListener('submit', guardar);
+datatable.on('click', '.btn-warning', traeDatos);
 
-// Event listener para el botón de buscar
-formularioParacaidas.addEventListener('submit', (e) => {
-    e.preventDefault();
-    buscar();
-});
+
+
+// // Event listener para el botón de buscar
+// formularioParacaidas.addEventListener('submit', (e) => {
+//     e.preventDefault();
+//     buscar();
+// });
 
 // Event listener para el botón de cancelar
-btnCancelar.addEventListener('click', () => {
-    cancelarAccion();
-    cargarTiposParacaidas(); // Recargar los tipos de paracaídas al cancelar
-});
+// btnCancelar.addEventListener('click', () => {
+//     cancelarAccion();
+//     cargarTiposParacaidas(); // Recargar los tipos de paracaídas al cancelar
+// });
 
-// Event listener para el botón de modificar (traer datos)
-btnModificar.addEventListener('click', () => {
-    const paraca_id = formularioParacaidas.paraca_id.value;
-    const paraca_tipo = formularioParacaidas.paraca_tipo.value;
-    const paraca_cupula = formularioParacaidas.paraca_cupula.value;
-    const paraca_arnes = formularioParacaidas.paraca_arnes.value;
-    const paraca_fecha_fabricacion = formularioParacaidas.paraca_fecha_fabricacion.value;
-    const paraca_fecha_caducidad = formularioParacaidas.paraca_fecha_caducidad.value;
-    const paraca_saltos_total = formularioParacaidas.paraca_saltos_total.value;
-    const paraca_saltos_uso = formularioParacaidas.paraca_saltos_uso.value;
+// // Event listener para el botón de modificar (traer datos)
+// btnModificar.addEventListener('click', () => {
+//     const paraca_id = formularioParacaidas.paraca_id.value;
+//     const paraca_tipo = formularioParacaidas.paraca_tipo.value;
+//     const paraca_cupula = formularioParacaidas.paraca_cupula.value;
+//     const paraca_arnes = formularioParacaidas.paraca_arnes.value;
+//     const paraca_fecha_fabricacion = formularioParacaidas.paraca_fecha_fabricacion.value;
+//     const paraca_fecha_caducidad = formularioParacaidas.paraca_fecha_caducidad.value;
+//     const paraca_saltos_total = formularioParacaidas.paraca_saltos_total.value;
+//     const paraca_saltos_uso = formularioParacaidas.paraca_saltos_uso.value;
 
-    const dataset = {
-        id: paraca_id,
-        paraca_tipo,
-        paraca_cupula,
-        paraca_arnes,
-        paraca_fecha_fabricacion,
-        paraca_fecha_caducidad,
-        paraca_saltos_total,
-        paraca_saltos_uso,
-    };
+//     const dataset = {
+//         id: paraca_id,
+//         paraca_tipo,
+//         paraca_cupula,
+//         paraca_arnes,
+//         paraca_fecha_fabricacion,
+//         paraca_fecha_caducidad,
+//         paraca_saltos_total,
+//         paraca_saltos_uso,
+//     };
 
-    colocarDatos(dataset);
-});
+//     colocarDatos(dataset);
+// });
 
-// Event listener para el botón de modificar
-btnModificar.addEventListener('click', () => {
-    modificar();
-});
+// // Event listener para el botón de modificar
+// btnModificar.addEventListener('click', () => {
+//     modificar();
+// });
 
-// Event listener para el botón de eliminar
-tablaParacaidas.addEventListener('click', (e) => {
-    const target = e.target;
+// // Event listener para el botón de eliminar
+// tablaParacaidas.addEventListener('click', (e) => {
+//     const target = e.target;
 
-    if (target.classList.contains('btn-danger')) {
-        const paraca_id = target.dataset.id;
-        eliminar(paraca_id);
-    }
-});
+//     if (target.classList.contains('btn-danger')) {
+//         const paraca_id = target.dataset.id;
+//         eliminar(paraca_id);
+//     }
+// });
 
 // Carga los tipos de paracaídas al cambiar la opción del select
 selectTipoParacaidas.addEventListener('change', () => {
     buscar();
 });
 
-// Event listener para el formulario
-formulario.addEventListener('submit', guardar);
+
+
+
+
 buscar();

@@ -15,6 +15,7 @@ module.exports = {
     'js/civil/index': './src/js/civil/index.js',
     'js/paracaidas/index': './src/js/paracaidas/index.js',
     'js/manifiesto/index': './src/js/manifiesto/index.js',
+    'js/paracaidista/index': './src/js/paracaidista/index.js',
 
   },
   output: {

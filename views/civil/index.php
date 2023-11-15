@@ -12,13 +12,14 @@
     <div class="row justify-content-center mb-5">
         <form class="col-lg-8 border bg-light p-3" id="formularioCivil">
             <input type="hidden" name="paraca_civil_dpi" id="paraca_civil_dpi">
-            
+
             <div class="row mb-3">
                 <div class="col">
                     <label for="paraca_civil_dpi">DPI</label>
-                    <input type="text" name="paraca_civil_dpi" id="paraca_civil_dpi" class="form-control" placeholder="Ingrese DPI">
+                    <input type="text" name="paraca_civil_dpi" id="paraca_civil_dpi" class="form-control">
                 </div>
             </div>
+
 
             <div class="row mb-3">
                 <div class="col">
@@ -50,10 +51,11 @@
                     <input type="text" name="paraca_civil_email" id="paraca_civil_email" class="form-control">
                 </div>
             </div>
-            
+
             <div class="row mb-3">
                 <div class="col">
-                    <button type="submit" form="formularioCivil" id="btnGuardar" class="btn btn-primary w-100">Guardar</button>
+                    <button type="submit" form="formularioCivil" id="btnGuardar"
+                        class="btn btn-primary w-100">Guardar</button>
                 </div>
                 <div class="col">
                     <button type="button" id="btnModificar" class="btn btn-warning w-100">Modificar</button>
