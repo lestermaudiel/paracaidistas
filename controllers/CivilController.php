@@ -19,9 +19,6 @@ class CivilController
     public static function guardarAPI()
     {
         try {
-            if (empty($_POST['paraca_civil_dpi'])) {
-                throw new Exception("El campo DPI no puede estar vacío");
-            }
     
             $civil = new Civil($_POST);
             $resultado = $civil->crear();

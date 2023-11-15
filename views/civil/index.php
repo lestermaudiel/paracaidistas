@@ -11,7 +11,6 @@
     <h1 class="text-center">Mantenimiento de Civiles</h1>
     <div class="row justify-content-center mb-5">
         <form class="col-lg-8 border bg-light p-3" id="formularioCivil">
-            <input type="hidden" name="paraca_civil_dpi" id="paraca_civil_dpi">
 
             <div class="row mb-3">
                 <div class="col">
@@ -43,8 +42,14 @@
             </div>
             <div class="row mb-3">
                 <div class="col">
+                    <label for="paraca_civil_tel">Dirección</label>
+                    <input type="text" name="paraca_civil_direc" id="paraca_civil_direc" class="form-control">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col">
                     <label for="paraca_civil_tel">Teléfono</label>
-                    <input type="text" name="paraca_civil_tel" id="paraca_civil_tel" class="form-control">
+                    <input type="NUMBER" name="paraca_civil_tel" id="paraca_civil_tel" class="form-control">
                 </div>
                 <div class="col">
                     <label for="paraca_civil_email">Correo Electrónico</label>

@@ -18,7 +18,6 @@ btnCancelar.parentElement.style.display = 'none';
 let contador = 1;
 
 const datatable = new Datatable('#tablaCivil', {
-    // Configuración de la tabla DataTable
     language: lenguaje,
     data: null,
     columns: [
@@ -34,8 +33,8 @@ const datatable = new Datatable('#tablaCivil', {
         { title: 'MODIFICAR', data: 'paraca_civil_dpi', searchable: false, orderable: false,
           render: (data, type, row, meta) => {
             return `<button class="btn btn-warning" data-id='${data}' data-dpi='${row['paraca_civil_dpi']}' data-nom1='${row['paraca_civil_nom1']}' 
-            data-nom2='${row['paraca_civil_nom2']}' data-ape1='${row['paraca_civil_ape1']}' data-ape2='${row['paraca_civil_ape2']}' 
-            data-tel='${row['paraca_civil_tel']}' data-direc='${row['paraca_civil_direc']}' data-email='${row['paraca_civil_email']}'>Modificar</button>` }
+            data-nom2='${row['paraca_civil_nom2']}' data-ape1='${row['paraca_civil_ape1']}' data-ape2='${row['paraca_civil_ape2']}' data-direc='${row['paraca_civil_direc']}'
+            data-tel='${row['paraca_civil_tel']}' data-email='${row['paraca_civil_email']}'>Modificar</button>` }
         },
         { title: 'ELIMINAR', 
         data: 'paraca_civil_dpi',
@@ -221,8 +220,8 @@ const traeDatos = (e) => {
     const nom2 = button.dataset.nom2;
     const ape1 = button.dataset.ape1;
     const ape2 = button.dataset.ape2;
-    const tel = button.dataset.tel;
     const direc = button.dataset.direc;
+    const tel = button.dataset.tel;
     const email = button.dataset.email;
 
     const dataset = {
@@ -232,8 +231,8 @@ const traeDatos = (e) => {
         nom2,
         ape1,
         ape2,
-        tel,
         direc,
+        tel,
         email,
     };
 
@@ -246,8 +245,8 @@ const colocarDatos = (dataset) => {
     formulario.paraca_civil_nom2.value = dataset.nom2;
     formulario.paraca_civil_ape1.value = dataset.ape1;
     formulario.paraca_civil_ape2.value = dataset.ape2;
-    formulario.paraca_civil_tel.value = dataset.tel;
     formulario.paraca_civil_direc.value = dataset.direc;
+    formulario.paraca_civil_tel.value = dataset.tel;
     formulario.paraca_civil_email.value = dataset.email;
 
     btnGuardar.disabled = true;
@@ -280,3 +279,4 @@ btnBuscar.addEventListener('click', buscar);
 formulario.addEventListener('submit', guardar);
 datatable.on('click', '.btn-warning', traeDatos);
 datatable.on('click', '.btn-danger', eliminar);
+
