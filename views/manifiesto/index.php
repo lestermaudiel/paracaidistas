@@ -91,12 +91,11 @@
                 </div>
                 <div class="col">
                     <label for="mani_aterrizaje">Aterrizaje</label>
-
                     <select name="mani_aterrizaje" id="mani_aterrizaje" class="form-control">
                         <option value="">Selecione un Tipo</option>
-                        <?php foreach ($pistas as $pistas): ?>
-                            <option value="<?= $pistas['pista_id'] ?>">
-                                <?= $pistas['pista_detalle'] ?>
+                        <?php foreach ($pistas2 as $pista2): ?>
+                            <option value="<?= $pista2['pista_id'] ?>">
+                                <?= $pista2['pista_detalle'] ?>
                             </option>
                         <?php endforeach ?>
                     </select>

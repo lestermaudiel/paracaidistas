@@ -30,7 +30,11 @@ class Pista extends ActiveRecord
 
 
 public function getPista(){
-    $sql = "SELECT * from par_pista where pista_situacion = 1";
+    $sql = "SELECT pista_id, pista_detalle from par_pista where pista_situacion = 1";
+    return $this->fetchArray($sql);
+}
+public function getPista2(){
+    $sql = "SELECT pista_id, pista_detalle from par_pista where pista_situacion = 1";
     return $this->fetchArray($sql);
 }
 }

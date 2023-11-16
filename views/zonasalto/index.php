@@ -21,11 +21,11 @@
             <div class="row mb-3">
                 <div class="col">
                     <label for="zona_salto_latitud">Latitud</label>
-                    <input type="number" name="zona_salto_latitud" id="zona_salto_latitud" class="form-control">
+                    <input type="decimal" name="zona_salto_latitud" id="zona_salto_latitud" class="form-control">
                 </div>
                 <div class="col">
                     <label for="zona_salto_longitud">Longitud</label>
-                    <input type="number" name="zona_salto_longitud" id="zona_salto_longitud" class="form-control">
+                    <input type="decimal" name="zona_salto_longitud" id="zona_salto_longitud" class="form-control">
                 </div>
             </div>
             <div class="row mb-3">

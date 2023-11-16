@@ -25,10 +25,15 @@ class ManifiestoController
 {
     public static function index(Router $router)
     {
-        $pistaObjeto = new Pista();
-        $pistas = $pistaObjeto->getPista();
+        // $pistaObjeto = new Pista();
+        // $pistas = $pistaObjeto->getPista();
 
-       
+        $pista = new Pista();
+        $pistas = $pista->getPista();
+        
+        $pista2 = new Pista();
+        $pistas2 = $pista2->getPista2();
+
 
         // $tiposParacaidasObjeto = new TiposParacaidas();
         // $tiposParacaidas = $tiposParacaidasObjeto->getTipoParacaidas();
@@ -66,6 +71,7 @@ class ManifiestoController
 
         $router->render('manifiesto/index', [
             'pistas' => $pistas,
+            'pistas2' => $pistas2,
             // 'tiposParacaidas' => $tiposParacaidas,
             'aeronaves' => $aeronaves,
             'altimetros' => $altimetros,
