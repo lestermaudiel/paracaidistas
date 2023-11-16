@@ -41,3 +41,8 @@ class Organizacion extends ActiveRecord {
         $this->org_categoria = $args['org_categoria'] ?? '';
     }
 }
+
+public function getOrganizacion(){
+    $sql = "SELECT * from morg";
+    return $this->fetchArray($sql);
+}

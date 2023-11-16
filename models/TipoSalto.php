@@ -20,3 +20,7 @@ class TipoSalto extends ActiveRecord
         $this->tipo_salto_situacion = $args['tipo_salto_situacion'] ?? '1';
     }
 }
+public function getPeTipoSalto(){
+    $sql = "SELECT * from par_tipo_salto where tipo_salto_situacion = 1";
+    return $this->fetchArray($sql);
+}

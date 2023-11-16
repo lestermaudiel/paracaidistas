@@ -21,3 +21,7 @@ class Altimetro extends ActiveRecord
         $this->altimetro_situacion = $args['altimetro_situacion'] ?? '1';
     }
 }
+public function getAltimetro(){
+    $sql = "SELECT * from par_altimetro where altimetro_situacion = 1";
+    return $this->fetchArray($sql);
+}

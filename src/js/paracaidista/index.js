@@ -4,43 +4,51 @@ import { lenguaje } from "../lenguaje";
 import Swal from "sweetalert2";
 import { validarFormulario, Toast, confirmacion } from "../funciones";
 
-const formulario = document.getElementById('formularioAltimetro');
-const btnBuscar = document.getElementById('btnBuscar');
-const btnModificar = document.getElementById('btnModificar');
-const btnGuardar = document.getElementById('btnGuardar');
-const btnCancelar = document.getElementById('btnCancelar');
+const formulario = document.getElementById('formularioParacaidista');
+
+const inputIdentificacion = document.getElementById('identificacion');
+
+const selectTipoPersona = document.getElementById('tipoPersona');
 
 btnModificar.disabled = true;
 btnModificar.parentElement.style.display = 'none';
 btnCancelar.disabled = true;
 btnCancelar.parentElement.style.display = 'none';
 
+
+
 let contador = 1;
 
-const datatable = new Datatable('#tablaAltimetro', {
+const datatable = new Datatable('#tablaParacaidista', {
     // Configuración de la tabla DataTable
     language: lenguaje,
     data: null,
     columns: [
+
+//         paraca_id
+// paraca_codigo
+// paraca_civil_dpi
+// paraca_saltos
+// paraca_tipo_salto
+// paraca_situación
         { title: 'NO', render: () => contador++ },
-        { title: 'Número de Serie', data: 'altimetro_serie' },
-        { title: 'Marca', data: 'altimetro_marca' },
-        { title: 'MODIFICAR', data: 'altimetro_id', searchable: false, orderable: false,
-          render: (data, type, row, meta) => {
-            return `<button class="btn btn-warning" data-id='${data}' data-serie='${row['altimetro_serie']}' data-marca='${row['altimetro_marca']}'>Modificar</button>` }
-        },
+        { title: 'Militar', data: 'paraca_codigo' },
+        { title: 'Nombre Militar', data: 'militar' },
+        { title: 'Civil', data: 'paraca_civil_dpi' },
+        { title: 'Nombre Civil', data: 'civil' },
+        
+        
         { title: 'ELIMINAR', 
-        data: 'altimetro_id',
+        data: 'paraca_id',
         searchable: false, orderable: false,
           render: (data) => `<button class="btn btn-danger" data-id='${data}'>Eliminar</button>` 
         },
     ],
 });
 
-const buscar = async () => {
-    let altimetro_serie = formulario.altimetro_serie.value;
+const buscar = async () => {    
 
-    const url = `/paracaidistas/API/altimetro/buscar?altimetro_serie=${altimetro_serie}`;
+    const url = `/paracaidistas/API/paracaidista/buscar`;
     const config = {
         method: 'GET'
     };
@@ -66,16 +74,28 @@ const buscar = async () => {
 
 const guardar = async (evento) => {
     evento.preventDefault();
-    if (!validarFormulario(formulario, ['altimetro_id'])) {
+
+    if (!validarFormulario(formulario, ['paraca_id'])) {
         Toast.fire({
             icon: 'info',
             text: 'Debe llenar todos los datos'
         });
         return;
     }
+    
 
     const body = new FormData(formulario);
-    const url = '/paracaidistas/API/altimetro/guardar';
+    if(selectTipoPersona.value === 'militar'){
+        body.append('paraca_codigo',inputIdentificacion.value)
+    }else{
+        
+        body.append('paraca_civil_dpi',inputIdentificacion.value)
+    }
+    console.log(selectTipoPersona.value)
+    for(var pair of body.entries()){
+        console.log(pair[0], pair[1]);
+    }
+    const url = '/paracaidistas/API/paracaidista/guardar';
     const config = {
         method: 'POST',
         body
@@ -120,7 +140,7 @@ const eliminar = async (e) => {
     if (await confirmacion('warning', '¿Desea eliminar este registro?')) {
         const body = new FormData();
         body.append('altimetro_id', id);
-        const url = '/paracaidistas/API/altimetro/eliminar';
+        const url = '/paracaidistas/API/paracaidista/eliminar';
         const config = {
             method: 'POST',
             body
@@ -156,101 +176,16 @@ const eliminar = async (e) => {
 
     }
 };
-
-const modificar = async (e) => {
-    e.preventDefault()
-    if (!validarFormulario(formulario, ['altimetro_id'])) {
-        alert('Debe llenar todos los campos');
-        return;
-    }
-
-    const body = new FormData(formulario)
-    const url = '/paracaidistas/API/altimetro/modificar';
-    const config = {
-        method: 'POST',
-        body
-    }
-
-    try {
-        const respuesta = await fetch(url, config);
-        const data = await respuesta.json();
-
-        const { codigo, mensaje, detalle } = data;
-        let icon = 'info';
-
-        switch (codigo) {
-            case 1:
-                formulario.reset();
-                icon = 'success';
-                buscar();
-                cancelarAccion();
-                break;
-
-            case 0:
-                icon = 'error'
-                console.log(detalle);
-                break;
-
-            default:
-                break;
-        }
-
-        Toast.fire({
-            icon,
-            text: mensaje
-        });
-    } catch (error) {
-        console.log(error);
+function validarTipoPersona(){
+    if(selectTipoPersona.value === 'militar'){
+        inputIdentificacion.placeholder='Ingrese catalogo'       
+    }else{       
+        inputIdentificacion.placeholder='Ingrese DPI'
     }
 }
-
-const traeDatos = (e) => {
-    const button = e.target;
-    const id = button.dataset.id;
-    const serie = button.dataset.serie;
-    const marca = button.dataset.marca;
-
-    const dataset = {
-        id,
-        serie,
-        marca,
-    };
-
-    colocarDatos(dataset);
-};
-
-const colocarDatos = (dataset) => {
-    formulario.altimetro_serie.value = dataset.serie;
-    formulario.altimetro_marca.value = dataset.marca;
-    formulario.altimetro_id.value = dataset.id;
-
-    btnGuardar.disabled = true;
-    btnGuardar.parentElement.style.display = 'none';
-    btnBuscar.disabled = true;
-    btnBuscar.parentElement.style.display = 'none';
-    btnModificar.disabled = false;
-    btnModificar.parentElement.style.display = '';
-    btnCancelar.disabled = false;
-    btnCancelar.parentElement.style.display = '';
-}
-
-const cancelarAccion = () => {
-    formulario.reset();
-    btnGuardar.disabled = false;
-    btnGuardar.parentElement.style.display = '';
-    btnBuscar.disabled = false;
-    btnBuscar.parentElement.style.display = '';
-    btnModificar.disabled = true;
-    btnModificar.parentElement.style.display = 'none';
-    btnCancelar.disabled = true;
-    btnCancelar.parentElement.style.display = 'none';
-};
-
+validarTipoPersona()
 buscar();
 
-btnModificar.addEventListener('click', modificar);
-btnCancelar.addEventListener('click', cancelarAccion);
-btnBuscar.addEventListener('click', buscar);
+selectTipoPersona.addEventListener('change',validarTipoPersona)
 formulario.addEventListener('submit', guardar);
-datatable.on('click', '.btn-warning', traeDatos);
 datatable.on('click', '.btn-danger', eliminar);

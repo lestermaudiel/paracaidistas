@@ -21,3 +21,7 @@ class Aeronave extends ActiveRecord
         $this->aer_tip_situacion = $args['aer_tip_situacion'] ?? '1';
     }
 }
+public function getAeronave(){
+    $sql = "SELECT * from fag_tip_aeronave where aer_tip_situacion = 1";
+    return $this->fetchArray($sql);
+}

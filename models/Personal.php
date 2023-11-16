@@ -87,3 +87,8 @@ class Personal extends ActiveRecord {
         
     }
 }
+
+public function getPersonal(){
+    $sql = "SELECT * from mper where per_situacion = 1";
+    return $this->fetchArray($sql);
+}

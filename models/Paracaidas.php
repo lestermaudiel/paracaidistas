@@ -31,3 +31,7 @@ class Paracaidas extends ActiveRecord
         $this->paraca_situacion = $args['paraca_situacion'] ?? '1';
     }
 }
+public function getAltimetro(){
+    $sql = "SELECT * from par_altimetro where altimetro_situacion = 1";
+    return $this->fetchArray($sql);
+}

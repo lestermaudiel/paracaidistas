@@ -28,3 +28,8 @@ class Dependencia extends ActiveRecord{
         $this->dep_ejto = $args['dep_ejto'] ?? '';
     }
 }
+
+public function getDependencia(){
+    $sql = "SELECT * from mdep ";
+    return $this->fetchArray($sql);
+}

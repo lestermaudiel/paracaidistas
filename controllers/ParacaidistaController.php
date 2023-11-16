@@ -43,19 +43,16 @@ class ParacaidistaController
     }
 
     public static function buscarAPI()
-    {
-        $paraca_codigo = $_GET['paraca_codigo'];
-        $paraca_civil_dpi = $_GET['paraca_civil_dpi'];
-
-        $sql = "SELECT * FROM par_paracaidista where paraca_situacion = 1 ";
-
-        if ($paraca_codigo != '') {
-            $sql .= " and paraca_codigo = $paraca_codigo ";
-        }
-
-        if ($paraca_civil_dpi != '') {
-            $sql .= " and paraca_civil_dpi like '%$paraca_civil_dpi%' ";
-        }
+    {     
+        $sql = "SELECT 
+                    p.*,
+                    trim(pc.paraca_civil_nom1)||' '||trim(pc.paraca_civil_nom2)||' '||trim(pc.paraca_civil_ape1)||' '||trim(pc.paraca_civil_ape2) civil,
+        
+                    trim(pm.per_nom1)||' '||trim(pm.per_nom2)||' '||trim(pm.per_ape1)||' '||trim(pm.per_ape2) militar
+                FROM par_paracaidista p
+                LEFT JOIN par_paraca_civil pc on pc.paraca_civil_dpi = p.paraca_civil_dpi
+                LEFT JOIN mper pm on pm.per_catalogo = p.paraca_codigo
+                where paraca_situacion = 1 ";    
 
         try {
             $paracaidistas = Paracaidista::fetchArray($sql);

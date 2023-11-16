@@ -4,6 +4,19 @@ namespace Controllers;
 
 use Exception;
 use Model\Manifiesto;
+use Model\TiposParacaidas;
+use Model\Aeronave;
+use Model\Altimetro;
+use Model\Civil;
+use Model\Dependencia;
+use Model\Organizacion;
+use Model\Paracaidas;
+use Model\Paracaidista;
+use Model\Personal;
+use Model\Pista;
+use Model\TipoSalto;
+use Model\ZonaSalto;
+
 use MVC\Router;
 
 class ManifiestoController

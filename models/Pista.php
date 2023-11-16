@@ -27,3 +27,10 @@ class Pista extends ActiveRecord
         $this->pista_situacion = $args['pista_situacion'] ?? '1';
     }
 }
+
+
+
+public function getPista(){
+    $sql = "SELECT * from par_pista where pista_situacion = 1";
+    return $this->fetchArray($sql);
+}

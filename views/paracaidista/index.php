@@ -12,34 +12,40 @@
     <div class="row justify-content-center mb-5">
         <form class="col-lg-8 border bg-light p-3" id="formularioParacaidista">
             <input type="hidden" name="paraca_id" id="paraca_id">
-            
+
             <div class="row mb-3">
                 <div class="col">
-                    <label for="paraca_codigo">Código</label>
-                    <select name="paraca_codigo" id="paraca_codigo" class="form-control">
-                        <!-- Aquí puedes cargar dinámicamente los datos del catálogo si es necesario -->
-                        <option value="1">Opción 1</option>
-                        <option value="2">Opción 2</option>
-                        <!-- ... más opciones ... -->
+                    <label for="tipoPersona">Tipo de Persona</label>
+                    <select name="tipoPersona" id="tipoPersona" class="form-control">
+                        <option value="militar">Militar</option>
+                        <option value="civil">Civil</option>
                     </select>
                 </div>
-                
+            </div>
+
+            <div class="row mb-3" id="catalogo">
                 <div class="col">
-                    <label for="paraca_civil_dpi">DPI</label>
-                    <input type="text" name="paraca_civil_dpi" id="paraca_civil_dpi" class="form-control" placeholder="Ingrese DPI">
+                    <label for="identificacion">Catalogo</label>
+                    <input type="text" name="identificacion" id="identificacion" class="form-control">
                 </div>
             </div>
 
-            <div class="row mb-3">
+            <!-- <div class="row mb-3" id="dpi">
                 <div class="col">
-                    <label for="paraca_saltos">Número de Saltos</label>
-                    <input type="number" name="paraca_saltos" id="paraca_saltos" class="form-control" value="0">
+                    <div class="col" id="divDPI">
+                        <label for="paraca_civil_dpi">DPI</label>
+                        <input type="text" name="paraca_civil_dpi" id="paraca_civil_dpi" class="form-control"
+                            placeholder="Ingrese DPI">
+                    </div>
                 </div>
-            </div>
+            </div> -->
+
+
 
             <div class="row mb-3">
                 <div class="col">
-                    <button type="submit" form="formularioParacaidista" id="btnGuardar" class="btn btn-primary w-100">Guardar</button>
+                    <button type="submit" form="formularioParacaidista" id="btnGuardar"
+                        class="btn btn-primary w-100">Guardar</button>
                 </div>
                 <div class="col">
                     <button type="button" id="btnModificar" class="btn btn-warning w-100">Modificar</button>
@@ -60,7 +66,7 @@
             </table>
         </div>
     </div>
+    <script src="<?= asset('./build/js/paracaidista/index.js') ?>"></script>
 </body>
 
 </html>
-<script src="<?= asset('./build/js/paracaidista/index.js') ?>"></script>
