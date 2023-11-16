@@ -20,7 +20,7 @@
             </div>
             <div class="row mb-3">
                 <div class="col">
-                    <label for="mani_paraca_cod">Paracaísta</label>
+                    <label for="mani_paraca_cod">Paracaidista</label>
                     <input type="input" name="mani_paraca_cod" id="mani_paraca_cod" class="form-control">
                 </div>
                 <div class="col">
@@ -81,23 +81,32 @@
                 <div class="col">
                     <label for="mani_despegue">Despegue</label>
                     <select name="mani_despegue" id="mani_despegue" class="form-control">
-                        <option value="" selected disabled>Seleccione una opción</option>
-                        <!-- Opciones del select se cargarán dinámicamente desde la base de datos -->
+                        <option value="">Selecione un Tipo</option>
+                        <?php foreach ($pistas as $pistas): ?>
+                            <option value="<?= $pistas['pista_id'] ?>">
+                                <?= $pistas['pista_detalle'] ?>
+                            </option>
+                        <?php endforeach ?>
                     </select>
                 </div>
                 <div class="col">
                     <label for="mani_aterrizaje">Aterrizaje</label>
+
                     <select name="mani_aterrizaje" id="mani_aterrizaje" class="form-control">
-                        <option value="" selected disabled>Seleccione una opción</option>
-                        <!-- Opciones del select se cargarán dinámicamente desde la base de datos -->
+                        <option value="">Selecione un Tipo</option>
+                        <?php foreach ($pistas as $pistas): ?>
+                            <option value="<?= $pistas['pista_id'] ?>">
+                                <?= $pistas['pista_detalle'] ?>
+                            </option>
+                        <?php endforeach ?>
                     </select>
                 </div>
-            </div>
-            <div class="row mb-3">
                 <div class="col">
                     <label for="mani_altura">Altura</label>
                     <input type="number" name="mani_altura" id="mani_altura" class="form-control">
                 </div>
+            </div>
+            <div class="row mb-3">
                 <div class="col">
                     <label for="mani_jefe">Jefe</label>
                     <select name="mani_jefe" id="mani_jefe" class="form-control">
@@ -105,6 +114,11 @@
                         <!-- Opciones del select se cargarán dinámicamente desde la base de datos -->
                     </select>
                 </div>
+                
+                
+
+            </div>
+            <div class="row mb-3">
                 <div class="col">
                     <label for="mani_unidad">Unidad</label>
                     <select name="mani_unidad" id="mani_unidad" class="form-control">
@@ -121,15 +135,23 @@
                 <div class="col">
                     <label for="mani_grado">Grado</label>
                     <select name="mani_grado" id="mani_grado" class="form-control">
-                        <option value="" selected disabled>Seleccione una opción</option>
-                        <!-- Opciones del select se cargarán dinámicamente desde la base de datos -->
+                        <option value="">Grado</option>
+                        <?php foreach ($grado as $grado): ?>
+                            <option value="<?= $grado['gra_codigo'] ?>">
+                                <?= $grado['gra_desc_md'] ?>
+                            </option>
+                        <?php endforeach ?>
                     </select>
                 </div>
                 <div class="col">
                     <label for="mani_paracaidas">Paracaídas</label>
                     <select name="mani_paracaidas" id="mani_paracaidas" class="form-control">
-                        <option value="" selected disabled>Seleccione una opción</option>
-                        <!-- Opciones del select se cargarán dinámicamente desde la base de datos -->
+                        <option value="">Selecione Opcion</option>
+                        <?php foreach ($paracaidas as $paracaidas): ?>
+                            <option value="<?= $paracaidas['paraca_id'] ?>">
+                                <?= $paracaidas['paraca_cupula'] ?>
+                            </option>
+                        <?php endforeach ?>
                     </select>
                 </div>
                 <div class="col">

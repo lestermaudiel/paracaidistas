@@ -103,6 +103,21 @@
                     </div>
                     <div class="nav-item dropdown ">
                         <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                            <i class="bi bi-alarm-fill me-2"></i>PARACAIDAS
+                        </a>
+                        <ul class="dropdown-menu  dropdown-menu-dark " id="dropwdownRevision" style="margin: 0;">
+                            <li>
+                                <a class="dropdown-item nav-link text-white " href="/paracaidistas/listaparacaidas"><i
+                                        class="ms-lg-0 ms-2 bi bi-plus-circle me-2"></i>Disponibilidad Paracaidas</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item nav-link text-white " href="/paracaidistas/saltolibre"><i
+                                        class="ms-lg-0 ms-2 bi bi-filetype-pdf me-2"></i>Control de Saltos Libre</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="nav-item dropdown ">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
                             <i class="bi bi-filetype-pdf me-2"></i>Manifieto
                         </a>
                         <ul class="dropdown-menu  dropdown-menu-dark " id="dropwdownRevision" style="margin: 0;">

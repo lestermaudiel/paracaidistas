@@ -17,6 +17,7 @@ use Model\Personal;
 use Model\TipoSalto;
 use Model\ZonaSalto;
 use Model\Pista;
+use Model\Grado;
 
 use MVC\Router;
 
@@ -24,8 +25,10 @@ class ManifiestoController
 {
     public static function index(Router $router)
     {
-        // $pistaObjeto = new Pista();
-        // $pistas = $pistaObjeto->getPista();
+        $pistaObjeto = new Pista();
+        $pistas = $pistaObjeto->getPista();
+
+       
 
         // $tiposParacaidasObjeto = new TiposParacaidas();
         // $tiposParacaidas = $tiposParacaidasObjeto->getTipoParacaidas();
@@ -45,11 +48,15 @@ class ManifiestoController
         // $organizacionObjeto = new Organizacion();
         // $organizaciones = $organizacionObjeto->getOrganizacion();
 
-        // $paracaidasObjeto = new Paracaidas();
-        // $paracaidas = $paracaidasObjeto->getParacaidas();
+        $paracaidasObjeto = new Paracaidas();
+        $paracaidas = $paracaidasObjeto->getParacaidas();
 
         // $paracaidistaObjeto = new Paracaidista();
         // $paracaidistas = $paracaidistaObjeto->getParacaidista(); 
+
+        $gradoObjeto = new Grado();
+        $grado = $gradoObjeto->getGrado(); 
+
 
         $tipoSaltoObjeto = new TipoSalto();
         $tiposSalto = $tipoSaltoObjeto->getPeTipoSalto();
@@ -58,17 +65,19 @@ class ManifiestoController
         $zonasSalto = $zonaSaltoObjeto->getZonaSalto();
 
         $router->render('manifiesto/index', [
-            // 'pistas' => $pistas,
+            'pistas' => $pistas,
             // 'tiposParacaidas' => $tiposParacaidas,
             'aeronaves' => $aeronaves,
             'altimetros' => $altimetros,
             // 'civiles' => $civiles,
             'dependencias' => $dependencias,
+            'grado' => $grado,
             // 'organizaciones' => $organizaciones,
-            // 'paracaidas' => $paracaidas,
+            'paracaidas' => $paracaidas,
             // 'paracaidistas' => $paracaidistas,
             'tiposSalto' => $tiposSalto,
             'zonasSalto' => $zonasSalto,
+           
         ]);
     }
 

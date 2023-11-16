@@ -34,3 +34,4 @@ public function getPista(){
     return $this->fetchArray($sql);
 }
 }
+
