@@ -52,7 +52,9 @@ class ListaParacaidasController
         $sql = "SELECT 
         paraca_saltos_total - paraca_saltos_uso AS saltos_disponibles,
         paraca_fecha_caducidad - TODAY || ' DIAS' as tiempo_restante_original,
-        TRUNC((paraca_fecha_caducidad - TODAY) / 365) || ' años ' || TRUNC(MOD((paraca_fecha_caducidad - TODAY) / 30, 12)) || ' meses ' || MOD((paraca_fecha_caducidad - TODAY), 30) || ' días' as tiempo_restante_formateado,
+        LPAD(TRUNC((paraca_fecha_caducidad - TODAY) / 365), 2, '0') || ' a. ' ||
+        LPAD(TRUNC(MOD((paraca_fecha_caducidad - TODAY) / 30, 12)), 2, '0') || ' m. ' ||
+        LPAD(MOD((paraca_fecha_caducidad - TODAY), 30), 2, '0') || ' dd.' as tiempo_restante_formateado,
         paraca_cupula,
         paraca_arnes,
         tipo_par_descripcion
