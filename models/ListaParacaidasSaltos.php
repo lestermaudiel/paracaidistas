@@ -2,7 +2,7 @@
 
 namespace Model;
 
-class ListaParacaidas extends ActiveRecord
+class ListaParacaidasSaltos extends ActiveRecord
 {
     public static $tabla = 'par_paracaidas';
     public static $columnasDB = ['paraca_tipo', 'paraca_cupula', 'paraca_arnes', 'paraca_fecha_fabricacion', 'paraca_fecha_caducidad', 'paraca_saltos_total', 'paraca_saltos_uso', 'paraca_situacion'];

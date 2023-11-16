@@ -14,6 +14,7 @@ use Controllers\ParacaidasController;
 use Controllers\ManifiestoController;  
 use Controllers\ParacaidistaController;  
 use Controllers\ListaParacaidasController; 
+use Controllers\ListaParacaidasSaltosController; 
 
 $router = new Router();
 $router->setBaseURL('/' . $_ENV['APP_NAME']);
@@ -72,6 +73,12 @@ $router->post('/API/listaparacaidas/guardar', [ListaParacaidasController::class,
 $router->post('/API/listaparacaidas/modificar', [ListaParacaidasController::class, 'modificarAPI']);
 $router->post('/API/listaparacaidas/eliminar', [ListaParacaidasController::class, 'eliminarAPI']);
 $router->get('/API/listaparacaidas/buscar', [ListaParacaidasController::class, 'buscarAPI']);
+
+$router->get('/listaparacaidassaltos', [ListaParacaidasSaltosController::class, 'index']);
+$router->post('/API/listaparacaidassaltos/guardar', [ListaParacaidasSaltosController::class, 'guardarAPI']);
+$router->post('/API/listaparacaidassaltos/modificar', [ListaParacaidasSaltosController::class, 'modificarAPI']);
+$router->post('/API/listaparacaidassaltos/eliminar', [ListaParacaidasSaltosController::class, 'eliminarAPI']);
+$router->get('/API/listaparacaidassaltos/buscar', [ListaParacaidasSaltosController::class, 'buscarAPI']);
 
 
 $router->get('/manifiesto', [ManifiestoController::class, 'index']);
