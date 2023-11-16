@@ -36,14 +36,20 @@ const datatable = new Datatable('#tablaListaParacaidassaltos', {
         {
             title: 'Saltos Diponibles',
             data: 'saltos_disponibles',
+            createdCell: function (td, cellData, rowData, row, col) {
+                if (cellData > 1000) {
+                    $(td).css('background-color', 'lightgreen');
+                } else if (cellData > 100 && cellData <= 1000) {
+                    $(td).css('background-color', 'yellow');
+                } else if (cellData > 50 && cellData <= 100) {
+                    $(td).css('background-color', 'orange');
+                } else if (cellData <= 50) {
+                    $(td).css('background-color', 'red');
+                }
+            }
         },
-        
-        
     ],
-}
-
-);
-
+});
 
 const buscar = async () => {
     const url = `/paracaidistas/API/listaparacaidassaltos/buscar`;
@@ -68,9 +74,5 @@ const buscar = async () => {
         console.log(error);
     }
 };
-
-
-
-
 
 buscar();
