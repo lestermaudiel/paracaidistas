@@ -30,11 +30,11 @@ class ManifiestoController
         // $tiposParacaidasObjeto = new TiposParacaidas();
         // $tiposParacaidas = $tiposParacaidasObjeto->getTipoParacaidas();
 
-        // $aeronaveObjeto = new Aeronave();
-        // $aeronaves = $aeronaveObjeto->getAeronave();
+        $aeronaveObjeto = new Aeronave();
+        $aeronaves = $aeronaveObjeto->getAeronave();
 
-        // $altimetroObjeto = new Altimetro();
-        // $altimetros = $altimetroObjeto->getAltimetro();
+        $altimetroObjeto = new Altimetro();
+        $altimetros = $altimetroObjeto->getAltimetro();
 
         // $civilObjeto = new Civil();
         // $civiles = $civilObjeto->getCivil();
@@ -51,24 +51,24 @@ class ManifiestoController
         // $paracaidistaObjeto = new Paracaidista();
         // $paracaidistas = $paracaidistaObjeto->getParacaidista(); 
 
-        // $tipoSaltoObjeto = new TipoSalto();
-        // $tiposSalto = $tipoSaltoObjeto->getPeTipoSalto();
+        $tipoSaltoObjeto = new TipoSalto();
+        $tiposSalto = $tipoSaltoObjeto->getPeTipoSalto();
 
-        // $zonaSaltoObjeto = new ZonaSalto();
-        // $zonasSalto = $zonaSaltoObjeto->getZonaSalto();
+        $zonaSaltoObjeto = new ZonaSalto();
+        $zonasSalto = $zonaSaltoObjeto->getZonaSalto();
 
         $router->render('manifiesto/index', [
             // 'pistas' => $pistas,
             // 'tiposParacaidas' => $tiposParacaidas,
-            // 'aeronaves' => $aeronaves,
-            // 'altimetros' => $altimetros,
+            'aeronaves' => $aeronaves,
+            'altimetros' => $altimetros,
             // 'civiles' => $civiles,
             'dependencias' => $dependencias,
             // 'organizaciones' => $organizaciones,
             // 'paracaidas' => $paracaidas,
             // 'paracaidistas' => $paracaidistas,
-            // 'tiposSalto' => $tiposSalto,
-            // 'zonasSalto' => $zonasSalto,
+            'tiposSalto' => $tiposSalto,
+            'zonasSalto' => $zonasSalto,
         ]);
     }
 

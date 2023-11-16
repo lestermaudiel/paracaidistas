@@ -42,22 +42,34 @@
                 <div class="col">
                     <label for="mani_tipo_salto">Tipo de Salto</label>
                     <select name="mani_tipo_salto" id="mani_tipo_salto" class="form-control">
-                        <option value="" selected disabled>Seleccione una opción</option>
-                        <!-- Opciones del select se cargarán dinámicamente desde la base de datos -->
+                        <option value="">Selecione un Tipo</option>
+                        <?php foreach ($tiposSalto as $tiposSalto): ?>
+                            <option value="<?= $tiposSalto['tipo_salto_id'] ?>">
+                                <?= $tiposSalto['tipo_salto_detalle'] ?>
+                            </option>
+                        <?php endforeach ?>
                     </select>
                 </div>
                 <div class="col">
                     <label for="mani_tipo_aeronave">Tipo de Aeronave</label>
                     <select name="mani_tipo_aeronave" id="mani_tipo_aeronave" class="form-control">
-                        <option value="" selected disabled>Seleccione una opción</option>
-                        <!-- Opciones del select se cargarán dinámicamente desde la base de datos -->
+                        <option value="">Selecione un Avion</option>
+                        <?php foreach ($aeronaves as $aeronaves): ?>
+                            <option value="<?= $aeronaves['aer_tip_registro'] ?>">
+                                <?= $aeronaves['aer_desc_aeronave'] ?>
+                            </option>
+                        <?php endforeach ?>
                     </select>
                 </div>
                 <div class="col">
                     <label for="mani_zona_salto">Zona de Salto</label>
                     <select name="mani_zona_salto" id="mani_zona_salto" class="form-control">
-                        <option value="" selected disabled>Seleccione una opción</option>
-                        <!-- Opciones del select se cargarán dinámicamente desde la base de datos -->
+                        <option value="">Selecione Opcion</option>
+                        <?php foreach ($zonasSalto as $zonasSalto): ?>
+                            <option value="<?= $zonasSalto['zona_salto_id'] ?>">
+                                <?= $zonasSalto['zona_salto_nombre'] ?>
+                            </option>
+                        <?php endforeach ?>
                     </select>
                 </div>
             </div>
@@ -96,13 +108,13 @@
                 <div class="col">
                     <label for="mani_unidad">Unidad</label>
                     <select name="mani_unidad" id="mani_unidad" class="form-control">
-                                <option value="">Selecione un Tipo</option>
-                                <?php foreach ($dependencias as $dependencia): ?>
-                                    <option value="<?= $dependencia['dep_llave'] ?>">
-                                        <?= $dependencia['dep_desc_lg'] ?>
-                                    </option>
-                                <?php endforeach ?>
-                            </select>
+                        <option value="">Selecione un Tipo</option>
+                        <?php foreach ($dependencias as $dependencia): ?>
+                            <option value="<?= $dependencia['dep_llave'] ?>">
+                                <?= $dependencia['dep_desc_lg'] ?>
+                            </option>
+                        <?php endforeach ?>
+                    </select>
                 </div>
             </div>
             <div class="row mb-3">
@@ -123,8 +135,12 @@
                 <div class="col">
                     <label for="mani_altimetro">Altimetro</label>
                     <select name="mani_altimetro" id="mani_altimetro" class="form-control">
-                        <option value="" selected disabled>Seleccione una opción</option>
-                        <!-- Opciones del select se cargarán dinámicamente desde la base de datos -->
+                        <option value="">Selecione Opcion</option>
+                        <?php foreach ($altimetros as $altimetros): ?>
+                            <option value="<?= $altimetros['altimetro_id'] ?>">
+                                <?= $altimetros['altimetro_serie'] ?>
+                            </option>
+                        <?php endforeach ?>
                     </select>
                 </div>
             </div>
@@ -141,7 +157,8 @@
             </div>
             <div class="row mb-3">
                 <div class="col">
-                    <button type="submit" form="formularioManifiesto" id="btnGuardar" class="btn btn-primary w-100">Guardar</button>
+                    <button type="submit" form="formularioManifiesto" id="btnGuardar"
+                        class="btn btn-primary w-100">Guardar</button>
                 </div>
                 <!-- <div class="col">
                     <button type="button" id="btnModificar" class="btn btn-warning w-100">Modificar</button>
