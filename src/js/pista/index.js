@@ -4,7 +4,7 @@ import { lenguaje } from "../lenguaje";
 import Swal from "sweetalert2";
 import { validarFormulario, Toast, confirmacion } from "../funciones";
 
-const formulario = document.getElementById('formularioZonaSalto');
+const formulario = document.getElementById('formularioPista');
 const btnBuscar = document.getElementById('btnBuscar');
 const btnModificar = document.getElementById('btnModificar');
 const btnGuardar = document.getElementById('btnGuardar');
@@ -17,22 +17,22 @@ btnCancelar.parentElement.style.display = 'none';
 
 let contador = 1;
 
-const datatable = new Datatable('#tablaZonaSalto', {
+const datatable = new Datatable('#tablaPista', {
     language: lenguaje,
     data: null,
     columns: [
         { title: 'NO', render: () => contador++ },
-        { title: 'Nombre de la Zona', data: 'zona_salto_nombre' },
-        { title: 'Latitud', data: 'zona_salto_latitud' },
-        { title: 'Longitud', data: 'zona_salto_longitud' },
-        { title: 'Dirección de Latitud', data: 'zona_salto_direc_latitud' },
-        { title: 'Dirección de Longitud', data: 'zona_salto_direc_longitud' },
-        { title: 'MODIFICAR', data: 'zona_salto_id', searchable: false, orderable: false,
+        { title: 'Detalle de la Pista', data: 'pista_detalle' },
+        { title: 'Latitud', data: 'pista_salto_latitud' },
+        { title: 'Longitud', data: 'pista_salto_longitud' },
+        { title: 'Dirección de Latitud', data: 'pista_salto_direc_latitud' },
+        { title: 'Dirección de Longitud', data: 'pista_salto_direc_longitud' },
+        { title: 'MODIFICAR', data: 'pista_id', searchable: false, orderable: false,
           render: (data, type, row, meta) => {
-            return `<button class="btn btn-warning" data-id='${data}' data-nombre='${row['zona_salto_nombre']}' data-latitud='${row['zona_salto_latitud']}' data-longitud='${row['zona_salto_longitud']}' data-direc-latitud='${row['zona_salto_direc_latitud']}' data-direc-longitud='${row['zona_salto_direc_longitud']}'>Modificar</button>` }
+            return `<button class="btn btn-warning" data-id='${data}' data-detalle='${row['pista_detalle']}' data-latitud='${row['pista_salto_latitud']}' data-longitud='${row['pista_salto_longitud']}' data-direc-latitud='${row['pista_salto_direc_latitud']}' data-direc-longitud='${row['pista_salto_direc_longitud']}'>Modificar</button>` }
         },
         { title: 'ELIMINAR', 
-        data: 'zona_salto_id',
+        data: 'pista_id',
         searchable: false, orderable: false,
           render: (data) => `<button class="btn btn-danger" data-id='${data}'>Eliminar</button>` 
         },
@@ -40,9 +40,9 @@ const datatable = new Datatable('#tablaZonaSalto', {
 });
 
 const buscar = async () => {
-    let zona_salto_nombre = formulario.zona_salto_nombre.value;
+    let pista_detalle = formulario.pista_detalle.value;
 
-    const url = `/paracaidistas/API/zonasalto/buscar?zona_salto_nombre=${zona_salto_nombre}`;
+    const url = `/paracaidistas/API/pista/buscar?pista_detalle=${pista_detalle}`;
     const config = {
         method: 'GET'
     };
@@ -68,7 +68,7 @@ const buscar = async () => {
 
 const guardar = async (evento) => {
     evento.preventDefault();
-    if (!validarFormulario(formulario, ['zona_salto_id'])) {
+    if (!validarFormulario(formulario, ['pista_id'])) {
         Toast.fire({
             icon: 'info',
             text: 'Debe llenar todos los datos'
@@ -77,7 +77,7 @@ const guardar = async (evento) => {
     }
 
     const body = new FormData(formulario);
-    const url = '/paracaidistas/API/zonasalto/guardar';
+    const url = '/paracaidistas/API/pista/guardar';
     const config = {
         method: 'POST',
         body
@@ -121,8 +121,8 @@ const eliminar = async (e) => {
 
     if (await confirmacion('warning', '¿Desea eliminar este registro?')) {
         const body = new FormData();
-        body.append('zona_salto_id', id);
-        const url = '/paracaidistas/API/zonasalto/eliminar';
+        body.append('pista_id', id);
+        const url = '/paracaidistas/API/pista/eliminar';
         const config = {
             method: 'POST',
             body
@@ -161,13 +161,13 @@ const eliminar = async (e) => {
 
 const modificar = async (e) => {
     e.preventDefault()
-    if (!validarFormulario(formulario, ['zona_salto_id'])) {
+    if (!validarFormulario(formulario, ['pista_id'])) {
         alert('Debe llenar todos los campos');
         return;
     }
 
     const body = new FormData(formulario)
-    const url = '/paracaidistas/API/zonasalto/modificar';
+    const url = '/paracaidistas/API/pista/modificar';
     const config = {
         method: 'POST',
         body
@@ -209,7 +209,7 @@ const modificar = async (e) => {
 const traeDatos = (e) => {
     const button = e.target;
     const id = button.dataset.id;
-    const nombre = button.dataset.nombre;
+    const detalle = button.dataset.detalle;
     const latitud = button.dataset.latitud;
     const longitud = button.dataset.longitud;
     const direcLatitud = button.dataset.direcLatitud;
@@ -217,7 +217,7 @@ const traeDatos = (e) => {
 
     const dataset = {
         id,
-        nombre,
+        detalle,
         latitud,
         longitud,
         direcLatitud,
@@ -228,12 +228,12 @@ const traeDatos = (e) => {
 };
 
 const colocarDatos = (dataset) => {
-    formulario.zona_salto_nombre.value = dataset.nombre;
-    formulario.zona_salto_latitud.value = dataset.latitud;
-    formulario.zona_salto_longitud.value = dataset.longitud;
-    formulario.zona_salto_direc_latitud.value = dataset.direcLatitud;
-    formulario.zona_salto_direc_longitud.value = dataset.direcLongitud;
-    formulario.zona_salto_id.value = dataset.id;
+    formulario.pista_detalle.value = dataset.detalle;
+    formulario.pista_salto_latitud.value = dataset.latitud;
+    formulario.pista_salto_longitud.value = dataset.longitud;
+    formulario.pista_salto_direc_latitud.value = dataset.direcLatitud;
+    formulario.pista_salto_direc_longitud.value = dataset.direcLongitud;
+    formulario.pista_id.value = dataset.id;
 
     btnGuardar.disabled = true;
     btnGuardar.parentElement.style.display = 'none';
