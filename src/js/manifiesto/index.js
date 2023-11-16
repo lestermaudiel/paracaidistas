@@ -3,17 +3,12 @@ import Datatable from "datatables.net-bs5";
 import { lenguaje } from "../lenguaje";
 import Swal from "sweetalert2";
 import { validarFormulario, Toast, confirmacion } from "../funciones";
+import { get } from "jquery";
 
 const formulario = document.getElementById('formularioManifiesto');
-const btnBuscar = document.getElementById('btnBuscar');
-const btnModificar = document.getElementById('btnModificar');
-const btnGuardar = document.getElementById('btnGuardar');
-const btnCancelar = document.getElementById('btnCancelar');
 
-btnModificar.disabled = true;
-btnModificar.parentElement.style.display = 'none';
-btnCancelar.disabled = true;
-btnCancelar.parentElement.style.display = 'none';
+const btnGuardar = document.getElementById('btnGuardar');
+const inputParacaidista = document.getElementById('mani_paraca_cod');
 
 let contador = 1;
 
@@ -33,6 +28,36 @@ const datatable = new Datatable('#tablaManifiesto', {
         // y la lógica de tu aplicación
     ],
 });
+
+const getParacaidista = async (e) => {
+    e.preventDefault()
+    console.log('getParacaidista')
+    let mani_paraca_cod = formulario.mani_paraca_cod.value;
+    
+    console.log(mani_paraca_cod)
+    const url = `/paracaidistas/API/manifesto/getParacaidista?codigo_paracaidista=${mani_paraca_cod}`;
+    const config = {
+        method: 'GET'
+    };
+
+    try {
+        const respuesta = await fetch(url, config);
+        const data = await respuesta.json();
+        console.log(respuesta)
+        console.log(data)
+        if (data) {
+            formulario.nombre_paracaidista.value=data[0]['nombre_paracaidista']
+            
+        } else {
+            Toast.fire({
+                title: 'No se encontraron registros',
+                icon: 'info'
+            });
+        }
+    } catch (error) {
+        console.log(error);
+    }
+};
 
 const buscar = async () => {
     // Implementa la lógica para realizar la búsqueda según tus necesidades
@@ -64,9 +89,8 @@ const cancelarAccion = () => {
 
 buscar();
 
-btnModificar.addEventListener('click', modificar);
-btnCancelar.addEventListener('click', cancelarAccion);
-btnBuscar.addEventListener('click', buscar);
 formulario.addEventListener('submit', guardar);
 datatable.on('click', '.btn-warning', traeDatos);
 datatable.on('click', '.btn-danger', eliminar);
+
+inputParacaidista.addEventListener('change',getParacaidista)

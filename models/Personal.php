@@ -1,16 +1,43 @@
 <?php
 namespace Model;
 
-class Personal extends ActiveRecord {
+class Personal extends ActiveRecord
+{
     protected static $tabla = 'mper';
     protected static $columnasDB = [
-        'per_serie', 'per_grado', 'per_arma', 'per_nom1', 'per_nom2', 'per_ape1',
-        'per_ape2', 'per_ape3', 'per_ced_ord', 'per_ced_reg', 'per_fec_ext_ced',
-        'per_ext_ced_lugar', 'per_est_civil', 'per_direccion', 'per_zona',
-        'per_dir_lugar', 'per_telefono', 'per_sexo', 'per_fec_nac', 'per_nac_lugar',
-        'per_promocion', 'per_afil_ipm', 'per_sangre', 'per_antiguedad', 'per_bienal',
-        'per_plaza', 'per_desc_empleo', 'per_fec_nomb', 'per_ord_gral', 'per_punto_og',
-        'per_situacion', 'per_prima_prof', 'per_dpi'
+        'per_serie',
+        'per_grado',
+        'per_arma',
+        'per_nom1',
+        'per_nom2',
+        'per_ape1',
+        'per_ape2',
+        'per_ape3',
+        'per_ced_ord',
+        'per_ced_reg',
+        'per_fec_ext_ced',
+        'per_ext_ced_lugar',
+        'per_est_civil',
+        'per_direccion',
+        'per_zona',
+        'per_dir_lugar',
+        'per_telefono',
+        'per_sexo',
+        'per_fec_nac',
+        'per_nac_lugar',
+        'per_promocion',
+        'per_afil_ipm',
+        'per_sangre',
+        'per_antiguedad',
+        'per_bienal',
+        'per_plaza',
+        'per_desc_empleo',
+        'per_fec_nomb',
+        'per_ord_gral',
+        'per_punto_og',
+        'per_situacion',
+        'per_prima_prof',
+        'per_dpi'
     ];
     protected static $idTabla = 'per_catalogo';
 
@@ -49,7 +76,8 @@ class Personal extends ActiveRecord {
     public $per_prima_prof;
     public $per_dpi;
 
-    public function __construct($args = []) {
+    public function __construct($args = [])
+    {
         $this->per_catalogo = $args['per_catalogo'] ?? null;
         $this->per_serie = $args['per_serie'] ?? '';
         $this->per_grado = $args['per_grado'] ?? null;
@@ -84,11 +112,13 @@ class Personal extends ActiveRecord {
         $this->per_situacion = $args['per_situacion'] ?? '';
         $this->per_prima_prof = $args['per_prima_prof'] ?? null;
         $this->per_dpi = $args['per_dpi'] ?? '';
-        
+
+    }
+
+    public function getPersonal()
+    {
+        $sql = "SELECT * from mper where per_situacion = 1";
+        return $this->fetchArray($sql);
     }
 }
 
-public function getPersonal(){
-    $sql = "SELECT * from mper where per_situacion = 1";
-    return $this->fetchArray($sql);
-}

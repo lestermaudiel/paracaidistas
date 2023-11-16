@@ -26,8 +26,10 @@ class ZonaSalto extends ActiveRecord
         $this->zona_salto_direc_longitud = $args['zona_salto_direc_longitud'] ?? '';
         $this->zona_salto_situacion = $args['zona_salto_situacion'] ?? '1';
     }
+    public function getZonaSalto()
+    {
+        $sql = "SELECT * from par_zona_salto where zona_salto_situacion = 1";
+        return $this->fetchArray($sql);
+    }
 }
-public function getZonaSalto(){
-    $sql = "SELECT * from par_zona_salto where zona_salto_situacion = 1";
-    return $this->fetchArray($sql);
-}
+

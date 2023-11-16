@@ -10,18 +10,20 @@ class Altimetro extends ActiveRecord
 
     public $altimetro_id;
     public $altimetro_serie;
-    public $altimetro_marca; 
+    public $altimetro_marca;
     public $altimetro_situacion;
 
     public function __construct($args = [])
     {
         $this->altimetro_id = $args['altimetro_id'] ?? null;
         $this->altimetro_serie = $args['altimetro_serie'] ?? '';
-        $this->altimetro_marca = $args['altimetro_marca'] ?? ''; 
+        $this->altimetro_marca = $args['altimetro_marca'] ?? '';
         $this->altimetro_situacion = $args['altimetro_situacion'] ?? '1';
     }
-}
-public function getAltimetro(){
-    $sql = "SELECT * from par_altimetro where altimetro_situacion = 1";
-    return $this->fetchArray($sql);
+
+    public function getAltimetro()
+    {
+        $sql = "SELECT * from par_altimetro where altimetro_situacion = 1";
+        return $this->fetchArray($sql);
+    }
 }

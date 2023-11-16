@@ -71,6 +71,7 @@ $router->post('/API/manifiesto/guardar', [ManifiestoController::class, 'guardarA
 $router->post('/API/manifiesto/modificar', [ManifiestoController::class, 'modificarAPI']);
 $router->post('/API/manifiesto/eliminar', [ManifiestoController::class, 'eliminarAPI']);
 $router->get('/API/manifiesto/buscar', [ManifiestoController::class, 'buscarAPI']);
+$router->get('/API/manifesto/getParacaidista', [ManifiestoController::class, 'getParacaidista']);
 
 
 $router->get('/paracaidista', [ParacaidistaController::class, 'index']);

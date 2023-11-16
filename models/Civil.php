@@ -40,9 +40,9 @@ class Civil extends ActiveRecord
         $this->paraca_civil_email = $args['paraca_civil_email'] ?? '';
         $this->paraca_civil_situacion = $args['paraca_civil_situacion'] ?? '1';
     }
-}
 
 public function getCivil(){
     $sql = "SELECT * from par_paraca_civil where paraca_civil_situacion = 1";
     return $this->fetchArray($sql);
+}
 }
