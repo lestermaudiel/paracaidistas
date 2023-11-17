@@ -92,12 +92,8 @@
                                         class="ms-lg-0 ms-2 bi bi-plus-circle me-2"></i>Registro de Paracaidistas</a>
                             </li>
                             <li>
-                                <a class="dropdown-item nav-link text-white " href="/paracaidistas/saltoenganchado"><i
-                                        class="ms-lg-0 ms-2 bi bi-filetype-pdf me-2"></i>Control de Saltos Enganchado</a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item nav-link text-white " href="/paracaidistas/saltolibre"><i
-                                        class="ms-lg-0 ms-2 bi bi-filetype-pdf me-2"></i>Control de Saltos Libre</a>
+                                <a class="dropdown-item nav-link text-white " href="/paracaidistas/controlsaltos"><i
+                                        class="ms-lg-0 ms-2 bi bi-filetype-pdf me-2"></i>Control de Saltos</a>
                             </li>
                         </ul>
                     </div>
@@ -107,12 +103,15 @@
                         </a>
                         <ul class="dropdown-menu  dropdown-menu-dark " id="dropwdownRevision" style="margin: 0;">
                             <li>
-                                <a class="dropdown-item nav-link text-white " href="/paracaidistas/listaparacaidas"><i
-                                        class="ms-lg-0 ms-2 bi bi-plus-circle me-2"></i>Disponibilidad Paracaidas Tiempo</a>
+                                <a class="dropdown-item nav-link text-white "
+                                    href="/paracaidistas/listaparacaidassaltos"><i
+                                        class="ms-lg-0 ms-2 bi bi-plus-circle me-2"></i>Disponibilidad Paracaidas
+                                    Saltos</a>
                             </li>
                             <li>
-                                <a class="dropdown-item nav-link text-white " href="/paracaidistas/listaparacaidassaltos"><i
-                                        class="ms-lg-0 ms-2 bi bi-plus-circle me-2"></i>Disponibilidad Paracaidas Saltos</a>
+                                <a class="dropdown-item nav-link text-white " href="/paracaidistas/listaparacaidas"><i
+                                        class="ms-lg-0 ms-2 bi bi-plus-circle me-2"></i>Disponibilidad Paracaidas
+                                    Tiempo</a>
                             </li>
                         </ul>
                     </div>
@@ -137,7 +136,8 @@
                         </a>
                         <ul class="dropdown-menu  dropdown-menu-dark " id="dropwdownRevision" style="margin: 0;">
                             <li>
-                                <a class="dropdown-item nav-link text-white " href="/paracaidistas/cartillaenganchado"><i
+                                <a class="dropdown-item nav-link text-white "
+                                    href="/paracaidistas/cartillaenganchado"><i
                                         class="ms-lg-0 ms-2 bi bi-person-fill me-2"></i>Cartilla Salto Enganchado</a>
                             </li>
                             <li>
