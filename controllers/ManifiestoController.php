@@ -100,7 +100,7 @@ class ManifiestoController
                 ]);
             } else {
                 echo json_encode([
-                    'mensaje' => 'Ocurrió un error',
+                    'mensaje' => 'Ocurrió un error al insertar',
                     'codigo' => 0
                 ]);
             }
@@ -112,6 +112,30 @@ class ManifiestoController
             ]);
         }
     }
+    public static function getJefeSaltoAPI()
+{
+    $codigo_jefe = $_GET['codigo_jefe'];
+    if ($codigo_jefe != '') {
+        $sql = "SELECT 
+                    trim(pm.per_nom1)||' '||trim(pm.per_nom2)||' '||trim(pm.per_ape1)||' '||trim(pm.per_ape2) nombre_jefe
+                FROM mper pm
+                WHERE pm.per_catalogo = $codigo_jefe";
+    } else {
+        echo json_encode([]);
+    }
+
+    try {
+        $jefeSalto = Personal::fetchArray($sql);
+        echo json_encode($jefeSalto);
+    } catch (Exception $e) {
+        echo json_encode([
+            'detalle' => $e->getMessage(),
+            'mensaje' => 'Ocurrió un error',
+            'codigo' => 0
+        ]);
+    }
+}
+
 
     public static function buscarAPI()
     {
@@ -135,6 +159,7 @@ class ManifiestoController
         $codigo_paracaidista = $_GET['codigo_paracaidista'];
         if ($codigo_paracaidista != '') {
             $sql = "SELECT 
+                    p.paraca_id,
                     case 
                         when p.paraca_codigo is null
                             then trim(pc.paraca_civil_nom1)||' '||trim(pc.paraca_civil_nom2)||' '||trim(pc.paraca_civil_ape1)||' '||trim(pc.paraca_civil_ape2)

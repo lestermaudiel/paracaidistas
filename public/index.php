@@ -86,15 +86,14 @@ $router->post('/API/manifiesto/guardar', [ManifiestoController::class, 'guardarA
 $router->post('/API/manifiesto/modificar', [ManifiestoController::class, 'modificarAPI']);
 $router->post('/API/manifiesto/eliminar', [ManifiestoController::class, 'eliminarAPI']);
 $router->get('/API/manifiesto/buscar', [ManifiestoController::class, 'buscarAPI']);
-$router->get('/API/manifesto/getParacaidista', [ManifiestoController::class, 'getParacaidista']);
-
+$router->get('/API/manifiesto/getParacaidista', [ManifiestoController::class, 'getParacaidista']);
+$router->get('/API/manifiesto/getJefeSalto', [ManifiestoController::class, 'getJefeSaltoAPI']);
 
 $router->get('/paracaidista', [ParacaidistaController::class, 'index']);
 $router->post('/API/paracaidista/guardar', [ParacaidistaController::class, 'guardarAPI']);
 $router->post('/API/paracaidista/modificar', [ParacaidistaController::class, 'modificarAPI']);
 $router->post('/API/paracaidista/eliminar', [ParacaidistaController::class, 'eliminarAPI']);
 $router->get('/API/paracaidista/buscar', [ParacaidistaController::class, 'buscarAPI']);
-
 
 $router->comprobarRutas();
 ?>

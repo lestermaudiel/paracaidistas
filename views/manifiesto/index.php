@@ -20,9 +20,10 @@
             </div>
             <div class="row mb-3">
                 <div class="col">
-                    <label for="mani_paraca_cod">Paracaidista</label>
-                    <input type="input" name="mani_paraca_cod" id="mani_paraca_cod" class="form-control">
+                    <label for="identificacion_paracaidista">Paracaidista</label>
+                    <input type="input" name="identificacion_paracaidista" id="identificacion_paracaidista" class="form-control">
                 </div>
+                <input type="input" name="mani_paraca_cod" id="mani_paraca_cod" class="form-control" hidden>
                 <div class="col">
                     <label for="nombre_paracaidista">Nombre del Paracaidista</label>
                     <input type="input" name="nombre_paracaidista" id="nombre_paracaidista" class="form-control">
@@ -107,12 +108,12 @@
             </div>
             <div class="row mb-3">
                 <div class="col">
-                    <label for="mani_jefe">Jefe</label>
-                    <input type="input" name="mani_jefe" id="mani_jefe" class="form-control">
+                    <label for="mani_jefe">Jefe de Salto</label>
+                    <input type="input" name="mani_jefe" id="inputJefe" class="form-control" >
                 </div>
                 <div class="col">
-                    <label for="mani_jefe">Nombre del Jefe</label>
-                    <input type="input" name="mani_jefe" id="mani_jefe" class="form-control">
+                    <label for="nombre_jefe">Nombre del Jefe</label>
+                    <input type="input" name="nombre_jefe" id="nombre_jefe" class="form-control" >
                 </div>
             </div>
             <div class="row mb-3">
