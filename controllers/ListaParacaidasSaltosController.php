@@ -19,31 +19,6 @@ class ListaParacaidasSaltosController
         ]);
     }
 
-    public static function guardarAPI()
-    {
-        try {
-            $paracaidas = new Paracaidas($_POST);
-            $resultado = $paracaidas->crear();
-
-            if ($resultado['resultado'] == 1) {
-                echo json_encode([
-                    'mensaje' => 'Registro guardado correctamente',
-                    'codigo' => 1
-                ]);
-            } else {
-                echo json_encode([
-                    'mensaje' => 'Ocurrió un error',
-                    'codigo' => 0
-                ]);
-            }
-        } catch (Exception $e) {
-            echo json_encode([
-                'detalle' => $e->getMessage(),
-                'mensaje' => 'Ocurrió un error',
-                'codigo' => 0
-            ]);
-        }
-    }
 
     public static function buscarAPI()
     {
@@ -70,61 +45,6 @@ class ListaParacaidasSaltosController
             ]);
         }
     }
-
-    public static function modificarAPI()
-    {
-        try {
-            $paracaidas = new Paracaidas($_POST);
-            $resultado = $paracaidas->actualizar();
-
-            if ($resultado['resultado'] == 1) {
-                echo json_encode([
-                    'mensaje' => 'Registro modificado correctamente',
-                    'codigo' => 1
-                ]);
-            } else {
-                echo json_encode([
-                    'mensaje' => 'Ocurrió un error',
-                    'codigo' => 0
-                ]);
-            }
-        } catch (Exception $e) {
-            echo json_encode([
-                'detalle' => $e->getMessage(),
-                'mensaje' => 'Ocurrió un error',
-                'codigo' => 0
-            ]);
-        }
-    }
-
-    public static function eliminarAPI()
-    {
-        try {
-            $paraca_id = $_POST['paraca_id'];
-            $paracaidas = Paracaidas::find($paraca_id);
-            $paracaidas->paraca_situacion = 0;
-            $resultado = $paracaidas->actualizar();
-
-            if ($resultado['resultado'] == 1) {
-                echo json_encode([
-                    'mensaje' => 'Registro eliminado correctamente',
-                    'codigo' => 1
-                ]);
-            } else {
-                echo json_encode([
-                    'mensaje' => 'Ocurrió un error',
-                    'codigo' => 0
-                ]);
-            }
-        } catch (Exception $e) {
-            echo json_encode([
-                'detalle' => $e->getMessage(),
-                'mensaje' => 'Ocurrió un error',
-                'codigo' => 0
-            ]);
-        }
-    }
-
 }
 
 
