@@ -18,7 +18,7 @@ module.exports = {
     'js/paracaidista/index': './src/js/paracaidista/index.js',
     'js/listaparacaidas/index': './src/js/listaparacaidas/index.js',
     'js/listaparacaidassaltos/index': './src/js/listaparacaidassaltos/index.js',
-
+    'js/control/index': './src/js/control/index.js',
   },
   output: {
     filename: '[name].js',

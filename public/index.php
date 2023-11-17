@@ -15,6 +15,7 @@ use Controllers\ManifiestoController;
 use Controllers\ParacaidistaController;  
 use Controllers\ListaParacaidasController; 
 use Controllers\ListaParacaidasSaltosController; 
+use Controllers\ControlController; 
 
 $router = new Router();
 $router->setBaseURL('/' . $_ENV['APP_NAME']);
@@ -95,5 +96,7 @@ $router->post('/API/paracaidista/modificar', [ParacaidistaController::class, 'mo
 $router->post('/API/paracaidista/eliminar', [ParacaidistaController::class, 'eliminarAPI']);
 $router->get('/API/paracaidista/buscar', [ParacaidistaController::class, 'buscarAPI']);
 
+$router->get('/control', [ControlController::class, 'index']);
+$router->get('/API/control/buscar', [ControlController::class, 'buscarAPI']);
 $router->comprobarRutas();
 ?>
