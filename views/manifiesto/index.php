@@ -105,16 +105,6 @@
                     <input type="number" name="mani_altura" id="mani_altura" class="form-control">
                 </div>
             </div>
-            <!-- <div class="row mb-3">
-                <div class="col">
-                    <label for="mani_paraca_cod">Paracaidista</label>
-                    <input type="input" name="mani_paraca_cod" id="mani_paraca_cod" class="form-control">
-                </div>
-                <div class="col">
-                    <label for="nombre_paracaidista">Nombre del Paracaidista</label>
-                    <input type="input" name="nombre_paracaidista" id="nombre_paracaidista" class="form-control">
-                </div>
-            </div> -->
             <div class="row mb-3">
                 <div class="col">
                     <label for="mani_jefe">Jefe</label>
