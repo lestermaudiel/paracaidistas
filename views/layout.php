@@ -92,7 +92,7 @@
                                         class="ms-lg-0 ms-2 bi bi-plus-circle me-2"></i>Registro de Paracaidistas</a>
                             </li>
                             <li>
-                                <a class="dropdown-item nav-link text-white " href="/paracaidistas/controlsaltos"><i
+                                <a class="dropdown-item nav-link text-white " href="/paracaidistas/control"><i
                                         class="ms-lg-0 ms-2 bi bi-filetype-pdf me-2"></i>Control de Saltos</a>
                             </li>
                         </ul>
