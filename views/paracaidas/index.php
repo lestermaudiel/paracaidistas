@@ -63,6 +63,7 @@
                 <div class="col">
                     <label for="paraca_estado">Estado</label>
                     <select name="paraca_estado" id="paraca_estado" class="form-control">
+                        <option value="">Seleccione</option>
                         <option value="1">Buen Estado</option>
                         <option value="2">Regular Estado</option>
                         <option value="3">Mal Estado Reparable</option>

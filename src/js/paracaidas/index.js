@@ -9,14 +9,22 @@ const btnBuscar = document.getElementById('btnBuscar');
 const btnModificar = document.getElementById('btnModificar');
 const btnGuardar = document.getElementById('btnGuardar');
 const btnCancelar = document.getElementById('btnCancelar');
-//const divTabla = document.getElementById('divTabla');
 const selectTipoParacaidas = document.getElementById('paraca_tipo');
+
+const estadosMapping = {
+    1: 'Buen Estado',
+    2: 'Regular Estado',
+    3: 'Mal Estado Reparable',
+    4: 'Mal Estado Irreparable',
+  };
 
 btnModificar.disabled = true;
 btnModificar.parentElement.style.display = 'none';
 btnCancelar.disabled = true;
 btnCancelar.parentElement.style.display = 'none';
+
 let contador = 1;
+
 const datatable = new Datatable('#tablaParacaidas', {
     language: lenguaje,
     data: null,
@@ -60,6 +68,15 @@ const datatable = new Datatable('#tablaParacaidas', {
         {
             title: 'Saltos Disponibles',
             data: 'saltos_disponibles',
+        },
+        {
+            title: 'Descripción',
+            data: 'paraca_descripcion',
+        },
+        {
+            title: 'Estado',
+            data: 'paraca_estado',
+            render: (data) => estadosMapping[data] || 'Desconocido',
         },
         {
             title: 'MODIFICAR',
@@ -151,6 +168,7 @@ const guardar = async (evento) => {
 
     const body = new FormData(formulario);
     body.delete('paraca_id');
+    
     const url = '/paracaidistas/API/paracaidas/guardar';
     const config = {
         method: 'POST',
