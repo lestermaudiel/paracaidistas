@@ -16,6 +16,7 @@ use Controllers\ParacaidistaController;
 use Controllers\ListaParacaidasController; 
 use Controllers\ListaParacaidasSaltosController; 
 use Controllers\ControlController; 
+use Controllers\ControlcivilController; 
 
 $router = new Router();
 $router->setBaseURL('/' . $_ENV['APP_NAME']);
@@ -98,5 +99,10 @@ $router->get('/API/paracaidista/buscar', [ParacaidistaController::class, 'buscar
 
 $router->get('/control', [ControlController::class, 'index']);
 $router->get('/API/control/buscar', [ControlController::class, 'buscarAPI']);
+
+
+$router->get('/controlcivil', [ControlcivilController::class, 'index']);
+$router->get('/API/controlcivil/buscar', [ControlcivilController::class, 'buscarAPI']);
+
 $router->comprobarRutas();
 ?>

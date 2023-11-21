@@ -20,10 +20,6 @@ const datatable = new Datatable('#tablaControl', {
             data: 'id_paracaidista',
         },
         {
-            title: 'grado',
-            data: 'grado',
-        },
-        {
             title: 'Paracaidista',
             data: 'nombre_paracaidista',
         },

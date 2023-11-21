@@ -77,7 +77,7 @@
                                         class="ms-lg-0 ms-2 bi bi-plus-circle me-2"></i>Registro de Personal Civil</a>
                             </li>
                             <li>
-                                <a class="dropdown-item nav-link text-white " href="/paracaidistas/saltocivil"><i
+                                <a class="dropdown-item nav-link text-white " href="/paracaidistas/controlcivil"><i
                                         class="ms-lg-0 ms-2 bi bi-filetype-pdf me-2"></i>Control de Saltos Civil</a>
                             </li>
                         </ul>
@@ -117,7 +117,7 @@
                     </div>
                     <div class="nav-item dropdown ">
                         <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
-                            <i class="bi bi-filetype-pdf me-2"></i>Manifieto
+                            <i class="bi bi-filetype-pdf me-2"></i>Manifiesto
                         </a>
                         <ul class="dropdown-menu  dropdown-menu-dark " id="dropwdownRevision" style="margin: 0;">
                             <li>

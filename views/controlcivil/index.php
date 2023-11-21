@@ -4,11 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PARACAIDISTA MILITAR</title>
+    <title>PARACAIDISTA CIVIL</title>
 </head>
 
 <body>
-    <h1 class="text-center">PARACAIDISTA MILITAR</h1>
+    <h1 class="text-center">PARACAIDISTA CIVIL</h1>
     <div class="row justify-content-center mb-5">
         <form class="col-lg-8 border bg-light p-3" id="formularioControl">
             <div class="row mb-3">
@@ -32,7 +32,7 @@
         </div>
     </div>
 
-    <script src="<?= asset('./build/js/control/index.js') ?>"></script>
+    <script src="<?= asset('./build/js/controlcivil/index.js') ?>"></script>
 </body>
 
 </html>

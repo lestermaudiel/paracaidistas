@@ -7,11 +7,11 @@ use Model\Paracaidista;
 use Model\Manifiesto;
 use MVC\Router;
 
-class ControlController
+class ControlcivilController
 {
     public static function index(Router $router)
     {
-        $router->render('control/index', [
+        $router->render('controlcivil/index', [
 
             
         ]);
@@ -25,7 +25,6 @@ $cod_paraca = $_GET['cod_paraca'];
         $sql = "SELECT
         pp.paraca_id AS id_paracaidista,
         mper.per_nom1 || ' ' || mper.per_ape1 AS nombre_paracaidista,
-        grados.gra_desc_ct AS grado,
         NVL(pts.tipo_salto_detalle, 'Sin saltos') AS tipo_salto,
         COUNT(pm.mani_id) AS cantidad_de_saltos
     FROM
@@ -33,11 +32,10 @@ $cod_paraca = $_GET['cod_paraca'];
     LEFT JOIN par_manifiesto pm ON pp.paraca_id = pm.mani_paraca_cod
     LEFT JOIN par_tipo_salto pts ON pm.mani_tipo_salto = pts.tipo_salto_id
     JOIN mper ON pp.paraca_codigo = mper.per_catalogo
-    JOIN grados ON mper.per_grado = grados.gra_codigo
     WHERE
         pp.paraca_id = '$cod_paraca'
     GROUP BY
-        pp.paraca_id, mper.per_nom1, mper.per_ape1, grados.gra_desc_ct, pts.tipo_salto_detalle";
+        pp.paraca_id, mper.per_nom1, mper.per_ape1, pts.tipo_salto_detalle";
 
         try {
             $paracaidas = Paracaidista::fetchArray($sql);

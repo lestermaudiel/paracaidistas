@@ -25,7 +25,7 @@
 
             <div class="row mb-3" id="catalogo">
                 <div class="col">
-                    <label for="identificacion">Catalogo</label>
+                    <label for="identificacion">Catalogo y/o DPI</label>
                     <input type="text" name="identificacion" id="identificacion" class="form-control">
                 </div>
             </div>
