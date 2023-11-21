@@ -5,7 +5,7 @@ namespace Model;
 class Paracaidas extends ActiveRecord
 {
     public static $tabla = 'par_paracaidas';
-    public static $columnasDB = ['paraca_tipo', 'paraca_cupula', 'paraca_arnes', 'paraca_fecha_fabricacion', 'paraca_fecha_caducidad', 'paraca_saltos_total', 'paraca_saltos_uso', 'paraca_situacion'];
+    public static $columnasDB = ['paraca_tipo', 'paraca_cupula', 'paraca_arnes', 'paraca_fecha_fabricacion', 'paraca_fecha_caducidad', 'paraca_saltos_total', 'paraca_saltos_uso', 'paraca_descripcion', 'paraca_estado', 'paraca_situacion'];
     public static $idTabla = 'paraca_id';
 
     public $paraca_id;
@@ -16,6 +16,8 @@ class Paracaidas extends ActiveRecord
     public $paraca_fecha_caducidad;
     public $paraca_saltos_total;
     public $paraca_saltos_uso;
+    public $paraca_descripcion;
+    public $paraca_estado;
     public $paraca_situacion;
 
     public function __construct($args = [])
@@ -28,11 +30,14 @@ class Paracaidas extends ActiveRecord
         $this->paraca_fecha_caducidad = $args['paraca_fecha_caducidad'] ?? null;
         $this->paraca_saltos_total = $args['paraca_saltos_total'] ?? null;
         $this->paraca_saltos_uso = $args['paraca_saltos_uso'] ?? null;
+        $this->paraca_descripcion = $args['paraca_descripcion'] ?? '';
+        $this->paraca_estado = $args['paraca_estado'] ?? '';
         $this->paraca_situacion = $args['paraca_situacion'] ?? '1';
     }
+
     public function getParacaidas()
     {
-        $sql = "SELECT * from par_paracaidas where paraca_situacion = 1";
+        $sql = "SELECT * FROM par_paracaidas WHERE paraca_situacion = 1";
         return $this->fetchArray($sql);
     }
 }

@@ -16,13 +16,13 @@
                 <div class="col">
                     <label for="paraca_tipo">Tipo de Paracaídas</label>
                     <select name="paraca_tipo" id="paraca_tipo" class="form-control">
-                                <option value="">Selecione un Tipo</option>
-                                <?php foreach ($tipoParacaidas as $tipo): ?>
-                                    <option value="<?= $tipo['tipo_par_id'] ?>">
-                                        <?= $tipo['tipo_par_descripcion'] ?>
-                                    </option>
-                                <?php endforeach ?>
-                            </select>
+                        <option value="">Selecione un Tipo</option>
+                        <?php foreach ($tipoParacaidas as $tipo): ?>
+                            <option value="<?= $tipo['tipo_par_id'] ?>">
+                                <?= $tipo['tipo_par_descripcion'] ?>
+                            </option>
+                        <?php endforeach ?>
+                    </select>
                 </div>
             </div>
             <div class="row mb-3">
@@ -53,6 +53,21 @@
                 <div class="col">
                     <label for="paraca_saltos_uso">Saltos en Uso</label>
                     <input type="number" name="paraca_saltos_uso" id="paraca_saltos_uso" class="form-control">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col">
+                    <label for="paraca_descripcion">Observaciones</label>
+                    <textarea name="paraca_descripcion" id="paraca_descripcion" class="form-control"></textarea>
+                </div>
+                <div class="col">
+                    <label for="paraca_estado">Estado</label>
+                    <select name="paraca_estado" id="paraca_estado" class="form-control">
+                        <option value="1">Buen Estado</option>
+                        <option value="2">Regular Estado</option>
+                        <option value="3">Mal Estado Reparable</option>
+                        <option value="4">Mal Estado Irreparable</option>
+                    </select>
                 </div>
             </div>
             <div class="row mb-3">
