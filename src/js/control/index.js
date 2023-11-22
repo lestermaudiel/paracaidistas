@@ -41,10 +41,10 @@ const datatable = new Datatable('#tablaControl', {
 
 const buscar = async () => {
 
-    let cod_paraca = formulario.codigo_paracaidista.value;
-console.log(cod_paraca);
+    let num_catalogo = formulario.codigo_paracaidista.value;
+console.log(num_catalogo);
 
-    const url = `/paracaidistas/API/control/buscar?cod_paraca=${cod_paraca}`;
+    const url = `/paracaidistas/API/control/buscar?num_catalogo=${num_catalogo}`;
     const config = {
         method: 'GET'
     };

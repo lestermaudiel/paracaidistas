@@ -20,7 +20,7 @@ class ControlController
 
     public static function buscarAPI()
     {
-$cod_paraca = $_GET['cod_paraca'];
+$num_catalogo = $_GET['num_catalogo'];
 
         $sql = "SELECT
         pp.paraca_id AS id_paracaidista,
@@ -35,9 +35,10 @@ $cod_paraca = $_GET['cod_paraca'];
     JOIN mper ON pp.paraca_codigo = mper.per_catalogo
     JOIN grados ON mper.per_grado = grados.gra_codigo
     WHERE
-        pp.paraca_id = '$cod_paraca'
+        mper.per_catalogo = '$num_catalogo'
     GROUP BY
-        pp.paraca_id, mper.per_nom1, mper.per_ape1, grados.gra_desc_ct, pts.tipo_salto_detalle";
+        pp.paraca_id, mper.per_nom1, mper.per_ape1, grados.gra_desc_ct, pts.tipo_salto_detalle;
+    ";
 
         try {
             $paracaidas = Paracaidista::fetchArray($sql);
