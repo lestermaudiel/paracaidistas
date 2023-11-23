@@ -18,7 +18,7 @@
                     <input type="text" name="mani_plan_trabajo" id="mani_plan_trabajo" class="form-control">
                 </div>
             </div>
-            <div class="row mb-3">
+            <!-- <div class="row mb-3">
                 <div class="col">
                     <label for="identificacion_paracaidista">Paracaidista</label>
                     <input type="input" name="identificacion_paracaidista" id="identificacion_paracaidista" class="form-control">
@@ -28,7 +28,7 @@
                     <label for="nombre_paracaidista">Nombre del Paracaidista</label>
                     <input type="input" name="nombre_paracaidista" id="nombre_paracaidista" class="form-control">
                 </div>
-            </div>
+            </div> -->
             <div class="row mb-2">
                 <div class="col">
                     <label for="mani_no_avion">Número de Avión</label>
@@ -129,7 +129,7 @@
                     </select>
                 </div>
             </div>
-            <div class="row mb-3">
+            <!-- <div class="row mb-3">
                 <div class="col">
                     <label for="mani_grado">Grado</label>
                     <select name="mani_grado" id="mani_grado" class="form-control">
@@ -163,7 +163,7 @@
                         <?php endforeach ?>
                     </select>
                 </div>
-            </div>
+            </div> -->
             <div class="row mb-3">
                 <div class="col">
                     <label for="mani_situacion">Situación</label>
@@ -173,6 +173,12 @@
                         <option value="2">Realizado</option>
                         <option value="3">Cancelado</option>
                     </select>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col">
+                    <label for="excelParacaidistas">Situación</label>
+                    <input name="excelParacaidistas" id="excelParacaidistas" type="file" value="Cargar archivo Excel">
                 </div>
             </div>
             <div class="row mb-3">

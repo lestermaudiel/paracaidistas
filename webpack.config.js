@@ -28,7 +28,7 @@ module.exports = {
   plugins: [
     new MiniCssExtractPlugin({
       filename: 'styles.css'
-    })
+    }),
   ],
   module: {
     rules: [
@@ -50,5 +50,6 @@ module.exports = {
         }
       },
     ]
-  }
+  },
+  
 };

@@ -125,8 +125,8 @@
                                         class="ms-lg-0 ms-2 bi bi-plus-circle me-2"></i>Crear Manifiesto</a>
                             </li>
                             <li>
-                                <a class="dropdown-item nav-link text-white " href="/paracaidistas/manifiestolista"><i
-                                        class="ms-lg-0 ms-2 bi bi-filetype-pdf me-2"></i>Lista de Manifiestos</a>
+                                <a class="dropdown-item nav-link text-white " href="/paracaidistas/asignarparacaidistas"><i
+                                        class="ms-lg-0 ms-2 bi bi-filetype-pdf me-2"></i>asignar paracaidistas a manifiestos</a>
                             </li>
                         </ul>
                     </div>

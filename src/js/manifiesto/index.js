@@ -4,7 +4,8 @@ import { lenguaje } from "../lenguaje";
 import Swal from "sweetalert2";
 import { validarFormulario, Toast, confirmacion } from "../funciones";
 import { get } from "jquery";
-
+import csv from "csvtojson";
+import Papa from "papaparse"
 const formulario = document.getElementById('formularioManifiesto');
 const inputJefe = document.getElementById('inputJefe');
 const btnGuardar = document.getElementById('btnGuardar');
@@ -17,47 +18,53 @@ const datatable = new Datatable('#tablaManifiesto', {
     data: null,
     columns: [
         { title: 'NO', render: () => contador++ },
-        // Incluir las columnas necesarias para la tabla par_manifiesto
-        // Por ejemplo:
-        // { title: 'ID', data: 'mani_id' },
-        // { title: 'Plan de Trabajo', data: 'mani_plan_trabajo' },
-        // ...
+        { title: 'Plan de trabajo', data: 'mani_plan_trabajo' },
+        { title: 'No. Avion', data: 'mani_no_avion' },
+        { title: 'Vuelo', data: 'mani_no_vuelo' },
+        { title: 'Tipo de Salto', data: 'tipo_salto_detalle' },
+        { title: 'Fecha Manifesto', data: 'mani_fecha' },
+        { title: 'Altura de Salto', data: 'mani_altura' },
+        { title: 'Jefe', data: 'nombre_jefe' },
 
-        // Agrega las columnas que necesites para tu aplicación
-        // Asegúrate de ajustar los nombres de las columnas según la estructura de tu base de datos
-        // y la lógica de tu aplicación
+
+        {
+            title: 'ASIGNAR PARACAIDISTAS',
+            data: 'mani_id',
+            searchable: false, orderable: false,
+            render: (data) => `<input type='file' class='btn btn-success' data-id='${data}' />`
+        },
     ],
 });
 
-const getParacaidista = async (e) => {
-    e.preventDefault()
-    console.log('getParacaidista')
-    let identificacion_paracaidista = formulario.identificacion_paracaidista.value;
-    
-    console.log(identificacion_paracaidista)
-    const url = `/paracaidistas/API/manifiesto/getParacaidista?codigo_paracaidista=${identificacion_paracaidista}`;
-    const config = {
-        method: 'GET'
-    };
+// const getParacaidista = async (e) => {
+//     e.preventDefault()
+//     console.log('getParacaidista')
+//     let identificacion_paracaidista = formulario.identificacion_paracaidista.value;
 
-    try {
-        const respuesta = await fetch(url, config);
-        const data = await respuesta.json();
-        console.log(respuesta)
-        console.log(data)
-        if (data) {
-            formulario.nombre_paracaidista.value=data[0]['nombre_paracaidista']
-            formulario.mani_paraca_cod.value=data[0]['paraca_id']
-        } else {
-            Toast.fire({
-                title: 'No se encontraron registros',
-                icon: 'info'
-            });
-        }
-    } catch (error) {
-        console.log(error);
-    }
-};
+//     console.log(identificacion_paracaidista)
+//     const url = `/paracaidistas/API/manifiesto/getParacaidista?codigo_paracaidista=${identificacion_paracaidista}`;
+//     const config = {
+//         method: 'GET'
+//     };
+
+//     try {
+//         const respuesta = await fetch(url, config);
+//         const data = await respuesta.json();
+//         console.log(respuesta)
+//         console.log(data)
+//         if (data) {
+//             formulario.nombre_paracaidista.value=data[0]['nombre_paracaidista']
+//             formulario.mani_paraca_cod.value=data[0]['paraca_id']
+//         } else {
+//             Toast.fire({
+//                 title: 'No se encontraron registros',
+//                 icon: 'info'
+//             });
+//         }
+//     } catch (error) {
+//         console.log(error);
+//     }
+// };
 
 const getJefeSalto = async (e) => {
     e.preventDefault();
@@ -90,7 +97,30 @@ const getJefeSalto = async (e) => {
 
 
 const buscar = async () => {
-    // Implementa la lógica para realizar la búsqueda según tus necesidades
+
+    const url = '/paracaidistas/API/manifiesto/buscar';
+
+
+    const config = {
+        method: 'GET',
+    };
+
+    try {
+        const respuesta = await fetch(url, config);
+        const data = await respuesta.json();
+        console.log(data)
+        if (data) {
+            contador = 1;
+            datatable.rows.add(data).draw();
+        } else {
+            Toast.fire({
+                title: 'No se encontraron registros',
+                icon: 'info'
+            });
+        }
+    } catch (error) {
+        console.log(error);
+    }
 };
 
 const guardar = async (evento) => {
@@ -99,7 +129,7 @@ const guardar = async (evento) => {
     const formData = new FormData(formulario);
     const url = '/paracaidistas/API/manifiesto/guardar';
 
-    for(var pair of formData.entries()){
+    for (var pair of formData.entries()) {
         console.log(pair[0], pair[1]);
     }
     const config = {
@@ -126,6 +156,64 @@ const guardar = async (evento) => {
         console.log(error);
     }
 };
+
+const asignarParacaidas = async (evento) => {
+    console.log('asignarParacaidas')
+    evento.preventDefault();
+    const fileInput = evento.target;
+    console.log(fileInput)
+    const id = fileInput.dataset.id;
+    console.log(id)
+    if (fileInput.files.length > 0) {
+        const file = fileInput.files[0];
+        
+   
+        
+    const paracaidistas =Papa.parse(file, {
+        header: true,
+        complete: function(results) {
+            return results
+        }
+    })}
+
+    paracaidistas.forEach(paracaidista => {
+        const formData = new FormData();
+        formData.append("campo",paracaidista[0])        
+        formData.append("campo",paracaidista[1])        
+        formData.append("campo",paracaidista[2])
+    const url = '/paracaidistas/API/manifiestodetalle/guardar';
+    });
+    // const formData = new FormData(formulario);
+    // const url = '/paracaidistas/API/manifiesto/guardar';
+
+    // for (var pair of formData.entries()) {
+    //     console.log(pair[0], pair[1]);
+    // }
+    // const config = {
+    //     method: 'POST',
+    //     body: formData
+    // };
+
+    // try {
+    //     const respuesta = await fetch(url, config);
+    //     const data = await respuesta.json();
+    //     console.log(data)
+    //     if (data.codigo === 1) {
+    //         Toast.fire({
+    //             title: 'Registro guardado correctamente',
+    //             icon: 'success'
+    //         });
+    //     } else {
+    //         Toast.fire({
+    //             title: 'Ocurrió un error al guardar',
+    //             icon: 'error'
+    //         });
+    //     }
+    // } catch (error) {
+    //     console.log(error);
+    // }
+};
+
 
 
 const eliminar = async (e) => {
@@ -154,6 +242,10 @@ formulario.addEventListener('submit', guardar);
 datatable.on('click', '.btn-warning', traeDatos);
 datatable.on('click', '.btn-danger', eliminar);
 
-inputParacaidista.addEventListener('change',getParacaidista)
+// inputParacaidista.addEventListener('change',getParacaidista)
 inputJefe.addEventListener('change', getJefeSalto);
+datatable.on('change', '.btn-success', (e)=>{
+    console.log("Here")
+    asignarParacaidas(e)
+});
 
