@@ -7,6 +7,7 @@ import { validarFormulario, Toast, confirmacion } from "../funciones";
 const formulario = document.querySelector('#formularioControl');
 const btnBuscar = document.querySelector('#btnBuscar');
 let contador = 1;
+
 const datatable = new Datatable('#tablaControl', {
     language: lenguaje,
     data: null,
@@ -17,7 +18,7 @@ const datatable = new Datatable('#tablaControl', {
         },
         {
             title: 'codigo',
-            data: 'id_paracaidista',
+            data: 'codigo',
         },
         {
             title: 'grado',
@@ -29,15 +30,15 @@ const datatable = new Datatable('#tablaControl', {
         },
         {
             title: 'Tipo de Salto',
-            data: 'tipo_salto',
+            data: 'tipo_salto_detalle',
         },
         {
             title: 'Saltos Total',
-            data: 'cantidad_de_saltos',
+            data: 'cantidad_saltos', 
         },
-    
     ],
 });
+
 
 const buscar = async () => {
 
