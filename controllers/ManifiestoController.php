@@ -4,6 +4,7 @@ namespace Controllers;
 
 use Exception;
 use Model\ActiveRecord;
+use Model\DetalleManifiesto;
 use Model\Manifiesto;
 use Model\TiposParacaidas;
 use Model\Aeronave;
@@ -23,6 +24,75 @@ use MVC\Router;
 
 class ManifiestoController
 {
+        public static function guardarDetalleAPI()
+    {
+        echo json_encode([
+            'mensaje' => 'Registro guardado correctamente',
+            'codigo' => 1
+        ]);
+        
+        //Encode the data as a JSON string
+
+        $catalogo =$_POST['catalogo'];
+        $paracaidas =$_POST['paracaidas'];
+        $altimetro =$_POST['altimetro'];
+
+        
+
+        $sqlParacaidista= " SELECT 
+                                paraca_id 
+                            FROM par_paracaidista
+                            WHERE paraca_codigo = '$catalogo'
+                            or paraca_civil_dpi= '$catalogo'";
+
+        $idParacaidista = ActiveRecord::fetchFirst($sqlParacaidista);     
+        
+        $sqlParacaidas= "SELECT 
+                            paraca_id
+                        FROM par_paracaidas
+                        WHERE paraca_cupula = '$paracaidas'";
+
+        $idParacaidas = ActiveRecord::fetchFirst($sqlParacaidas); 
+        
+        $sqlAltimetro= "SELECT 
+                            altimetro_id
+                        FROM par_altimetro
+                        WHERE altimetro_serie =$altimetro";
+
+        $idAltimetro = ActiveRecord::fetchFirst($sqlAltimetro); 
+
+        
+
+        $_POST['detalle_mani_id']=$_POST['detalle_manifiesto'];
+        $_POST['detalle_paracaidista']=$idParacaidista;
+        $_POST['detalle_paracaidas']=$idParacaidas;
+        $_POST['detalle_altimetro']=$idAltimetro;
+        
+        
+
+        try {
+            $detalleManifiesto = new DetalleManifiesto($_POST);
+            $resultado = $detalleManifiesto->crear();
+
+            if ($resultado['resultado'] == 1) {
+                echo json_encode([
+                    'mensaje' => 'Registro guardado correctamente',
+                    'codigo' => 1
+                ]);
+            } else {
+                echo json_encode([
+                    'mensaje' => 'Ocurrió un error al insertar',
+                    'codigo' => 0
+                ]);
+            }
+        } catch (Exception $e) {
+            echo json_encode([
+                'detalle' => $e->getMessage(),
+                'mensaje' => 'Ocurrió un error',
+                'codigo' => 0
+            ]);
+        }
+    }
     public static function index(Router $router)
     {
         // $pistaObjeto = new Pista();
@@ -30,7 +100,7 @@ class ManifiestoController
 
         $pista = new Pista();
         $pistas = $pista->getPista();
-        
+
         $pista2 = new Pista();
         $pistas2 = $pista2->getPista2();
 
@@ -83,7 +153,7 @@ class ManifiestoController
             // 'paracaidistas' => $paracaidistas,
             'tiposSalto' => $tiposSalto,
             'zonasSalto' => $zonasSalto,
-           
+
         ]);
     }
 
@@ -112,29 +182,31 @@ class ManifiestoController
             ]);
         }
     }
+
+
     public static function getJefeSaltoAPI()
-{
-    $codigo_jefe = $_GET['codigo_jefe'];
-    if ($codigo_jefe != '') {
-        $sql = "SELECT 
+    {
+        $codigo_jefe = $_GET['codigo_jefe'];
+        if ($codigo_jefe != '') {
+            $sql = "SELECT 
                     trim(pm.per_nom1)||' '||trim(pm.per_nom2)||' '||trim(pm.per_ape1)||' '||trim(pm.per_ape2) nombre_jefe
                 FROM mper pm
                 WHERE pm.per_catalogo = $codigo_jefe";
-    } else {
-        echo json_encode([]);
-    }
+        } else {
+            echo json_encode([]);
+        }
 
-    try {
-        $jefeSalto = Personal::fetchArray($sql);
-        echo json_encode($jefeSalto);
-    } catch (Exception $e) {
-        echo json_encode([
-            'detalle' => $e->getMessage(),
-            'mensaje' => 'Ocurrió un error',
-            'codigo' => 0
-        ]);
+        try {
+            $jefeSalto = Personal::fetchArray($sql);
+            echo json_encode($jefeSalto);
+        } catch (Exception $e) {
+            echo json_encode([
+                'detalle' => $e->getMessage(),
+                'mensaje' => 'Ocurrió un error',
+                'codigo' => 0
+            ]);
+        }
     }
-}
 
 
     public static function buscarAPI()
@@ -152,7 +224,7 @@ class ManifiestoController
                 FROM par_manifiesto 
                 inner join par_tipo_salto on mani_tipo_salto=tipo_salto_id
                 inner join mper pm on per_catalogo=mani_jefe
-                WHERE mani_situacion = 1";      
+                WHERE mani_situacion = 1";
 
         try {
             $paracaidas = Paracaidas::fetchArray($sql);
