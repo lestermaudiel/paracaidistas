@@ -7,38 +7,39 @@ use Model\Paracaidista;
 use Model\Manifiesto;
 use MVC\Router;
 
-class ControlcivilController
+class ControlCivilController
 {
     public static function index(Router $router)
     {
-        $router->render('controlcivil/index', [
-
-            
-        ]);
+        $router->render('controlcivil/index', []);
     }
-
 
     public static function buscarAPI()
     {
-$cod_paraca = $_GET['cod_paraca'];
+        $dpi_paracaidista = $_GET['dpi_paracaidista'];
 
         $sql = "SELECT
-        pp.paraca_id AS id_paracaidista,
-        mper.per_nom1 || ' ' || mper.per_ape1 AS nombre_paracaidista,
-        NVL(pts.tipo_salto_detalle, 'Sin saltos') AS tipo_salto,
-        COUNT(pm.mani_id) AS cantidad_de_saltos
-    FROM
-        par_paracaidista pp
-    LEFT JOIN par_manifiesto pm ON pp.paraca_id = pm.mani_paraca_cod
-    LEFT JOIN par_tipo_salto pts ON pm.mani_tipo_salto = pts.tipo_salto_id
-    JOIN mper ON pp.paraca_codigo = mper.per_catalogo
-    WHERE
-        pp.paraca_id = '$cod_paraca'
-    GROUP BY
-        pp.paraca_id, mper.per_nom1, mper.per_ape1, pts.tipo_salto_detalle";
+            pc.paraca_civil_dpi AS dpi_paracaidista,
+            pc.paraca_civil_nom1 || ' ' || pc.paraca_civil_ape1 AS nombre_paracaidista,
+            pts.tipo_salto_detalle,
+            COUNT(pm.mani_id) AS cantidad_saltos
+        FROM
+            par_paraca_civil pc
+        LEFT JOIN
+            par_paracaidista pp ON pc.paraca_civil_dpi = pp.paraca_civil_dpi
+        LEFT JOIN
+            par_detalle_manifiesto pdm ON pp.paraca_id = pdm.detalle_paracaidista
+        LEFT JOIN
+            par_manifiesto pm ON pdm.detalle_mani_id = pm.mani_id
+        LEFT JOIN
+            par_tipo_salto pts ON pm.mani_tipo_salto = pts.tipo_salto_id
+        WHERE
+            pc.paraca_civil_dpi = '$dpi_paracaidista'
+        GROUP BY
+            pc.paraca_civil_dpi, nombre_paracaidista, pts.tipo_salto_detalle";
 
         try {
-            $paracaidas = Paracaidista::fetchArray($sql);
+            $paracaidas = Paracaidista::fetchArray($sql, ['dpi_paracaidista' => $dpi_paracaidista]);
             echo json_encode($paracaidas);
         } catch (Exception $e) {
             echo json_encode([

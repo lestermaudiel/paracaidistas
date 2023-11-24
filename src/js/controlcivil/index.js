@@ -4,10 +4,11 @@ import { lenguaje } from "../lenguaje";
 import Swal from "sweetalert2";
 import { validarFormulario, Toast, confirmacion } from "../funciones";
 
-const formulario = document.querySelector('#formularioControl');
-const btnBuscar = document.querySelector('#btnBuscar');
+const formulario = document.querySelector('#formularioControlCivil');
+const btnBuscar = document.querySelector('#btnBuscarCivil');
 let contador = 1;
-const datatable = new Datatable('#tablaControl', {
+
+const datatable = new Datatable('#tablaControlCivil', {
     language: lenguaje,
     data: null,
     columns: [
@@ -16,8 +17,8 @@ const datatable = new Datatable('#tablaControl', {
             render: () => contador++
         },
         {
-            title: 'codigo',
-            data: 'id_paracaidista',
+            title: 'DPI',
+            data: 'dpi_paracaidista',
         },
         {
             title: 'Paracaidista',
@@ -25,22 +26,19 @@ const datatable = new Datatable('#tablaControl', {
         },
         {
             title: 'Tipo de Salto',
-            data: 'tipo_salto',
+            data: 'tipo_salto_detalle',
         },
         {
             title: 'Saltos Total',
-            data: 'cantidad_de_saltos',
+            data: 'cantidad_saltos',
         },
-    
     ],
 });
 
 const buscar = async () => {
+    let dpi_paracaidista = formulario.dpi_paracaidista.value;
 
-    let cod_paraca = formulario.codigo_paracaidista.value;
-console.log(cod_paraca);
-
-    const url = `/paracaidistas/API/control/buscar?cod_paraca=${cod_paraca}`;
+    const url = `/paracaidistas/API/controlcivil/buscar?dpi_paracaidista=${dpi_paracaidista}`;
     const config = {
         method: 'GET'
     };
@@ -62,6 +60,5 @@ console.log(cod_paraca);
         console.log(error);
     }
 };
-
 
 btnBuscar.addEventListener('click', buscar);

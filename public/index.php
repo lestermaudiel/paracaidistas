@@ -16,7 +16,9 @@ use Controllers\ParacaidistaController;
 use Controllers\ListaParacaidasController; 
 use Controllers\ListaParacaidasSaltosController; 
 use Controllers\ControlController; 
-use Controllers\ControlcivilController; 
+use Controllers\ControlCivilController; 
+use Controllers\ReporteController; 
+
 
 $router = new Router();
 $router->setBaseURL('/' . $_ENV['APP_NAME']);
@@ -90,6 +92,7 @@ $router->post('/API/manifiesto/eliminar', [ManifiestoController::class, 'elimina
 $router->get('/API/manifiesto/buscar', [ManifiestoController::class, 'buscarAPI']);
 $router->get('/API/manifiesto/getParacaidista', [ManifiestoController::class, 'getParacaidista']);
 $router->get('/API/manifiesto/getJefeSalto', [ManifiestoController::class, 'getJefeSaltoAPI']);
+$router->post('/API/manifiesto/guardarDetalle', [ManifiestoController::class, 'guardarDetalleAPI']);
 
 $router->get('/paracaidista', [ParacaidistaController::class, 'index']);
 $router->post('/API/paracaidista/guardar', [ParacaidistaController::class, 'guardarAPI']);
@@ -101,8 +104,13 @@ $router->get('/control', [ControlController::class, 'index']);
 $router->get('/API/control/buscar', [ControlController::class, 'buscarAPI']);
 
 
-$router->get('/controlcivil', [ControlcivilController::class, 'index']);
-$router->get('/API/controlcivil/buscar', [ControlcivilController::class, 'buscarAPI']);
+$router->get('/controlcivil', [ControlCivilController::class, 'index']);
+$router->get('/API/controlcivil/buscar', [ControlCivilController::class, 'buscarAPI']);
+
+
+//reporte
+$router->get('/', [AppController::class,'index']);
+$router->get('/pdf', [ReporteController::class,'pdf']);
 
 $router->comprobarRutas();
 ?>
