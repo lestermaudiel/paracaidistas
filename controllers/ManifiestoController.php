@@ -24,75 +24,7 @@ use MVC\Router;
 
 class ManifiestoController
 {
-        public static function guardarDetalleAPI()
-    {
-        echo json_encode([
-            'mensaje' => 'Registro guardado correctamente',
-            'codigo' => 1
-        ]);
-        
-        //Encode the data as a JSON string
-
-        $catalogo =$_POST['catalogo'];
-        $paracaidas =$_POST['paracaidas'];
-        $altimetro =$_POST['altimetro'];
-
-        
-
-        $sqlParacaidista= " SELECT 
-                                paraca_id 
-                            FROM par_paracaidista
-                            WHERE paraca_codigo = '$catalogo'
-                            or paraca_civil_dpi= '$catalogo'";
-
-        $idParacaidista = ActiveRecord::fetchFirst($sqlParacaidista);     
-        
-        $sqlParacaidas= "SELECT 
-                            paraca_id
-                        FROM par_paracaidas
-                        WHERE paraca_cupula = '$paracaidas'";
-
-        $idParacaidas = ActiveRecord::fetchFirst($sqlParacaidas); 
-        
-        $sqlAltimetro= "SELECT 
-                            altimetro_id
-                        FROM par_altimetro
-                        WHERE altimetro_serie =$altimetro";
-
-        $idAltimetro = ActiveRecord::fetchFirst($sqlAltimetro); 
-
-        
-
-        $_POST['detalle_mani_id']=$_POST['detalle_manifiesto'];
-        $_POST['detalle_paracaidista']=$idParacaidista;
-        $_POST['detalle_paracaidas']=$idParacaidas;
-        $_POST['detalle_altimetro']=$idAltimetro;
-        
-        
-
-        try {
-            $detalleManifiesto = new DetalleManifiesto($_POST);
-            $resultado = $detalleManifiesto->crear();
-
-            if ($resultado['resultado'] == 1) {
-                echo json_encode([
-                    'mensaje' => 'Registro guardado correctamente',
-                    'codigo' => 1
-                ]);
-            } else {
-                echo json_encode([
-                    'mensaje' => 'Ocurrió un error al insertar',
-                    'codigo' => 0
-                ]);
-            }
-        } catch (Exception $e) {
-            echo json_encode([
-                'detalle' => $e->getMessage(),
-                'mensaje' => 'Ocurrió un error',
-                'codigo' => 0
-            ]);
-        }
-    }
+    
     public static function index(Router $router)
     {
         // $pistaObjeto = new Pista();
@@ -246,6 +178,133 @@ class ManifiestoController
     public static function eliminarAPI()
     {
         // Implementa la lógica para eliminar según tus necesidades
+    }
+
+    public static function aprobarAPI()
+    {
+        try {
+            $manifiesto_id = $_POST['mani_id'];
+            $manifiesto = Manifiesto::find($manifiesto_id);
+            $manifiesto->mani_situacion = 2;
+            $resultado = $manifiesto->actualizar();
+
+            if ($resultado['resultado'] == 1) {
+                echo json_encode([
+                    'mensaje' => 'Registro eliminado correctamente',
+                    'codigo' => 1
+                ]);
+            } else {
+                echo json_encode([
+                    'mensaje' => 'Ocurrió un error',
+                    'codigo' => 0
+                ]);
+            }
+        } catch (Exception $e) {
+            echo json_encode([
+                'detalle' => $e->getMessage(),
+                'mensaje' => 'Ocurrió un error',
+                'codigo' => 0
+            ]);
+        }
+    }
+
+    public static function denegarAPI()
+    {
+        try {
+            $manifiesto_id = $_POST['mani_id'];
+            $manifiesto = Manifiesto::find($manifiesto_id);
+            $manifiesto->mani_situacion = 3;
+            $resultado = $manifiesto->actualizar();
+
+            if ($resultado['resultado'] == 1) {
+                echo json_encode([
+                    'mensaje' => 'Registro eliminado correctamente',
+                    'codigo' => 1
+                ]);
+            } else {
+                echo json_encode([
+                    'mensaje' => 'Ocurrió un error',
+                    'codigo' => 0
+                ]);
+            }
+        } catch (Exception $e) {
+            echo json_encode([
+                'detalle' => $e->getMessage(),
+                'mensaje' => 'Ocurrió un error',
+                'codigo' => 0
+            ]);
+        }
+    }
+
+    public static function guardarDetalleAPI()
+    {
+
+        $catalogo = $_POST['detalle_paracaidista'];
+        $paracaidas = $_POST['detalle_paracaidas'];
+        $altimetro = $_POST['detalle_altimetro'];
+       
+       
+        $sqlParacaidista = " SELECT 
+                                paraca_id 
+                            FROM par_paracaidista
+                            WHERE paraca_codigo = '$catalogo'
+                            or paraca_civil_dpi= '$catalogo'";
+
+        $idParacaidista = ActiveRecord::fetchFirst($sqlParacaidista);
+        
+       
+        $sqlParacaidas = "SELECT 
+                            paraca_id
+                        FROM par_paracaidas
+                        WHERE paraca_cupula = '$paracaidas'";
+
+        $idParacaidas = ActiveRecord::fetchFirst($sqlParacaidas);
+
+        
+        $sqlAltimetro = "SELECT 
+                            altimetro_id
+                        FROM par_altimetro
+                        WHERE altimetro_serie =$altimetro";
+
+        $idAltimetro = ActiveRecord::fetchFirst($sqlAltimetro);
+
+        $arr = array(
+            'detalle_mani_id'=>$_POST['detalle_mani_id'], 
+            'detalle_paracaidista' =>$idParacaidista['paraca_id'],
+            'detalle_paracaidas' =>$idParacaidas['paraca_id'], 
+            'detalle_altimetro' =>$idAltimetro['altimetro_id']
+            );
+
+
+        // $_POST['detalle_mani_id'] = $_POST['detalle_manifiesto'];
+        // $_POST['detalle_paracaidista'] = $idParacaidista;
+        // $_POST['detalle_paracaidas'] = $idParacaidas;
+        // $_POST['detalle_altimetro'] = $idAltimetro;
+
+
+
+        try {
+            $detalleManifiesto = new DetalleManifiesto($arr);
+            $resultado = $detalleManifiesto->crear();
+
+            if ($resultado['resultado'] == 1) {
+                echo json_encode([
+                    'mensaje' => 'Registro guardado correctamente',
+                    'codigo' => 1
+                ]);
+            } else {
+                echo json_encode([
+                    'mensaje' => 'Ocurrió un error al insertar',
+                    'codigo' => 0
+                ]);
+            }
+        } catch (Exception $e) {
+            echo json_encode([
+                'detalle' => $e->getMessage(),
+                'mensaje' => 'Ocurrió un error',
+                'codigo' => 0
+            ]);
+        }
     }
 
 }

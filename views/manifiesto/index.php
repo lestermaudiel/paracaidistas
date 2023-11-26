@@ -175,12 +175,7 @@
                     </select>
                 </div>
             </div>
-            <div class="row mb-3">
-                <div class="col">
-                    <label for="excelParacaidistas">Situación</label>
-                    <input name="excelParacaidistas" id="excelParacaidistas" type="file" value="Cargar archivo Excel">
-                </div>
-            </div>
+            
             <div class="row mb-3">
                 <div class="col">
                     <button type="submit" form="formularioManifiesto" id="btnGuardar"

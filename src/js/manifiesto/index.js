@@ -31,8 +31,20 @@ const datatable = new Datatable('#tablaManifiesto', {
             title: 'ASIGNAR PARACAIDISTAS',
             data: 'mani_id',
             searchable: false, orderable: false,
-            render: (data) => `<input type='file' class='btn btn-success' data-id='${data}' />`
+            render: (data) => `<input type='file' class='btn btn-success' style='width: 220px' data-id='${data}' />`
         },
+        { title: 'APROBAR', 
+        data: 'mani_id',
+        searchable: false, orderable: false,
+          render: (data) => `<button class="btn btn-warning" data-id='${data}'>APROBAR</button>` 
+        },
+        { title: 'DENEGAR', 
+        data: 'mani_id',
+        searchable: false, orderable: false,
+          render: (data) => `<button class="btn btn-danger" data-id='${data}'>DENEGAR</button>` 
+        },
+       
+       
     ],
 });
 
@@ -110,6 +122,7 @@ const buscar = async () => {
         const respuesta = await fetch(url, config);
         const data = await respuesta.json();
         console.log(data)
+        datatable.clear().draw();
         if (data) {
             contador = 1;
             datatable.rows.add(data).draw();
@@ -208,8 +221,6 @@ const asignarParacaidas = async (evento) => {
             try {
                 const respuesta =await fetch(url, config);
                 console.log(respuesta)
-                var parsedData = JSON.parse(respuesta);
-                console.log(parsedData)
                 const data = await respuesta.json();
                 console.log(data)
                 if (data.codigo === 1) {
@@ -234,8 +245,92 @@ const asignarParacaidas = async (evento) => {
 
 
 
-const eliminar = async (e) => {
-    // Implementa la lógica para eliminar según tus necesidades
+const aprobar = async (e) => {
+    const button = e.target;
+    const id = button.dataset.id;
+
+    if (await confirmacion('warning', '¿Desea aprobar este manifiesto?')) {
+        const body = new FormData();
+        body.append('mani_id', id);
+        const url = '/paracaidistas/API/manifiesto/aprobar';
+        const config = {
+            method: 'POST',
+            body
+        };
+        try {
+            const respuesta = await fetch(url, config);
+            const data = await respuesta.json();
+
+            const { codigo, mensaje, detalle } = data;
+            let icon = 'info';
+            switch (codigo) {
+                case 1:
+                    icon = 'success';
+                    buscar();
+                    break;
+
+                case 0:
+                    icon = 'error';
+                    console.log(detalle);
+                    break;
+
+                default:
+                    break;
+            }
+
+            Toast.fire({
+                icon,
+                text: mensaje
+            });
+        } catch (error) {
+            console.log(error);
+        }
+
+    }
+};
+
+const denegar = async (e) => {
+    const button = e.target;
+    const id = button.dataset.id;
+
+    if (await confirmacion('warning', '¿Desea denegar este manifiesto?')) {
+        const body = new FormData();
+        body.append('mani_id', id);
+        const url = '/paracaidistas/API/manifiesto/denegar';
+        const config = {
+            method: 'POST',
+            body
+        };
+        try {
+            const respuesta = await fetch(url, config);
+            const data = await respuesta.json();
+
+            const { codigo, mensaje, detalle } = data;
+            let icon = 'info';
+            switch (codigo) {
+                case 1:
+                    icon = 'success';
+                    buscar();
+                    break;
+
+                case 0:
+                    icon = 'error';
+                    console.log(detalle);
+                    break;
+
+                default:
+                    break;
+            }
+
+            Toast.fire({
+                icon,
+                text: mensaje
+            });
+        } catch (error) {
+            console.log(error);
+        }
+
+    }
 };
 
 const modificar = async (e) => {
@@ -257,8 +352,9 @@ const cancelarAccion = () => {
 buscar();
 
 formulario.addEventListener('submit', guardar);
-datatable.on('click', '.btn-warning', traeDatos);
-datatable.on('click', '.btn-danger', eliminar);
+datatable.on('click', '.btn-warning', aprobar);
+
+datatable.on('click', '.btn-danger', denegar);
 
 // inputParacaidista.addEventListener('change',getParacaidista)
 inputJefe.addEventListener('change', getJefeSalto);

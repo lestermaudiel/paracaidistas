@@ -84,11 +84,12 @@ $router->post('/API/listaparacaidassaltos/modificar', [ListaParacaidasSaltosCont
 $router->post('/API/listaparacaidassaltos/eliminar', [ListaParacaidasSaltosController::class, 'eliminarAPI']);
 $router->get('/API/listaparacaidassaltos/buscar', [ListaParacaidasSaltosController::class, 'buscarAPI']);
 
-
 $router->get('/manifiesto', [ManifiestoController::class, 'index']);
 $router->post('/API/manifiesto/guardar', [ManifiestoController::class, 'guardarAPI']);
 $router->post('/API/manifiesto/modificar', [ManifiestoController::class, 'modificarAPI']);
 $router->post('/API/manifiesto/eliminar', [ManifiestoController::class, 'eliminarAPI']);
+$router->post('/API/manifiesto/aprobar', [ManifiestoController::class, 'aprobarAPI']);
+$router->post('/API/manifiesto/denegar', [ManifiestoController::class, 'denegarAPI']);
 $router->get('/API/manifiesto/buscar', [ManifiestoController::class, 'buscarAPI']);
 $router->get('/API/manifiesto/getParacaidista', [ManifiestoController::class, 'getParacaidista']);
 $router->get('/API/manifiesto/getJefeSalto', [ManifiestoController::class, 'getJefeSaltoAPI']);
