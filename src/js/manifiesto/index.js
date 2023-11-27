@@ -48,35 +48,6 @@ const datatable = new Datatable('#tablaManifiesto', {
     ],
 });
 
-// const getParacaidista = async (e) => {
-//     e.preventDefault()
-//     console.log('getParacaidista')
-//     let identificacion_paracaidista = formulario.identificacion_paracaidista.value;
-
-//     console.log(identificacion_paracaidista)
-//     const url = `/paracaidistas/API/manifiesto/getParacaidista?codigo_paracaidista=${identificacion_paracaidista}`;
-//     const config = {
-//         method: 'GET'
-//     };
-
-//     try {
-//         const respuesta = await fetch(url, config);
-//         const data = await respuesta.json();
-//         console.log(respuesta)
-//         console.log(data)
-//         if (data) {
-//             formulario.nombre_paracaidista.value=data[0]['nombre_paracaidista']
-//             formulario.mani_paraca_cod.value=data[0]['paraca_id']
-//         } else {
-//             Toast.fire({
-//                 title: 'No se encontraron registros',
-//                 icon: 'info'
-//             });
-//         }
-//     } catch (error) {
-//         console.log(error);
-//     }
-// };
 
 const getJefeSalto = async (e) => {
     e.preventDefault();

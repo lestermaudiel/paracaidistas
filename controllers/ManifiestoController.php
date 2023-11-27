@@ -280,7 +280,12 @@ class ManifiestoController
         // $_POST['detalle_paracaidista'] = $idParacaidista;
         // $_POST['detalle_paracaidas'] = $idParacaidas;
         // $_POST['detalle_altimetro'] = $idAltimetro;
+        $paracaidasID = $idParacaidas['paraca_id'];
+        $paracaidasObject = Paracaidas::find($paracaidasID);
+        $paracaidasObject->paraca_saltos_uso++;        
+        $resultado = $paracaidasObject->actualizar();
 
+        
 
 
         try {
@@ -288,6 +293,8 @@ class ManifiestoController
             $resultado = $detalleManifiesto->crear();
 
             if ($resultado['resultado'] == 1) {
+               
+
                 echo json_encode([
                     'mensaje' => 'Registro guardado correctamente',
                     'codigo' => 1

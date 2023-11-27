@@ -20,6 +20,7 @@ module.exports = {
     'js/listaparacaidassaltos/index': './src/js/listaparacaidassaltos/index.js',
     'js/control/index': './src/js/control/index.js',
     'js/controlcivil/index': './src/js/controlcivil/index.js',
+    'js/cartillaenganchado/index': './src/js/cartillaenganchado/index.js'
   },
   output: {
     filename: '[name].js',

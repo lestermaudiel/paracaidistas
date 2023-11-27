@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/../includes/app.php';
 
+use Controllers\CartillaEnganchadoController;
 use MVC\Router;
 use Controllers\AppController;
 use Controllers\TiposParacaidasController;
@@ -109,8 +110,11 @@ $router->get('/controlcivil', [ControlCivilController::class, 'index']);
 $router->get('/API/controlcivil/buscar', [ControlCivilController::class, 'buscarAPI']);
 
 
+$router->get('/cartillaenganchado', [CartillaEnganchadoController::class, 'index']);
+
+
 //reporte
-$router->get('/', [AppController::class,'index']);
+
 $router->get('/pdf', [ReporteController::class,'pdf']);
 
 $router->comprobarRutas();
