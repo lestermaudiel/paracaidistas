@@ -18,17 +18,6 @@
                     <input type="text" name="mani_plan_trabajo" id="mani_plan_trabajo" class="form-control">
                 </div>
             </div>
-            <!-- <div class="row mb-3">
-                <div class="col">
-                    <label for="identificacion_paracaidista">Paracaidista</label>
-                    <input type="input" name="identificacion_paracaidista" id="identificacion_paracaidista" class="form-control">
-                </div>
-                <input type="input" name="mani_paraca_cod" id="mani_paraca_cod" class="form-control" hidden>
-                <div class="col">
-                    <label for="nombre_paracaidista">Nombre del Paracaidista</label>
-                    <input type="input" name="nombre_paracaidista" id="nombre_paracaidista" class="form-control">
-                </div>
-            </div> -->
             <div class="row mb-2">
                 <div class="col">
                     <label for="mani_no_avion">Número de Avión</label>
@@ -128,42 +117,11 @@
                         <?php endforeach ?>
                     </select>
                 </div>
+                <div class="col">
+                    <label for="mani_observacion">Observaciones</label>
+                    <textarea name="mani_observacion" id="mani_observacion" class="form-control"></textarea>
+                </div>
             </div>
-            <!-- <div class="row mb-3">
-                <div class="col">
-                    <label for="mani_grado">Grado</label>
-                    <select name="mani_grado" id="mani_grado" class="form-control">
-                        <option value="">Grado</option>
-                        <?php foreach ($grado as $grado): ?>
-                            <option value="<?= $grado['gra_codigo'] ?>">
-                                <?= $grado['gra_desc_md'] ?>
-                            </option>
-                        <?php endforeach ?>
-                    </select>
-                </div>
-                <div class="col">
-                    <label for="mani_paracaidas">Paracaídas</label>
-                    <select name="mani_paracaidas" id="mani_paracaidas" class="form-control">
-                        <option value="">Selecione Opcion</option>
-                        <?php foreach ($paracaidas as $paracaidas): ?>
-                            <option value="<?= $paracaidas['paraca_id'] ?>">
-                                <?= $paracaidas['paraca_cupula'] ?>
-                            </option>
-                        <?php endforeach ?>
-                    </select>
-                </div>
-                <div class="col">
-                    <label for="mani_altimetro">Altimetro</label>
-                    <select name="mani_altimetro" id="mani_altimetro" class="form-control">
-                        <option value="">Selecione Opcion</option>
-                        <?php foreach ($altimetros as $altimetros): ?>
-                            <option value="<?= $altimetros['altimetro_id'] ?>">
-                                <?= $altimetros['altimetro_serie'] ?>
-                            </option>
-                        <?php endforeach ?>
-                    </select>
-                </div>
-            </div> -->
             <div class="row mb-3">
                 <div class="col">
                     <label for="mani_situacion">Situación</label>
@@ -181,12 +139,6 @@
                     <button type="submit" form="formularioManifiesto" id="btnGuardar"
                         class="btn btn-primary w-100">Guardar</button>
                 </div>
-                <!-- <div class="col">
-                    <button type="button" id="btnModificar" class="btn btn-warning w-100">Modificar</button>
-                </div>
-                <div class="col">
-                    <button type="button" id="btnBuscar" class="btn btn-info w-100">Buscar</button>
-                </div> -->
                 <div class="col">
                     <button type="button" id="btnCancelar" class="btn btn-danger w-100">Cancelar</button>
                 </div>

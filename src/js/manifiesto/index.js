@@ -165,13 +165,6 @@ const asignarParacaidas = async (evento) => {
 
         let paracaidistas = await json
         console.log(paracaidistas)
-        // Papa.parse(file, {
-        //     header: true,
-        //     complete: function (results) {
-
-        //         paracaidistas = results.data
-        //     }
-        // })
 
         for (const paracaidista of paracaidistas) {
             const formData = new FormData();

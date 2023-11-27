@@ -19,6 +19,7 @@ class Manifiesto extends ActiveRecord
         'mani_jefe',
         'mani_unidad',
         'mani_situacion',
+        'mani_observacion',
     ];
     public static $idTabla = 'mani_id';
 
@@ -37,6 +38,7 @@ class Manifiesto extends ActiveRecord
     public $mani_unidad;
 
     public $mani_situacion;
+    public $mani_observacion;
 
     public function __construct($args = [])
     {
@@ -53,6 +55,7 @@ class Manifiesto extends ActiveRecord
         $this->mani_altura = $args['mani_altura'] ?? null;
         $this->mani_jefe = $args['mani_jefe'] ?? null;
         $this->mani_unidad = $args['mani_unidad'] ?? null;
+        $this->mani_observacion = $args['mani_observacion'] ?? null;
         $this->mani_situacion = $args['mani_situacion'] ?? 1;
     }
 }
