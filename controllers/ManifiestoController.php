@@ -218,6 +218,7 @@ class ManifiestoController
         $catalogo = $_POST['detalle_paracaidista'];
         $paracaidas = $_POST['detalle_paracaidas'];
         $altimetro = $_POST['detalle_altimetro'];
+        $stick = $_POST['detalle_stick'];
        
        
         $sqlParacaidista = " SELECT 
@@ -248,7 +249,8 @@ class ManifiestoController
             'detalle_mani_id'=>$_POST['detalle_mani_id'], 
             'detalle_paracaidista' =>$idParacaidista['paraca_id'],
             'detalle_paracaidas' =>$idParacaidas['paraca_id'], 
-            'detalle_altimetro' =>$idAltimetro['altimetro_id']
+            'detalle_altimetro' =>$idAltimetro['altimetro_id'],
+            'detalle_stick' => $stick
             );
 
         $paracaidasID = $idParacaidas['paraca_id'];

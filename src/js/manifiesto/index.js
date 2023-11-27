@@ -172,6 +172,7 @@ const asignarParacaidas = async (evento) => {
             formData.append("detalle_paracaidas", paracaidista['paracaidas'])
             formData.append("detalle_altimetro", paracaidista['altimetro'])
             formData.append("detalle_mani_id", id)
+            formData.append("detalle_stick", paracaidista['stick'])
             for (var pair of formData.entries()) {
                 console.log(pair[0]+ ', ' + pair[1]); 
             }

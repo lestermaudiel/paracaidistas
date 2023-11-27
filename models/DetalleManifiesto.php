@@ -10,7 +10,8 @@ class DetalleManifiesto extends ActiveRecord
     'detalle_mani_id' ,
     'detalle_paracaidista' ,
     'detalle_paracaidas' ,
-    'detalle_altimetro' 
+    'detalle_altimetro',
+    'detalle_stick',
     ];
     public static $idTabla = 'detalle_id';
 
@@ -19,6 +20,7 @@ class DetalleManifiesto extends ActiveRecord
     public $detalle_paracaidista;
     public $detalle_paracaidas;
     public $detalle_altimetro;
+    public $detalle_stick;
 
     public function __construct($args = [])
     {
@@ -27,5 +29,6 @@ class DetalleManifiesto extends ActiveRecord
         $this->detalle_paracaidista = $args['detalle_paracaidista'] ?? null;
         $this->detalle_paracaidas = $args['detalle_paracaidas'] ?? null;
         $this->detalle_altimetro = $args['detalle_altimetro'] ?? null;
+        $this->detalle_stick = $args['detalle_stick'] ?? null;
     }
 }
