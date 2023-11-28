@@ -15,23 +15,27 @@ const datatable = new Datatable('#tablaListaParacaidassaltos', {
         },
         {
             title: 'Cúpula',
-            data: 'paraca_cupula',
+            data: 'cupula',
         },
         {
             title: 'Arnés',
-            data: 'paraca_arnes',
+            data: 'arnes',
         },
         {
             title: 'Tipo de Paracaídas',
-            data: 'tipo_par_descripcion',
+            data: 'tipo_paracaidas',
         },
         {
             title: 'Saltos Total',
-            data: 'paraca_saltos_total',
+            data: 'saltos_totales',
         },
         {
             title: 'Saltos Uso',
-            data: 'paraca_saltos_uso',
+            data: 'saltos_uso',
+        },
+        {
+            title: 'Fecha Caducidad',
+            data: 'fecha_caducidad',
         },
         {
             title: 'Saltos Diponibles',
@@ -47,6 +51,10 @@ const datatable = new Datatable('#tablaListaParacaidassaltos', {
                     $(td).css('background-color', 'red');
                 }
             }
+        },
+        {
+            title: 'Tiempo Restante',
+            data: 'tiempo_restante_formateado',
         },
     ],
 });

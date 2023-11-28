@@ -25,10 +25,16 @@ class ListaParacaidasSaltosController
 
 
         $sql = "SELECT 
-        *,
-        paraca_saltos_total-paraca_saltos_uso saltos_disponibles,
-        paraca_fecha_caducidad - TODAY || ' DIAS' tiempo_restante,
-        tipo_par_descripcion
+        paraca_cupula AS cupula,
+        paraca_arnes AS arnes,
+        tipo_par_descripcion AS tipo_paracaidas,
+        paraca_saltos_total AS saltos_totales,
+        paraca_saltos_uso AS saltos_uso,
+        paraca_saltos_total - paraca_saltos_uso AS saltos_disponibles,
+        paraca_fecha_caducidad AS fecha_caducidad,
+        LPAD(TRUNC((paraca_fecha_caducidad - TODAY) / 365), 2, '0') || ' a. ' ||
+        LPAD(TRUNC(MOD((paraca_fecha_caducidad - TODAY) / 30, 12)), 2, '0') || ' m. ' ||
+        LPAD(MOD((paraca_fecha_caducidad - TODAY), 30), 2, '0') || ' dd.' AS tiempo_restante_formateado
     FROM par_paracaidas 
     INNER JOIN par_tipo_paracaidas ON paraca_tipo = tipo_par_id
     WHERE paraca_situacion = 1;

@@ -108,11 +108,6 @@
                                         class="ms-lg-0 ms-2 bi bi-plus-circle me-2"></i>Disponibilidad Paracaidas
                                     Saltos</a>
                             </li>
-                            <li>
-                                <a class="dropdown-item nav-link text-white " href="/paracaidistas/listaparacaidas"><i
-                                        class="ms-lg-0 ms-2 bi bi-plus-circle me-2"></i>Disponibilidad Paracaidas
-                                    Tiempo</a>
-                            </li>
                         </ul>
                     </div>
                     <div class="nav-item dropdown ">
