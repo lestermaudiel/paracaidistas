@@ -17,7 +17,6 @@ module.exports = {
     'js/paracaidas/index': './src/js/paracaidas/index.js',
     'js/manifiesto/index': './src/js/manifiesto/index.js',
     'js/paracaidista/index': './src/js/paracaidista/index.js',
-    'js/listaparacaidas/index': './src/js/listaparacaidas/index.js',
     'js/listaparacaidassaltos/index': './src/js/listaparacaidassaltos/index.js',
     'js/control/index': './src/js/control/index.js',
     'js/controlcivil/index': './src/js/controlcivil/index.js',

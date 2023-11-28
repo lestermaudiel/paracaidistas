@@ -36,15 +36,6 @@
                             <i class="bi bi-gear me-2"></i>Insertar Datos
                         </a>
                         <ul class="dropdown-menu  dropdown-menu-dark " id="dropwdownRevision" style="margin: 0;">
-                            <!-- <h6 class="dropdown-header">Información</h6> -->
-                            <li>
-                                <a class="dropdown-item nav-link text-white " href="/paracaidistas/tiposparacaidas"><i
-                                        class="ms-lg-0 ms-2 bi bi-plus-circle me-2"></i>Tipos de Paracaidas</a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item nav-link text-white " href="/paracaidistas/paracaidas"><i
-                                        class="ms-lg-0 ms-2 bi bi-plus-circle me-2"></i>Paracaidas</a>
-                            </li>
                             <li>
                                 <a class="dropdown-item nav-link text-white " href="/paracaidistas/tiposalto"><i
                                         class="ms-lg-0 ms-2 bi bi-plus-circle me-2"></i>Tipos de Saltos</a>
@@ -102,6 +93,15 @@
                             <i class="bi bi-alarm-fill me-2"></i>PARACAIDAS
                         </a>
                         <ul class="dropdown-menu  dropdown-menu-dark " id="dropwdownRevision" style="margin: 0;">
+
+                            <li>
+                                <a class="dropdown-item nav-link text-white " href="/paracaidistas/tiposparacaidas"><i
+                                        class="ms-lg-0 ms-2 bi bi-plus-circle me-2"></i>Tipos de Paracaidas</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item nav-link text-white " href="/paracaidistas/paracaidas"><i
+                                        class="ms-lg-0 ms-2 bi bi-plus-circle me-2"></i>Paracaidas</a>
+                            </li>
                             <li>
                                 <a class="dropdown-item nav-link text-white "
                                     href="/paracaidistas/listaparacaidassaltos"><i
