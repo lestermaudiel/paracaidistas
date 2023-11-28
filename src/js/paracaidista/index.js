@@ -134,7 +134,7 @@ const eliminar = async (e) => {
 
     if (await confirmacion('warning', '¿Desea eliminar este registro?')) {
         const formData = new FormData();
-        formData.append('altimetro_id', id);
+        formData.append('paraca_id', id);
 
         const url = '/paracaidistas/API/paracaidista/eliminar';
         const config = { method: 'POST', body: formData };
