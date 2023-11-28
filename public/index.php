@@ -2,6 +2,7 @@
 require_once __DIR__ . '/../includes/app.php';
 
 use Controllers\CartillaEnganchadoController;
+use Controllers\CartillaLibreController;
 use Controllers\PlantrabajoController;
 use MVC\Router;
 use Controllers\AppController;
@@ -20,6 +21,7 @@ use Controllers\ListaParacaidasSaltosController;
 use Controllers\ControlController; 
 use Controllers\ControlCivilController; 
 use Controllers\ReporteController; 
+use Controllers\Reporte2Controller; 
 
 
 $router = new Router();
@@ -119,11 +121,15 @@ $router->get('/API/controlcivil/buscar', [ControlCivilController::class, 'buscar
 
 
 $router->get('/cartillaenganchado', [CartillaEnganchadoController::class, 'index']);
+$router->get('/cartillalibre', [CartillaLibreController::class, 'index']);
+
 
 
 //reporte
 
 $router->get('/pdf', [ReporteController::class,'pdf']);
+$router->get('/pdf', [Reporte2Controller::class,'pdf']);
+
 
 $router->comprobarRutas();
 ?>
