@@ -19,12 +19,15 @@
                 </div>
             </div>
             <div class="row mb-3">
-                <div class="col d-flex justify-content-center">
+                <div class="col">
                     <button type="submit" form="formularioTipoSalto" id="btnGuardar"
-                        class="btn btn-primary w-50">Guardar</button>
+                        class="btn btn-primary w-100">Guardar</button>
                 </div>
                 <div class="col">
                     <button type="button" id="btnModificar" class="btn btn-warning w-100">Modificar</button>
+                </div>
+                <div class="col">
+                    <button type="button" id="btnBuscar" class="btn btn-info w-100">Buscar</button>
                 </div>
                 <div class="col">
                     <button type="button" id="btnCancelar" class="btn btn-danger w-100">Cancelar</button>

@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import { validarFormulario, Toast, confirmacion } from "../funciones";
 
 const formulario = document.getElementById('formularioTipoParacaidas');
+const btnBuscar = document.getElementById('btnBuscar');
 const btnModificar = document.getElementById('btnModificar');
 const btnGuardar = document.getElementById('btnGuardar');
 const btnCancelar = document.getElementById('btnCancelar');
@@ -245,6 +246,8 @@ const colocarDatos = (dataset) => {
 
     btnGuardar.disabled = true;
     btnGuardar.parentElement.style.display = 'none';
+    btnBuscar.disabled = true;
+    btnBuscar.parentElement.style.display = 'none';
     btnModificar.disabled = false;
     btnModificar.parentElement.style.display = '';
     btnCancelar.disabled = false;
@@ -255,6 +258,8 @@ const cancelarAccion = () => {
     formulario.reset();
     btnGuardar.disabled = false;
     btnGuardar.parentElement.style.display = '';
+    btnBuscar.disabled = false;
+    btnBuscar.parentElement.style.display = '';
     btnModificar.disabled = true;
     btnModificar.parentElement.style.display = 'none';
     btnCancelar.disabled = true;
@@ -266,6 +271,7 @@ const cancelarAccion = () => {
 buscar();
 
 formulario.addEventListener('submit', guardar);
+btnBuscar.addEventListener('click', buscar);
 datatable.on('click', '.btn-warning', traeDatos);
 datatable.on('click', '.btn-danger', eliminar);
 btnCancelar.addEventListener('click', cancelarAccion);
