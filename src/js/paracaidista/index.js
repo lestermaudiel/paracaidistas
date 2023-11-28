@@ -7,7 +7,6 @@ import { validarFormulario, Toast, confirmacion } from "../funciones";
 const formulario = document.getElementById('formularioParacaidista');
 const inputIdentificacion = document.getElementById('identificacion');
 const selectTipoPersona = document.getElementById('tipoPersona');
-
 const btnModificar = document.getElementById('btnModificar');
 const btnCancelar = document.getElementById('btnCancelar');
 
@@ -23,10 +22,35 @@ const datatableConfig = {
     data: null,
     columns: [
         { title: 'NO', render: () => contador++ },
-        { title: 'Militar', data: 'paraca_codigo' },
-        { title: 'Nombre Militar', data: 'militar' },
-        { title: 'Civil', data: 'paraca_civil_dpi' },
-        { title: 'Nombre Civil', data: 'civil' },
+        {
+            title: 'Codigo Paracaidista',
+            data: null,
+            render: function (data, type, row) {
+                let codigocat = '';
+                if (row) {
+                    codigocat += '' + row['paraca_codigo'] ;
+                }
+                
+                if (row) {
+                    codigocat += '' + row['paraca_civil_dpi'] ;
+                }
+                return codigocat;
+            }
+        },
+        {
+            title: 'Nombre del Paracaidista',
+            data: null,
+            render: function (data, type, row) {
+                let codigoNombre = '';
+                if (row) {
+                    codigoNombre += '' + row['militar'];
+                }
+                if (row) {
+                    codigoNombre += '' + row['civil'];
+                }
+                return codigoNombre;
+            }
+        },
         { title: 'Fecha de Graduación', data: 'paraca_fecha_graduacion' },
         {
             title: 'ELIMINAR',
@@ -69,9 +93,7 @@ const guardar = async (evento) => {
 
     const formData = new FormData(formulario);
     formData.append(selectTipoPersona.value === 'militar' ? 'paraca_codigo' : 'paraca_civil_dpi', inputIdentificacion.value);
-    const body = new FormData(formulario);
-body.append('fechaGraduacion', document.getElementById('fechaGraduacion').value);
-
+    formData.append('fechaGraduacion', document.getElementById('fechaGraduacion').value);
 
     const url = '/paracaidistas/API/paracaidista/guardar';
     const config = { method: 'POST', body: formData };
