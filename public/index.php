@@ -2,6 +2,7 @@
 require_once __DIR__ . '/../includes/app.php';
 
 use Controllers\CartillaEnganchadoController;
+use Controllers\PlantrabajoController;
 use MVC\Router;
 use Controllers\AppController;
 use Controllers\TiposParacaidasController;
@@ -36,6 +37,13 @@ $router->post('/API/tiposalto/guardar', [TipoSaltoController::class, 'guardarAPI
 $router->post('/API/tiposalto/modificar', [TipoSaltoController::class, 'modificarAPI']);
 $router->post('/API/tiposalto/eliminar', [TipoSaltoController::class, 'eliminarAPI']);
 $router->get('/API/tiposalto/buscar', [TipoSaltoController::class, 'buscarAPI']);
+
+$router->get('/plantrabajo', [PlantrabajoController::class, 'index']);
+$router->post('/API/plantrabajo/guardar', [PlantrabajoController::class, 'guardarAPI']);
+$router->post('/API/plantrabajo/modificar', [PlantrabajoController::class, 'modificarAPI']);
+$router->post('/API/plantrabajo/eliminar', [PlantrabajoController::class, 'eliminarAPI']);
+$router->get('/API/plantrabajo/buscar', [PlantrabajoController::class, 'buscarAPI']);
+
 
 $router->get('/zonasalto', [ZonaSaltoController::class, 'index']);
 $router->post('/API/zonasalto/guardar', [ZonaSaltoController::class, 'guardarAPI']);
