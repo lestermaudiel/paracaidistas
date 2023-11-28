@@ -18,6 +18,7 @@ use Model\Personal;
 use Model\TipoSalto;
 use Model\ZonaSalto;
 use Model\Pista;
+use Model\Plantrabajo;
 use Model\Grado;
 
 use MVC\Router;
@@ -52,6 +53,9 @@ class ManifiestoController
         $zonaSaltoObjeto = new ZonaSalto();
         $zonasSalto = $zonaSaltoObjeto->getZonaSalto();
 
+        $plantrabajoObjeto = new Plantrabajo();
+        $plantrabajo = $plantrabajoObjeto->getPlantrabajo();
+
         $router->render('manifiesto/index', [
             'pistas' => $pistas,
             'pistas2' => $pistas2,
@@ -60,6 +64,7 @@ class ManifiestoController
             'paracaidas' => $paracaidas,
             'tiposSalto' => $tiposSalto,
             'zonasSalto' => $zonasSalto,
+            'plantrabajo' => $plantrabajo,
 
         ]);
     }

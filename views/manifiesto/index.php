@@ -15,7 +15,14 @@
             <div class="row mb-3">
                 <div class="col">
                     <label for="mani_plan_trabajo">Plan de Trabajo</label>
-                    <input type="text" name="mani_plan_trabajo" id="mani_plan_trabajo" class="form-control">
+                    <select name="mani_plan_trabajo" id="mani_plan_trabajo" class="form-control">
+                        <option value="">Selecione un Tipo</option>
+                        <?php foreach ($plantrabajo as $plantrabajo): ?>
+                            <option value="<?= $plantrabajo['plan_id'] ?>">
+                                <?= $plantrabajo['plan_codigo'] ?>
+                            </option>
+                        <?php endforeach ?>
+                    </select>
                 </div>
             </div>
             <div class="row mb-2">

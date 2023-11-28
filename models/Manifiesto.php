@@ -43,7 +43,7 @@ class Manifiesto extends ActiveRecord
     public function __construct($args = [])
     {
         $this->mani_id = $args['mani_id'] ?? null;
-        $this->mani_plan_trabajo = $args['mani_plan_trabajo'] ?? '';
+        $this->mani_plan_trabajo = $args['mani_plan_trabajo'] ?? null;
         $this->mani_no_avion = $args['mani_no_avion'] ?? null;
         $this->mani_no_vuelo = $args['mani_no_vuelo'] ?? null;
         $this->mani_tipo_salto = $args['mani_tipo_salto'] ?? null;
