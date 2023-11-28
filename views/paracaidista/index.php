@@ -28,20 +28,11 @@
                     <label for="identificacion">Catalogo y/o DPI</label>
                     <input type="text" name="identificacion" id="identificacion" class="form-control">
                 </div>
-            </div>
-
-            <!-- <div class="row mb-3" id="dpi">
                 <div class="col">
-                    <div class="col" id="divDPI">
-                        <label for="paraca_civil_dpi">DPI</label>
-                        <input type="text" name="paraca_civil_dpi" id="paraca_civil_dpi" class="form-control"
-                            placeholder="Ingrese DPI">
-                    </div>
+                    <label for="fechaGraduacion">Fecha de Graduación</label>
+                    <input type="date" name="fechaGraduacion" id="fechaGraduacion" class="form-control">
                 </div>
-            </div> -->
-
-
-
+            </div>
             <div class="row mb-3">
                 <div class="col">
                     <button type="submit" form="formularioParacaidista" id="btnGuardar"

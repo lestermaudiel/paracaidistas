@@ -20,6 +20,7 @@ class ParacaidistaController
     {
         try {
             $paracaidista = new Paracaidista($_POST);
+            $paracaidista->paraca_fecha_graduacion = $_POST['fechaGraduacion'] ?? null;
             $resultado = $paracaidista->crear();
 
             if ($resultado['resultado'] == 1) {
@@ -70,6 +71,7 @@ class ParacaidistaController
     {
         try {
             $paracaidista = new Paracaidista($_POST);
+            $paracaidista->paraca_fecha_graduacion = $_POST['fechaGraduacion'] ?? null;
             $resultado = $paracaidista->actualizar();
 
             if ($resultado['resultado'] == 1) {
