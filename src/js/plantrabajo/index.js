@@ -23,7 +23,6 @@ const datatable = new Datatable('#tablaPlantrabajo', {
     columns: [
         { title: 'NO', render: () => contador++ },
         { title: 'Código', data: 'plan_codigo' },
-        { title: 'Situación', data: 'plan_situacion' },
         { title: 'MODIFICAR', data: 'plan_id', searchable: false, orderable: false,
             render: (data, type, row, meta) => {
                 return `<button class="btn btn-warning" data-id='${data}' data-codigo='${row['plan_codigo']}' data-situacion='${row['plan_situacion']}'>Modificar</button>`;
