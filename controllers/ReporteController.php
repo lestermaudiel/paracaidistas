@@ -11,6 +11,7 @@ class ReporteController {
         $id_paracaidista = $_GET['id_paracaidista'];
 
         $data = static::GetInforme($id_paracaidista);
+        $info = static::GetInfo($id_paracaidista);
         $mpdf = new Mpdf([
             "orientation" => "L",
             "default_font_size" => 12,
@@ -22,6 +23,8 @@ class ReporteController {
 
         $html = $router->load('reporte/pdf',[
             'dataSet' => $data,
+            'info' => $info,
+
         ]);
         // $htmlHeader = $router->load('reporte/header', [
         //     'saludo' => $saludo
@@ -32,6 +35,19 @@ class ReporteController {
         $mpdf->WriteHTML($html);
         $mpdf->Output();
     }
+private static function GetInfo($info){
+    $sql= "SELECT
+        mper.per_nom1 || ' ' || mper.per_nom2 || ' ' || mper.per_ape1 || ' ' || mper.per_ape2 AS nombre_paracaidista,
+        grados.gra_desc_md AS grado
+    FROM
+        mper
+    LEFT JOIN grados ON mper.per_grado = grados.gra_codigo
+    WHERE
+        mper.per_catalogo = $info";
+        $resultados = ActiveRecord::fetchArray($sql);
+
+        return $resultados; 
+}
 
     private static function GetInforme($id_paracaidista) {
 
