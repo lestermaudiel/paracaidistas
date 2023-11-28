@@ -143,7 +143,9 @@
         .paragrafatura {
             font-size: 12px;
             margin-bottom: 10px;
+            text-align: justify;
         }
+        
     </style>
 </head>
 
@@ -249,7 +251,12 @@
         <p class="paragrafatura">B. Haber sido jefe en treinta y tres saltos, o en dos o más saltos en combate real; y.</p>
         <p class="paragrafatura">C. Haber servido en situación de activo (saltando), en las Unidades de Paracaidistas en el Ejército de Guatemala, o en otra organización de paracaidistas autorizado, durante un tiempo no menor de dos años</p>
         </div>
+        <div class="images-container" style="float: right; width: 50%;">
+            <img src="../public/images/paracaidista.jpg" alt="Paracaidista">
+            <img src="../public/images/experto.jpg" alt="Experto">
+            <img src="../public/images/maestro.jpg" alt="Maestro">
         </div>
-    </div>    
+    </div>
+</div>
 </body>
 </html>
