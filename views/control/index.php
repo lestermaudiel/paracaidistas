@@ -32,6 +32,15 @@
         </div>
     </div>
 
+    <div id="divTotal" ></div>
+    <progress id="progresoTotal" value="0" max="100"></progress>
+    
+    <div id="divTactico" ></div>
+    <progress id="progresoTactico" value="0" max="100"></progress>
+    
+    <div id="divJefe" ></div>
+    <progress id="progresoJefe" value="0" max="100"></progress>
+
     <script src="<?= asset('./build/js/control/index.js') ?>"></script>
 </body>
 
