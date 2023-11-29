@@ -107,7 +107,6 @@ const buscar = async () => {
         console.log(error);
     }
 };
-
 const guardar = async (evento) => {
     evento.preventDefault();
 
@@ -131,6 +130,10 @@ const guardar = async (evento) => {
                 title: 'Registro guardado correctamente',
                 icon: 'success'
             });
+
+            setTimeout(() => {
+                location.reload();
+            }, 1000);
         } else {
             Toast.fire({
                 title: 'Ocurrió un error al guardar',
@@ -141,6 +144,7 @@ const guardar = async (evento) => {
         console.log(error);
     }
 };
+
 
 const asignarParacaidas = async (evento) => {
     evento.preventDefault();
