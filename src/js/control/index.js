@@ -15,6 +15,16 @@ const divTactico = document.getElementById('divTactico');
 const progresoTotal = document.getElementById('progresoTotal');
 const progresoJefe = document.getElementById('progresoJefe');
 const progresoTactico = document.getElementById('progresoTactico');
+
+const divTotalMaestro = document.getElementById('divTotalMaestro');
+const divJefeMaestro = document.getElementById('divJefeMaestro');
+const divTacticoMaestro = document.getElementById('divTacticoMaestro');
+const divNocturnoMaestro = document.getElementById('divNocturnoMaestro');
+
+const progresoTotalMaestro = document.getElementById('progresoTotalMaestro');
+const progresoJefeMaestro = document.getElementById('progresoJefeMaestro');
+const progresoTacticoMaestro = document.getElementById('progresoTacticoMaestro');
+const progresoNocturnoMaestro = document.getElementById('progresoNocturnoMaestro');
 let contador = 1;
 
 const datatable = new Datatable('#tablaControl', {
@@ -70,6 +80,7 @@ console.log(num_catalogo);
             contador = 1;
             datatable.rows.add(data).draw();
             buscarAlas()
+            buscarAlasMaestro()
         } else {
             Toast.fire({
                 title: 'No se encontraron registros',
@@ -117,6 +128,50 @@ const buscarAlas = async () => {
         console.log(error);
     }
 };
+
+
+const buscarAlasMaestro = async () => {
+
+    let num_catalogo = formulario.codigo_paracaidista.value;
+    console.log(num_catalogo);
+
+    const url = `/paracaidistas/API/control/buscarAlasMaestro?num_catalogo=${num_catalogo}`;
+    const config = {
+        method: 'GET'
+    };
+
+    try {
+        const respuesta = await fetch(url, config);
+        const data = await respuesta.json();
+
+        if (data) {
+            var total = data[3]['porcentaje']
+            var tactico = data[2]['porcentaje']
+            var jefe = data[0]['porcentaje']
+            var nocturno = data[1]['porcentaje']
+
+            progresoTotalMaestro.value+=total
+            progresoTacticoMaestro.value+=tactico
+            progresoJefeMaestro.value+=jefe
+            progresoNocturnoMaestro.value+=nocturno
+
+
+            divTotalMaestro.innerText =total + "%"
+            divTacticoMaestro.innerText =tactico + "%"
+            divJefeMaestro.innerText =jefe + "%"
+            divNocturnoMaestro.innerText =nocturno + "%"
+
+        } else {
+            Toast.fire({
+                title: 'No se encontraron registros',
+                icon: 'info'
+            });
+        }
+    } catch (error) {
+        console.log(error);
+    }
+};
+
 
 
 

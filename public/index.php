@@ -108,6 +108,7 @@ $router->get('/API/paracaidista/buscar', [ParacaidistaController::class, 'buscar
 $router->get('/control', [ControlController::class, 'index']);
 $router->get('/API/control/buscar', [ControlController::class, 'buscarAPI']);
 $router->get('/API/control/buscarAlas', [ControlController::class, 'getAlas']);
+$router->get('/API/control/buscarAlasMaestro', [ControlController::class, 'getAlasmaestro']);
 
 
 $router->get('/controlcivil', [ControlCivilController::class, 'index']);

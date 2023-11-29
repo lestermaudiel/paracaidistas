@@ -69,6 +69,70 @@ class ControlController
             ]);
         }
     }
+
+    public static function getAlasmaestro()
+    {
+        $num_catalogo = $_GET['num_catalogo'];
+
+        $sql = "SELECT
+        'TOTALES' descripcion,
+        FLOOR(count(1)/75*100) porcentaje
+    FROM
+        par_detalle_manifiesto dm
+        INNER JOIN par_paracaidista p ON dm.detalle_paracaidista=p.paraca_id
+    
+    WHERE
+           p.paraca_codigo = '$num_catalogo'
+           or
+           p.paraca_civil_dpi = '$num_catalogo'
+    UNION
+    SELECT
+        'TACTICOS' descripcion,
+        FLOOR(count(1)/25*100) porcentaje
+    FROM
+        par_detalle_manifiesto dm
+        INNER JOIN par_paracaidista p ON dm.detalle_paracaidista=p.paraca_id  
+        INNER JOIN par_manifiesto m ON dm.detalle_mani_id = m.mani_id
+        INNER JOIN par_tipo_salto ts ON m.mani_tipo_salto = ts.tipo_salto_id
+    
+    WHERE
+        ts.tipo_salto_detalle = 'TACTICO'
+        and
+        (p.paraca_codigo = '$num_catalogo' or p.paraca_civil_dpi = '$num_catalogo')
+    UNION  
+    SELECT
+        'JEFE' descripcion,
+        FLOOR(count(1)/33*100) porcentaje
+    FROM
+        par_manifiesto m   
+    WHERE
+        m.mani_jefe= '$num_catalogo'
+    UNION 
+    SELECT 
+        'NOCTURNO' descripcion,
+        FLOOR(count(1)/6*100) porcentaje
+    FROM
+        par_detalle_manifiesto dm
+        INNER JOIN par_paracaidista p ON dm.detalle_paracaidista=p.paraca_id  
+        INNER JOIN par_manifiesto m ON dm.detalle_mani_id = m.mani_id
+        INNER JOIN par_tipo_salto ts ON m.mani_tipo_salto = ts.tipo_salto_id
+        
+    WHERE
+        ts.tipo_salto_detalle= 'NOCTURNO'
+        and
+        (p.paraca_codigo = '$num_catalogo' or p.paraca_civil_dpi = '$num_catalogo')";
+
+        try {
+            $alas = ActiveRecord::fetchArray($sql);
+            echo json_encode($alas);
+        } catch (Exception $e) {
+            echo json_encode([
+                'detalle' => $e->getMessage(),
+                'mensaje' => 'Ocurrió un error',
+                'codigo' => 0
+            ]);
+        }
+    }
     public static function buscarAPI()
     {
         $num_catalogo = $_GET['num_catalogo'];

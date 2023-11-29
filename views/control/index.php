@@ -41,6 +41,20 @@
     <div id="divJefe" ></div>
     <progress id="progresoJefe" value="0" max="100"></progress>
 
+
+
+
+    <div id="divTotalMaestro" ></div>
+    <progress id="progresoTotalMaestro" value="0" max="100"></progress>
+    
+    <div id="divTacticoMaestro" ></div>
+    <progress id="progresoTacticoMaestro" value="0" max="100"></progress>
+    
+    <div id="divJefeMaestro" ></div>
+    <progress id="progresoJefeMaestro" value="0" max="100"></progress>
+    <div id="divNocturnoMaestro" ></div>
+    <progress id="progresoNocturnoMaestro" value="0" max="100"></progress>
+
     <script src="<?= asset('./build/js/control/index.js') ?>"></script>
 </body>
 
