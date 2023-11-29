@@ -151,14 +151,33 @@
 
 <body>
 <div class="container">
-        <div class="first-page">
-        <p style="text-align: center; font-weight: bold; text-decoration: underline;">RECORD INDIVIDUAL DE SALTO EN PARACAIDAS</p>
-        <p>Nombre: <?= $info['nombre'] ?></p>
-        <p>Grado: <?= $info['grado'] ?></p>
-        
-        <p>Número de Serie: <?= $info['serie'] ?></p>
-        <p>Fecha de Graduación como Paracaidista: <?= $info['graduacion'] ?></p>
-        <p>Unidad: <?= $info['unidad'] ?></p>
+    <div class="first-page" style="text-align: center; padding: 20px; background-color: #f8f9fa; color: #343a40;">
+        <h1 style="font-weight: bold; text-decoration: underline; margin-bottom: 20px; font-size: 24px;">
+            RECORD INDIVIDUAL DE SALTO EN PARACAIDAS ESTILO LIBRE
+        </h1>
+        <div class="images-container" style="width: 100%; text-align: center;">
+            <img src="../public/images/maestro.jpg" alt="Paracaidista" style="max-width: 100%; height: auto;">
+        </div>
+        <div style="font-size: 18px; margin-bottom: 10px; text-align: justify;">
+            <strong>Nombre:</strong>&nbsp;&nbsp;<?= $info['nombre'] ?>
+        </div>
+        <div style="font-size: 18px; margin-bottom: 10px; text-align: justify;">
+            <strong>Grado:</strong>&nbsp;&nbsp;<?= $info['grado'] ?>
+        </div>
+        <div style="font-size: 18px; margin-bottom: 10px; text-align: justify;">
+            <strong>Número de Serie:</strong>&nbsp;&nbsp;<?= $info['serie'] ?>
+        </div>
+        <div style="font-size: 18px; margin-bottom: 10px; text-align: justify;">
+            <strong>Fecha de Graduación como Paracaidista:</strong>&nbsp;&nbsp;<?= $info['graduacion'] ?>
+        </div>
+        <div style="font-size: 18px; margin-bottom: 10px; text-align: justify;">
+            <strong>Unidad:</strong>&nbsp;&nbsp;<?= $info['unidad'] ?>
+        </div>
+    </div>
+</div>
+
+
+
             <pagebreak/>
         </div>
         <div>
@@ -202,22 +221,25 @@
         </table>
         <pagebreak/>
     </div>
-    <div class="libreta-salto">
-                <h1>SU LIBRETA DE SALTO LIBRE</h1>
-                <ol>
-                    <li>Escriba su nombre con tinta en el espacio indicado.</li>
-                    <li>Mantenga su libreta al día y con tinta.</li>
-                    <li>Llene Todos los espacios que se indican, exceptuando el de la firma del Oficial responsable.</li>
-                    <li>Llene los espacios como sigue:</li>
-                    <ol type="a">
-                        <li>Columna 1: Número que corresponda al salto</li>
-                        <li>Columna 2: Unidad a la que pertenece.</li>
-                        <li>Columna 3: Nombre de la Zona de Salto y localización.</li>
-                        <li>Columna 4: Fecha del Salto.</li>
-                        <li>Columna 5: Posición en el Stick.</li>
-                        <li>Columna 6: Tipo del Avión.</li>
-                        <li>Columna 7: Tipo del Paracaidas.</li>
-                        <li>Columna 8: Tipo de Salto como sigue:</li>
+    <div class="container">
+    <div class="libreta-salto" style="background-color: #f8f9fa; padding: 20px; margin-bottom: 20px;">
+        <h1 style="font-weight: bold; text-decoration: underline; font-size: 24px; margin-bottom: 20px;">
+            SU LIBRETA DE SALTO LIBRE
+        </h1>
+        <ol style="font-size: 16px;">
+            <li>Escriba su nombre con tinta en el espacio indicado.</li>
+            <li>Mantenga su libreta al día y con tinta.</li>
+            <li>Llene Todos los espacios que se indican, exceptuando el de la firma del Oficial responsable.</li>
+            <li>Llene los espacios como sigue:
+                <ol type="a">
+                    <li>Número que corresponda al salto</li>
+                    <li>Unidad a la que pertenece.</li>
+                    <li>Nombre de la Zona de Salto y localización.</li>
+                    <li>Fecha del Salto.</li>
+                    <li>Posición en el Stick.</li>
+                    <li>Tipo del Avión.</li>
+                    <li>Tipo del Paracaídas.</li>
+                    <li>Tipo de Salto como sigue:
                         <ul>
                             <li>T-Táctico</li>
                             <li>M-Masa</li>
@@ -226,35 +248,37 @@
                             <li>EC-Equipo de Combate.</li>
                             <li>N-Nocturno</li>
                         </ul>
-                        <li>Columna 9: Firma y Grado del Oficial que certifica el Salto.</li>
-                        <li>Columna 10: Observaciones. (Se incluye el nombre de la Unidad con la que se efectúan el Salto).</li>
-                    </ol>
+                    </li>
+                    <li>Firma y Grado del Oficial que certifica el Salto.</li>
+                    <li>Observaciones. (Se incluye el nombre de la Unidad con la que se efectúan el Salto).</li>
                 </ol>
-            </div>
-        </div>
-        <pagebreak/>
-        <div class="container">
-            <div class="escala-insignias">
-                <h1>ESCALA DE INSIGNIAS</h1>
-        <p><strong>I. ALAS DE PARACAIDISTA:</strong></p>
-        <P> Cinco saltos en paracaídas. Uno de ellos con equipo de combate.</p>
-        <p><strong>II. ALAS DE PARACAIDISTA EXPERTO:</strong></p>
-        <p class="paragrafatura">ARTÍCULO 182. Las Alas de Paracaidismo Experto, se otorgarán después de haber efectuado un mínimo de treinta saltos conforme los requisitos siguientes:</p>
-        <p class="paragrafatura">A. De los treinta saltos, haber efectuado quince saltos en combate simulado, dos saltos nocturnos (uno como jefe de salto), y dos saltos en masa, como miembro de una Unidad que salte completa.</p>
-        <p class="paragrafatura">B. Ser graduado en una Escuela para Jefes de salto en el extranjero, o haber recibido y aprobado este entrenamiento en el Ejército de Guatemala.</p>
-        <p class="paragrafatura">C. Haber sido jefe en quince saltos o haber efectuado un salto en combate real.</p>
-        <p class="paragrafatura">D. Haber servido en situación de activo (saltando), en las Unidades de Paracaidista o en otras organizaciones de Paracaidista autorizado, por lo menos durante un año.</p>
-        <p><strong>III. ALAS DE PARACAIDISTA MAESTRO:</strong></p>
-        <p class="paragrafatura">ARTÍCULO 183. Las Alas de Paracaidista Maestro, se otorgarán después de haber efectuado un número de sesenta y cinco saltos y llenar cualesquiera de los requisitos siguientes:</p>
-        <p class="paragrafatura">A. De los sesenta y cinco saltos, haber efectuado veinticinco saltos en combate simulado, cuatro saltos nocturnos (dos como jefe de salto), dos saltos libre (uno de ellos con caída controlada) y cinco saltos en masa cuando la Unidad salte completa.</p>
-        <p class="paragrafatura">B. Haber sido jefe en treinta y tres saltos, o en dos o más saltos en combate real; y.</p>
-        <p class="paragrafatura">C. Haber servido en situación de activo (saltando), en las Unidades de Paracaidistas en el Ejército de Guatemala, o en otra organización de paracaidistas autorizado, durante un tiempo no menor de dos años</p>
-        </div>
-        <div class="images-container" style="float: right; width: 50%;">
-            <img src="../public/images/paracaidista.jpg" alt="Paracaidista">
-            <img src="../public/images/experto.jpg" alt="Experto">
-            <img src="../public/images/maestro.jpg" alt="Maestro">
-        </div>
+            </li>
+        </ol>
+    </div>
+</div>
+
+<pagebreak/>
+
+<div class="container">
+    <div class="escala-insignias" style="background-color: #f8f9fa; padding: 20px; margin-bottom: 20px;">
+        <h1 style="font-weight: bold; font-size: 24px; margin-bottom: 20px;">ESCALA DE INSIGNIAS</h1>
+        <p style="font-size: 16px;"><strong>I. ALAS DE PARACAIDISTA:</strong></p>
+        <p style="font-size: 16px;">Cinco saltos en paracaídas. Uno de ellos con equipo de combate.</p>
+        <p style="font-size: 16px;"><strong>II. ALAS DE PARACAIDISTA EXPERTO:</strong></p>
+        <p style="font-size: 16px;">ARTÍCULO 182. Las Alas de Paracaidismo Experto, se otorgarán después de haber efectuado un mínimo de treinta saltos conforme los requisitos siguientes:</p>
+        <p style="font-size: 16px;">A. De los treinta saltos, haber efectuado quince saltos en combate simulado, dos saltos nocturnos (uno como jefe de salto), y dos saltos en masa, como miembro de una Unidad que salte completa.</p>
+        <p style="font-size: 16px;">B. Ser graduado en una Escuela para Jefes de salto en el extranjero, o haber recibido y aprobado este entrenamiento en el Ejército de Guatemala.</p>
+        <p style="font-size: 16px;">C. Haber sido jefe en quince saltos o haber efectuado un salto en combate real.</p>
+        <p style="font-size: 16px;">D. Haber servido en situación de activo (saltando), en las Unidades de Paracaidista o en otras organizaciones de Paracaidista autorizado, por lo menos durante un año.</p>
+        <p style="font-size: 16px;"><strong>III. ALAS DE PARACAIDISTA MAESTRO:</strong></p>
+        <p style="font-size: 16px;">ARTÍCULO 183. Las Alas de Paracaidista Maestro, se otorgarán después de haber efectuado un número de sesenta y cinco saltos y llenar cualesquiera de los requisitos siguientes:</p>
+        <p style="font-size: 16px;">A. De los sesenta y cinco saltos, haber efectuado veinticinco saltos en combate simulado, cuatro saltos nocturnos (dos como jefe de salto), dos saltos libre (uno de ellos con caída controlada) y cinco saltos en masa cuando la Unidad salte completa.</p>
+        <p style="font-size: 16px;">B. Haber sido jefe en treinta y tres saltos, o en dos o más saltos en combate real; y.</p>
+        <p style="font-size: 16px;">C. Haber servido en situación de activo (saltando), en las Unidades de Paracaidistas en el Ejército de Guatemala, o en otra organización de paracaidistas autorizado, durante un tiempo no menor de dos años</p>
+    </div>
+    <div class="images-container" style="float: right; width: 50%;">
+        <img src="../public/images/paracaidista.jpg" alt="Paracaidista" style="width: 100%;">
+
     </div>
 </div>
 </body>
