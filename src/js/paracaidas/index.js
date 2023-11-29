@@ -207,10 +207,7 @@ const guardar = async (evento) => {
     }
 };
 
-const eliminar = async (paraca_id) => {
-    const button = e.target;
-    const id = button.dataset.id;
-
+const eliminar = async (e, paraca_id) => {
     if (await confirmacion('warning', '¿Desea eliminar este registro?')) {
         const body = new FormData();
         body.append('paraca_id', paraca_id);
@@ -254,6 +251,7 @@ const eliminar = async (paraca_id) => {
         }
     }
 };
+
 
 const modificar = async (e) => {
     e.preventDefault()
@@ -372,6 +370,11 @@ btnModificar.addEventListener('click', modificar);
 datatable.on('click', '.btn-danger', eliminar);
 formulario.addEventListener('submit', guardar);
 datatable.on('click', '.btn-warning', traeDatos);
+datatable.on('click', '.btn-danger', function(e) {
+    const button = e.target;
+    const id = button.dataset.id;
+    eliminar(e, id);
+});
 
 
 
