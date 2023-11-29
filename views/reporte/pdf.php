@@ -153,12 +153,11 @@
 <div class="container">
         <div class="first-page">
         <p style="text-align: center; font-weight: bold; text-decoration: underline;">RECORD INDIVIDUAL DE SALTO EN PARACAIDAS</p>
-        <p>Nombre: <?= $info['nombre_paracaidista'] ?></p>
+        <p>Nombre: <?= $info['nombre'] ?></p>
         <p>Grado: <?= $info['grado'] ?></p>
-        <?= var_dump ($info)
-    ?>
-        <p>Número de Serie: <?= $info['numero_serie'] ?></p>
-        <p>Fecha de Graduación como Paracaidista: <?= $info['fecha_graduacion'] ?></p>
+        
+        <p>Número de Serie: <?= $info['serie'] ?></p>
+        <p>Fecha de Graduación como Paracaidista: <?= $info['graduacion'] ?></p>
         <p>Unidad: <?= $info['unidad'] ?></p>
             <pagebreak/>
         </div>
