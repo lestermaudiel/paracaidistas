@@ -64,9 +64,11 @@
             </div>
         </div>
     </div>
-    <button type="button" id="btnMostrarProgreso" class="btn btn-primary btn-block" data-toggle="modal" data-target="#modalProgreso">Proceso de Condecoraciones</button>
+    <button type="button" id="btnMostrarProgreso" class="btn btn-primary btn-block" data-toggle="modal"
+        data-target="#modalProgreso">Proceso de Condecoraciones</button>
 
-    <div class="modal fade" id="modalProgreso" tabindex="-1" role="dialog" aria-labelledby="modalProgresoLabel" aria-hidden="true">
+    <div class="modal fade" id="modalProgreso" tabindex="-1" role="dialog" aria-labelledby="modalProgresoLabel"
+        aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -81,38 +83,38 @@
                             <div class="col-lg-5">
                                 <div class="progress-box">
                                     <h2>ALAS DE PARACAIDISMO EXPERTO</h2>
-            <p>Saltos Totales</p>
-            <div id="divTotal"></div>
-            <progress id="progresoTotal" value="0" max="100"></progress>
-    
-            <p>Saltos Tácticos</p>
-            <div id="divTactico"></div>
-            <progress id="progresoTactico" value="0" max="100"></progress>
-    
-            <p>Saltos de Jefe de Salto</p>
-            <div id="divJefe"></div>
-            <progress id="progresoJefe" value="0" max="100"></progress>
-            </div>
+                                    <p>Saltos Totales</p>
+                                    <div id="divTotal"></div>
+                                    <progress id="progresoTotal" value="0" max="100"></progress>
+
+                                    <p>Saltos Tácticos</p>
+                                    <div id="divTactico"></div>
+                                    <progress id="progresoTactico" value="0" max="100"></progress>
+
+                                    <p>Saltos de Jefe de Salto</p>
+                                    <div id="divJefe"></div>
+                                    <progress id="progresoJefe" value="0" max="100"></progress>
+                                </div>
                             </div>
                             <div class="col-lg-5">
                                 <div class="progress-box">
                                     <h2>ALAS DE PARACAIDISMO MAESTRO</h2>
-            <p>Saltos Totales</p>
-            <div id="divTotalMaestro"></div>
-            <progress id="progresoTotalMaestro" value="0" max="100"></progress>
-    
-            <p>Saltos Tácticos</p>
-            <div id="divTacticoMaestro"></div>
-            <progress id="progresoTacticoMaestro" value="0" max="100"></progress>
-    
-            <p>Saltos de Jefe de Salto</p>
-            <div id="divJefeMaestro"></div>
-            <progress id="progresoJefeMaestro" value="0" max="100"></progress>
-    
-            <p>Saltos Nocturnos</p>
-            <div id="divNocturnoMaestro"></div>
-            <progress id="progresoNocturnoMaestro" value="0" max="100"></progress>
-            </div>
+                                    <p>Saltos Totales</p>
+                                    <div id="divTotalMaestro"></div>
+                                    <progress id="progresoTotalMaestro" value="0" max="100"></progress>
+
+                                    <p>Saltos Tácticos</p>
+                                    <div id="divTacticoMaestro"></div>
+                                    <progress id="progresoTacticoMaestro" value="0" max="100"></progress>
+
+                                    <p>Saltos de Jefe de Salto</p>
+                                    <div id="divJefeMaestro"></div>
+                                    <progress id="progresoJefeMaestro" value="0" max="100"></progress>
+
+                                    <p>Saltos Nocturnos</p>
+                                    <div id="divNocturnoMaestro"></div>
+                                    <progress id="progresoNocturnoMaestro" value="0" max="100"></progress>
+                                </div>
                             </div>
                         </div>
                     </div>
