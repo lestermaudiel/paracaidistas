@@ -109,7 +109,7 @@
                             </li>
                             <li>
                                 <a class="dropdown-item nav-link text-white "
-                                    href="/paracaidistas/estadistica"><i
+                                    href="/paracaidistas/estadisticas"><i
                                         class="ms-lg-0 ms-2 bi bi-plus-circle me-2"></i>Grafica Estadisticas Paracaidas</a>
                             </li>
                         </ul>
