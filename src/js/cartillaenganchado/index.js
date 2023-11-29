@@ -4,7 +4,7 @@ import { lenguaje } from "../lenguaje";
 import Swal from "sweetalert2";
 import { validarFormulario, Toast, confirmacion } from "../funciones";
 
-const formulario = document.getElementById('formularioCartilla');
+const formulario = document.getElementById('formularioCartillaEnganchado');
 const btnBuscar = document.getElementById('btnBuscar');
 
 
@@ -27,7 +27,6 @@ const buscar = async () => {
             if (blob) {
                 const urlBlob = window.URL.createObjectURL(blob);
 
-                // Abre el PDF en una nueva ventana o pestaña
                 window.open(urlBlob, '_blank');
             } else {
                 console.error('No se pudo obtener el blob del PDF.');

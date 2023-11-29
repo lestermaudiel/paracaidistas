@@ -7,7 +7,7 @@ use Mpdf\Mpdf;
 use MVC\Router;
 
 class Reporte2Controller {
-    public static function pdf (Router $router){
+    public static function pdf2 (Router $router){
         $id_paracaidista = $_GET['id_paracaidista'];
 
         $data = static::GetInforme($id_paracaidista);
@@ -21,7 +21,7 @@ class Reporte2Controller {
         ]);
         $mpdf->SetMargins(30,35,25);
 
-        $html = $router->load('reporte2/pdf',[
+        $html = $router->load('reporte2/pdf2',[
             'dataSet' => $data,
             'info' => $info,
 
