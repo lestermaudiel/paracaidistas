@@ -71,7 +71,7 @@ const getRandomColor = () => {
           chartparacaidas.data.datasets[0].backgroundColor.push(getRandomColor());
         });
   
-        chartEquipo.update();
+        chartparacaidas.update();
     } else {
       Toast.fire({
         title: "No se encontraron registros",

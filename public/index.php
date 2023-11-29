@@ -128,7 +128,6 @@ $router->get('/pdf2', [Reporte2Controller::class,'pdf2']);
 
 
 $router->get('/estadisticas', [EstadisticaController::class, 'index']);
-$router->get('/API/estadisticas/getEstadisticas', [EstadisticaController::class, 'getDataAPI']);
+$router->get('/API/estadisticas/getEstadisticas', [EstadisticaController::class,'getDataAPI']);
 
 $router->comprobarRutas();
-?>n
