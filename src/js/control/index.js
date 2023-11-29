@@ -173,6 +173,9 @@ const buscarAlasMaestro = async () => {
 };
 
 
+document.getElementById('btnMostrarProgreso').addEventListener('click', function () {
+    document.getElementById('contenedorProgreso').style.display = 'block';
+});
 
 
 btnBuscar.addEventListener('click', buscar);

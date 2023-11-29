@@ -16,7 +16,8 @@
         .progress-container {
             width: 100%;
             text-align: center;
-            margin: 20px; /* Añadido para ajustar el espacio */
+            margin: 20px;
+            display: none;
         }
 
         .progress-box {
@@ -28,6 +29,11 @@
         progress {
             width: 100%;
             margin-top: 10px;
+        }
+
+        #btnMostrarProgreso {
+            width: 50%;
+            margin: 10px auto;
         }
     </style>
 </head>
@@ -45,7 +51,7 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col">
-                        <button type="button" id="btnBuscar" class="btn btn-primary w-100">Buscar</button>
+                        <button type="button" id="btnBuscar" class="btn btn-primary btn-block">Buscar</button>
                     </div>
                 </div>
             </form>
@@ -58,11 +64,23 @@
             </div>
         </div>
     </div>
-    <div class="progress-container">
-        <div class="row justify-content-center">
-            <div class="col-lg-6">
-                <div class="progress-box">
-                    <h2>ALAS DE PARACAIDISMO EXPERTO</h2>
+    <button type="button" id="btnMostrarProgreso" class="btn btn-primary btn-block" data-toggle="modal" data-target="#modalProgreso">Proceso de Condecoraciones</button>
+
+    <div class="modal fade" id="modalProgreso" tabindex="-1" role="dialog" aria-labelledby="modalProgresoLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalProgresoLabel">Proceso de Condecoraciones</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="progress-container" id="contenedorProgreso">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-5">
+                                <div class="progress-box">
+                                    <h2>ALAS DE PARACAIDISMO EXPERTO</h2>
             <p>Saltos Totales</p>
             <div id="divTotal"></div>
             <progress id="progresoTotal" value="0" max="100"></progress>
@@ -75,10 +93,10 @@
             <div id="divJefe"></div>
             <progress id="progresoJefe" value="0" max="100"></progress>
             </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="progress-box">
-                    <h2>ALAS DE PARACAIDISMO MAESTRO</h2>
+                            </div>
+                            <div class="col-lg-5">
+                                <div class="progress-box">
+                                    <h2>ALAS DE PARACAIDISMO MAESTRO</h2>
             <p>Saltos Totales</p>
             <div id="divTotalMaestro"></div>
             <progress id="progresoTotalMaestro" value="0" max="100"></progress>
@@ -95,6 +113,13 @@
             <div id="divNocturnoMaestro"></div>
             <progress id="progresoNocturnoMaestro" value="0" max="100"></progress>
             </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                </div>
             </div>
         </div>
     </div>
