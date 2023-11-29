@@ -105,8 +105,12 @@
                             <li>
                                 <a class="dropdown-item nav-link text-white "
                                     href="/paracaidistas/listaparacaidassaltos"><i
-                                        class="ms-lg-0 ms-2 bi bi-plus-circle me-2"></i>Disponibilidad Paracaidas
-                                    Saltos</a>
+                                        class="ms-lg-0 ms-2 bi bi-plus-circle me-2"></i>Disponibilidad Paracaidas</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item nav-link text-white "
+                                    href="/paracaidistas/estadistica"><i
+                                        class="ms-lg-0 ms-2 bi bi-plus-circle me-2"></i>Grafica Estadisticas Paracaidas</a>
                             </li>
                         </ul>
                     </div>

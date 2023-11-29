@@ -21,6 +21,7 @@ use Controllers\ControlController;
 use Controllers\ControlCivilController; 
 use Controllers\ReporteController; 
 use Controllers\Reporte2Controller; 
+use Controllers\EstadisticaController; 
 
 
 $router = new Router();
@@ -126,5 +127,8 @@ $router->get('/pdf', [ReporteController::class,'pdf']);
 $router->get('/pdf2', [Reporte2Controller::class,'pdf2']);
 
 
+$router->get('/estadisticas', [EstadisticaController::class, 'index']);
+$router->get('/API/estadisticas/getEstadisticas', [EstadisticaController::class, 'getDataAPI']);
+
 $router->comprobarRutas();
-?>
+?>n
