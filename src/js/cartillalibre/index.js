@@ -12,8 +12,10 @@ const btnBuscar = document.getElementById('btnBuscar');
 
 const buscar = async () => {
     let id_paracaidista = formulario.codigo_paracaidista.value;
+    console.log(id_paracaidista)
 
-    const url = `/paracaidistas/pdf?id_paracaidista=${id_paracaidista}`;
+
+    const url = `/paracaidistas/pdf2?id_paracaidista=${id_paracaidista}`;
     const config = {
         method: 'GET'
     };

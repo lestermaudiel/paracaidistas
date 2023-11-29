@@ -122,7 +122,7 @@ $router->get('/cartillalibre', [CartillaLibreController::class, 'index']);
 //reporte
 
 $router->get('/pdf', [ReporteController::class,'pdf']);
-$router->get('/pdf2', [Reporte2Controller::class,'pdf']);
+$router->get('/pdf2', [Reporte2Controller::class,'pdf2']);
 
 
 $router->comprobarRutas();
