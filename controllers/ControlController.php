@@ -13,8 +13,6 @@ class ControlController
     public static function index(Router $router)
     {
         $router->render('control/index', [
-
-
         ]);
     }
 

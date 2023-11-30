@@ -15,7 +15,6 @@ class PistaController
             'pistas' => $pistas,
         ]);
     }
-
     public static function guardarAPI()
     {
         try {
@@ -41,7 +40,6 @@ class PistaController
             ]);
         }
     }
-
     public static function buscarAPI()
     {
         $pista_detalle = $_GET['pista_detalle'];

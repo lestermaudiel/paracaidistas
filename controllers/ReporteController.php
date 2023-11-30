@@ -6,8 +6,10 @@ use Model\ActiveRecord;
 use Mpdf\Mpdf;
 use MVC\Router;
 
-class ReporteController {
-    public static function pdf (Router $router){
+class ReporteController
+{
+    public static function pdf(Router $router)
+    {
         $id_paracaidista = $_GET['id_paracaidista'];
 
         $data = static::GetInforme($id_paracaidista);
@@ -19,24 +21,19 @@ class ReporteController {
             "format" => "Letter",
             "mode" => 'utf-8'
         ]);
-        $mpdf->SetMargins(30,35,25);
+        $mpdf->SetMargins(30, 35, 25);
 
-        $html = $router->load('reporte/pdf',[
+        $html = $router->load('reporte/pdf', [
             'dataSet' => $data,
             'info' => $info[0],
 
         ]);
-        // $htmlHeader = $router->load('reporte/header', [
-        //     'saludo' => $saludo
-        // ]);
-        // $htmlFooter = $router->load('reporte/footer');
-        // $mpdf->SetHTMLHeader($htmlHeader);
-        // $mpdf->SetHTMLFooter($htmlFooter);
         $mpdf->WriteHTML($html);
         $mpdf->Output();
     }
-private static function GetInfo($info){
-    $sql= " SELECT
+    private static function GetInfo($info)
+    {
+        $sql = " SELECT
                 CASE WHEN p.paraca_codigo is null
                     THEN  trim(pc.paraca_civil_nom1)||' '||trim(pc.paraca_civil_nom2)||' '||trim(pc.paraca_civil_ape1)||' '||trim(pc.paraca_civil_ape2) 
                     ELSE trim(mper.per_nom1)||' '||trim(mper.per_nom2)||' '||trim(mper.per_ape1)||' '||trim(mper.per_ape2) 
@@ -62,12 +59,13 @@ private static function GetInfo($info){
             p.paraca_codigo=$info or p.paraca_civil_dpi=$info";
         $resultados = ActiveRecord::fetchArray($sql);
 
-        return $resultados; 
-}
+        return $resultados;
+    }
 
-    private static function GetInforme($id_paracaidista) {
+    private static function GetInforme($id_paracaidista)
+    {
 
-        $sql="  SELECT         
+        $sql = "  SELECT         
         mdep.dep_desc_ct AS UNIDAD,
         PZ.zona_salto_nombre AS ZONA_SALTO,
         M.mani_fecha AS FECHA,
@@ -96,6 +94,6 @@ private static function GetInfo($info){
 
         $resultados = ActiveRecord::fetchArray($sql);
 
-        return $resultados;        
+        return $resultados;
     }
 }

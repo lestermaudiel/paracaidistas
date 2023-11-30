@@ -7,9 +7,6 @@ import { validarFormulario, Toast, confirmacion } from "../funciones";
 const formulario = document.getElementById('formularioCartillaEnganchado');
 const btnBuscar = document.getElementById('btnBuscar');
 
-
-
-
 const buscar = async () => {
     let id_paracaidista = formulario.codigo_paracaidista.value;
 

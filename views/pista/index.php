@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mantenimiento de Pistas</title>
 </head>
-
 <body>
     <h1 class="text-center">Formulario de Pistas</h1>
     <div class="row justify-content-center mb-5">
@@ -71,6 +70,5 @@
         </div>
     </div>
 </body>
-
 </html>
 <script src="<?= asset('./build/js/pista/index.js') ?>"></script>

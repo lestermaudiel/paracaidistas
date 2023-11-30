@@ -24,12 +24,15 @@ const datatable = new Datatable('#tablaAeronave', {
         { title: 'NO', render: () => contador++ },
         { title: 'Descripción de Aeronave', data: 'aer_desc_aeronave' },
         { title: 'Tipo de Ala', data: 'aer_tip_ala' },
-        { title: 'MODIFICAR', data: 'aer_tip_registro', searchable: false, orderable: false,
-          render: (data, type, row, meta) => {
-            return `<button class="btn btn-warning" data-id='${data}' data-desc='${row['aer_desc_aeronave']}' data-ala='${row['aer_tip_ala']}'>Modificar</button>` }
+        {
+            title: 'MODIFICAR', data: 'aer_tip_registro', searchable: false, orderable: false,
+            render: (data, type, row, meta) => {
+                return `<button class="btn btn-warning" data-id='${data}' data-desc='${row['aer_desc_aeronave']}' data-ala='${row['aer_tip_ala']}'>Modificar</button>`
+            }
         },
-        { title: 'ELIMINAR', data: 'aer_tip_registro', searchable: false, orderable: false,
-          render: (data) => `<button class="btn btn-danger" data-id='${data}'>Eliminar</button>` 
+        {
+            title: 'ELIMINAR', data: 'aer_tip_registro', searchable: false, orderable: false,
+            render: (data) => `<button class="btn btn-danger" data-id='${data}'>Eliminar</button>`
         },
     ],
 });

@@ -4,7 +4,6 @@ import { lenguaje } from "../lenguaje";
 import Swal from "sweetalert2";
 import { validarFormulario, Toast, confirmacion } from "../funciones";
 
-
 const formulario = document.querySelector('#formularioControl');
 const btnBuscar = document.querySelector('#btnBuscar');
 
@@ -53,19 +52,16 @@ const datatable = new Datatable('#tablaControl', {
         },
         {
             title: 'Saltos Total',
-            data: 'cantidad_saltos', 
+            data: 'cantidad_saltos',
         },
     ],
 });
 
 
-
-
-
 const buscar = async () => {
 
     let num_catalogo = formulario.codigo_paracaidista.value;
-console.log(num_catalogo);
+    console.log(num_catalogo);
 
     const url = `/paracaidistas/API/control/buscar?num_catalogo=${num_catalogo}`;
     const config = {
@@ -111,12 +107,12 @@ const buscarAlas = async () => {
             var tactico = data[1]['porcentaje']
             var jefe = data[0]['porcentaje']
 
-            progresoTotal.value+=total
-            progresoTactico.value+=tactico
-            progresoJefe.value+=jefe
-            divTotal.innerText =total + "%"
-            divTactico.innerText =tactico + "%"
-            divJefe.innerText =jefe + "%"
+            progresoTotal.value += total
+            progresoTactico.value += tactico
+            progresoJefe.value += jefe
+            divTotal.innerText = total + "%"
+            divTactico.innerText = tactico + "%"
+            divJefe.innerText = jefe + "%"
 
         } else {
             Toast.fire({
@@ -150,16 +146,16 @@ const buscarAlasMaestro = async () => {
             var jefe = data[0]['porcentaje']
             var nocturno = data[1]['porcentaje']
 
-            progresoTotalMaestro.value+=total
-            progresoTacticoMaestro.value+=tactico
-            progresoJefeMaestro.value+=jefe
-            progresoNocturnoMaestro.value+=nocturno
+            progresoTotalMaestro.value += total
+            progresoTacticoMaestro.value += tactico
+            progresoJefeMaestro.value += jefe
+            progresoNocturnoMaestro.value += nocturno
 
 
-            divTotalMaestro.innerText =total + "%"
-            divTacticoMaestro.innerText =tactico + "%"
-            divJefeMaestro.innerText =jefe + "%"
-            divNocturnoMaestro.innerText =nocturno + "%"
+            divTotalMaestro.innerText = total + "%"
+            divTacticoMaestro.innerText = tactico + "%"
+            divJefeMaestro.innerText = jefe + "%"
+            divNocturnoMaestro.innerText = nocturno + "%"
 
         } else {
             Toast.fire({

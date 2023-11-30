@@ -19,11 +19,8 @@ class ListaParacaidasSaltosController
         ]);
     }
 
-
     public static function buscarAPI()
     {
-
-
         $sql = "SELECT 
         paraca_cupula AS cupula,
         paraca_arnes AS arnes,

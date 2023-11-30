@@ -43,5 +43,6 @@
         </div>
     </div>
 </body>
+
 </html>
 <script src="<?= asset('./build/js/tiposalto/index.js') ?>"></script>

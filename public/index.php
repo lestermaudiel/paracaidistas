@@ -13,15 +13,15 @@ use Controllers\AltimetroController;
 use Controllers\PistaController;
 use Controllers\AeronaveController;
 use Controllers\CivilController;
-use Controllers\ParacaidasController;  
-use Controllers\ManifiestoController;  
-use Controllers\ParacaidistaController;  
-use Controllers\ListaParacaidasSaltosController; 
-use Controllers\ControlController; 
-use Controllers\ControlCivilController; 
-use Controllers\ReporteController; 
-use Controllers\Reporte2Controller; 
-use Controllers\EstadisticaController; 
+use Controllers\ParacaidasController;
+use Controllers\ManifiestoController;
+use Controllers\ParacaidistaController;
+use Controllers\ListaParacaidasSaltosController;
+use Controllers\ControlController;
+use Controllers\ControlCivilController;
+use Controllers\ReporteController;
+use Controllers\Reporte2Controller;
+use Controllers\EstadisticaController;
 
 
 $router = new Router();
@@ -120,14 +120,10 @@ $router->get('/cartillaenganchado', [CartillaEnganchadoController::class, 'index
 $router->get('/cartillalibre', [CartillaLibreController::class, 'index']);
 
 
-
-//reporte
-
-$router->get('/pdf', [ReporteController::class,'pdf']);
-$router->get('/pdf2', [Reporte2Controller::class,'pdf2']);
-
+$router->get('/pdf', [ReporteController::class, 'pdf']);
+$router->get('/pdf2', [Reporte2Controller::class, 'pdf2']);
 
 $router->get('/estadisticas', [EstadisticaController::class, 'index']);
-$router->get('/API/estadisticas/getEstadisticas', [EstadisticaController::class,'getDataAPI']);
+$router->get('/API/estadisticas/getEstadisticas', [EstadisticaController::class, 'getDataAPI']);
 
 $router->comprobarRutas();

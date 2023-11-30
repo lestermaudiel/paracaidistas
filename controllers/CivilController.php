@@ -19,10 +19,10 @@ class CivilController
     public static function guardarAPI()
     {
         try {
-    
+
             $civil = new Civil($_POST);
             $resultado = $civil->crear();
-    
+
             if ($resultado['resultado'] == 1) {
                 echo json_encode([
                     'mensaje' => 'Registro guardado correctamente',
@@ -42,7 +42,7 @@ class CivilController
             ]);
         }
     }
-    
+
 
     public static function buscarAPI()
     {

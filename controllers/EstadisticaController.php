@@ -13,7 +13,6 @@ class EstadisticaController
         $router->render('estadisticas/index', []);
     }
 
-
     public static function getDataAPI(Router $router)
     {
         $sql = "   SELECT

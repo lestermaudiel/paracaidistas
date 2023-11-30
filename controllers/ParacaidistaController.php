@@ -44,7 +44,7 @@ class ParacaidistaController
     }
 
     public static function buscarAPI()
-    {     
+    {
         $sql = "SELECT 
                     p.*,
                     trim(pc.paraca_civil_nom1)||' '||trim(pc.paraca_civil_nom2)||' '||trim(pc.paraca_civil_ape1)||' '||trim(pc.paraca_civil_ape2) civil,
@@ -53,7 +53,7 @@ class ParacaidistaController
                 FROM par_paracaidista p
                 LEFT JOIN par_paraca_civil pc on pc.paraca_civil_dpi = p.paraca_civil_dpi
                 LEFT JOIN mper pm on pm.per_catalogo = p.paraca_codigo
-                where paraca_situacion = 1 ";    
+                where paraca_situacion = 1 ";
 
         try {
             $paracaidistas = Paracaidista::fetchArray($sql);

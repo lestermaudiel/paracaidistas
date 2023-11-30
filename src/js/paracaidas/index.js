@@ -115,7 +115,6 @@ const cargarTiposParacaidas = async () => {
         // Limpia las opciones actuales
         selectTipoParacaidas.innerHTML = '';
 
-        // Añade una opción por cada tipo de paracaídas
         data.forEach((tipo) => {
             const option = document.createElement('option');
             option.value = tipo.tipo_par_id;
@@ -330,7 +329,6 @@ const traeDatos = (e) => {
 };
 
 const colocarDatos = (dataset) => {
-    // Asigna los valores a los campos del formulario
     formulario.paraca_tipo.value = dataset.paraca_tipo;
     formulario.paraca_cupula.value = dataset.paraca_cupula;
     formulario.paraca_arnes.value = dataset.paraca_arnes;
@@ -340,7 +338,6 @@ const colocarDatos = (dataset) => {
     formulario.paraca_saltos_uso.value = dataset.paraca_saltos_uso;
     formulario.paraca_id.value = dataset.id;
 
-    // Habilita y muestra los botones de Modificar y Cancelar
     btnGuardar.disabled = true;
     btnGuardar.parentElement.style.display = 'none';
     btnBuscar.disabled = true;
@@ -362,8 +359,6 @@ const cancelarAccion = () => {
     btnCancelar.disabled = true;
     btnCancelar.parentElement.style.display = 'none';
 };
-// Event listeners
-
 btnBuscar.addEventListener('click', buscar);
 btnCancelar.addEventListener('click', cancelarAccion);
 btnModificar.addEventListener('click', modificar);
@@ -377,15 +372,9 @@ datatable.on('click', '.btn-danger', function(e) {
 });
 
 
-
-
-// Carga los tipos de paracaídas al cambiar la opción del select
 selectTipoParacaidas.addEventListener('change', () => {
     buscar();
 });
-
-
-
 
 
 buscar();

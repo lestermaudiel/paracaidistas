@@ -70,7 +70,7 @@
             </table>
         </div>
     </div>
-    </body>
-</html>
-    <script src="<?= asset('./build/js/zonasalto/index.js')  ?>"></script>
+</body>
 
+</html>
+<script src="<?= asset('./build/js/zonasalto/index.js') ?>"></script>

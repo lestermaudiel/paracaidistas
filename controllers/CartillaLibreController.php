@@ -3,7 +3,7 @@
 namespace Controllers;
 
 use Exception;
-use Model\Paracaidista; 
+use Model\Paracaidista;
 use Model\Manifiesto;
 use MVC\Router;
 
@@ -14,5 +14,5 @@ class CartillaLibreController
         $router->render('cartillalibre/index', []);
     }
 
-    
+
 }

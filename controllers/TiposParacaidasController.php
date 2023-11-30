@@ -6,15 +6,17 @@ use Exception;
 use Model\TiposParacaidas;
 use MVC\Router;
 
-class TiposParacaidasController {
-    public static function index(Router $router) {
+class TiposParacaidasController
+{
+    public static function index(Router $router)
+    {
         $tiposParacaidas = TiposParacaidas::all();
         $router->render('tiposparacaidas/index', [
             'tiposParacaidas' => $tiposParacaidas,
         ]);
     }
-
-    public static function guardarAPI() {
+    public static function guardarAPI()
+    {
         try {
             $tipoParacaidas = new TiposParacaidas($_POST);
             $resultado = $tipoParacaidas->crear();
@@ -39,7 +41,8 @@ class TiposParacaidasController {
         }
     }
 
-    public static function modificarAPI() {
+    public static function modificarAPI()
+    {
         try {
             $tipoParacaidas = new TiposParacaidas($_POST);
             $resultado = $tipoParacaidas->actualizar();
@@ -64,7 +67,8 @@ class TiposParacaidasController {
         }
     }
 
-    public static function eliminarAPI() {
+    public static function eliminarAPI()
+    {
         try {
             $tipo_par_id = $_POST['tipo_par_id'];
             $tipoParacaidas = TiposParacaidas::find($tipo_par_id);
@@ -91,11 +95,12 @@ class TiposParacaidasController {
         }
     }
 
-    public static function buscarAPI() {
+    public static function buscarAPI()
+    {
         $tipo_par_lote = $_GET['tipo_par_lote'];
         $tipo_par_descripcion = $_GET['tipo_par_descripcion'];
 
-        $sql = "SELECT * FROM par_tipo_paracaidas WHERE tipo_par_id > 0 and tipo_par_situacion = 1 "; 
+        $sql = "SELECT * FROM par_tipo_paracaidas WHERE tipo_par_id > 0 and tipo_par_situacion = 1 ";
         if ($tipo_par_lote !== '') {
             $sql .= " AND tipo_par_lote LIKE '%$tipo_par_lote%' ";
         }

@@ -302,30 +302,11 @@ const denegar = async (e) => {
     }
 };
 
-const modificar = async (e) => {
-    // Implementa la lógica para modificar según tus necesidades
-};
-
-const traeDatos = (e) => {
-    // Implementa la lógica para obtener los datos y llenar el formulario de modificación
-};
-
-const colocarDatos = (dataset) => {
-    // Implementa la lógica para colocar los datos en el formulario de modificación
-};
-
-const cancelarAccion = () => {
-    // Implementa la lógica para cancelar la acción y limpiar el formulario
-};
-
 buscar();
 
 formulario.addEventListener('submit', guardar);
 datatable.on('click', '.btn-warning', aprobar);
-
 datatable.on('click', '.btn-danger', denegar);
-
-// inputParacaidista.addEventListener('change',getParacaidista)
 inputJefe.addEventListener('change', getJefeSalto);
 datatable.on('change', '.btn-success', (e) => {
     console.log("Here")

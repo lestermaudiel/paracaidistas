@@ -30,16 +30,19 @@ const datatable = new Datatable('#tablaCivil', {
         { title: 'Teléfono', data: 'paraca_civil_tel' },
         { title: 'Dirección', data: 'paraca_civil_direc' },
         { title: 'Email', data: 'paraca_civil_email' },
-        { title: 'MODIFICAR', data: 'paraca_civil_dpi', searchable: false, orderable: false,
-          render: (data, type, row, meta) => {
-            return `<button class="btn btn-warning" data-id='${data}' data-dpi='${row['paraca_civil_dpi']}' data-nom1='${row['paraca_civil_nom1']}' 
+        {
+            title: 'MODIFICAR', data: 'paraca_civil_dpi', searchable: false, orderable: false,
+            render: (data, type, row, meta) => {
+                return `<button class="btn btn-warning" data-id='${data}' data-dpi='${row['paraca_civil_dpi']}' data-nom1='${row['paraca_civil_nom1']}' 
             data-nom2='${row['paraca_civil_nom2']}' data-ape1='${row['paraca_civil_ape1']}' data-ape2='${row['paraca_civil_ape2']}' data-direc='${row['paraca_civil_direc']}'
-            data-tel='${row['paraca_civil_tel']}' data-email='${row['paraca_civil_email']}'>Modificar</button>` }
+            data-tel='${row['paraca_civil_tel']}' data-email='${row['paraca_civil_email']}'>Modificar</button>`
+            }
         },
-        { title: 'ELIMINAR', 
-        data: 'paraca_civil_dpi',
-        searchable: false, orderable: false,
-          render: (data) => `<button class="btn btn-danger" data-id='${data}'>Eliminar</button>` 
+        {
+            title: 'ELIMINAR',
+            data: 'paraca_civil_dpi',
+            searchable: false, orderable: false,
+            render: (data) => `<button class="btn btn-danger" data-id='${data}'>Eliminar</button>`
         },
     ],
 });

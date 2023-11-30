@@ -6,29 +6,24 @@ use Exception;
 use Model\ActiveRecord;
 use Model\DetalleManifiesto;
 use Model\Manifiesto;
-use Model\TiposParacaidas;
 use Model\Aeronave;
 use Model\Altimetro;
-use Model\Civil;
 use Model\Dependencia;
-use Model\Organizacion;
 use Model\Paracaidas;
-use Model\Paracaidista;
 use Model\Personal;
 use Model\TipoSalto;
 use Model\ZonaSalto;
 use Model\Pista;
 use Model\Plantrabajo;
-use Model\Grado;
 
 use MVC\Router;
 
 class ManifiestoController
 {
-    
+
     public static function index(Router $router)
     {
-        
+
         $pista = new Pista();
         $pistas = $pista->getPista();
 
@@ -95,7 +90,6 @@ class ManifiestoController
         }
     }
 
-
     public static function getJefeSaltoAPI()
     {
         $codigo_jefe = $_GET['codigo_jefe'];
@@ -119,7 +113,6 @@ class ManifiestoController
             ]);
         }
     }
-
 
     public static function buscarAPI()
     {
@@ -149,16 +142,6 @@ class ManifiestoController
                 'codigo' => 0
             ]);
         }
-    }
-
-    public static function modificarAPI()
-    {
-        // Implementa la lógica para modificar según tus necesidades
-    }
-
-    public static function eliminarAPI()
-    {
-        // Implementa la lógica para eliminar según tus necesidades
     }
 
     public static function aprobarAPI()
@@ -224,8 +207,8 @@ class ManifiestoController
         $paracaidas = $_POST['detalle_paracaidas'];
         $altimetro = $_POST['detalle_altimetro'];
         $stick = $_POST['detalle_stick'];
-       
-       
+
+
         $sqlParacaidista = " SELECT 
                                 paraca_id 
                             FROM par_paracaidista
@@ -233,8 +216,8 @@ class ManifiestoController
                             or paraca_civil_dpi= '$catalogo'";
 
         $idParacaidista = ActiveRecord::fetchFirst($sqlParacaidista);
-        
-       
+
+
         $sqlParacaidas = "SELECT 
                             paraca_id
                         FROM par_paracaidas
@@ -242,7 +225,7 @@ class ManifiestoController
 
         $idParacaidas = ActiveRecord::fetchFirst($sqlParacaidas);
 
-        
+
         $sqlAltimetro = "SELECT 
                             altimetro_id
                         FROM par_altimetro
@@ -251,27 +234,24 @@ class ManifiestoController
         $idAltimetro = ActiveRecord::fetchFirst($sqlAltimetro);
 
         $arr = array(
-            'detalle_mani_id'=>$_POST['detalle_mani_id'], 
-            'detalle_paracaidista' =>$idParacaidista['paraca_id'],
-            'detalle_paracaidas' =>$idParacaidas['paraca_id'], 
-            'detalle_altimetro' =>$idAltimetro['altimetro_id'],
+            'detalle_mani_id' => $_POST['detalle_mani_id'],
+            'detalle_paracaidista' => $idParacaidista['paraca_id'],
+            'detalle_paracaidas' => $idParacaidas['paraca_id'],
+            'detalle_altimetro' => $idAltimetro['altimetro_id'],
             'detalle_stick' => $stick
-            );
+        );
 
         $paracaidasID = $idParacaidas['paraca_id'];
         $paracaidasObject = Paracaidas::find($paracaidasID);
-        $paracaidasObject->paraca_saltos_uso++;        
+        $paracaidasObject->paraca_saltos_uso++;
         $resultado = $paracaidasObject->actualizar();
-
-        
-
 
         try {
             $detalleManifiesto = new DetalleManifiesto($arr);
             $resultado = $detalleManifiesto->crear();
 
             if ($resultado['resultado'] == 1) {
-               
+
 
                 echo json_encode([
                     'mensaje' => 'Registro guardado correctamente',

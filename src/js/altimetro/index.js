@@ -18,21 +18,23 @@ btnCancelar.parentElement.style.display = 'none';
 let contador = 1;
 
 const datatable = new Datatable('#tablaAltimetro', {
-    // Configuración de la tabla DataTable
     language: lenguaje,
     data: null,
     columns: [
         { title: 'NO', render: () => contador++ },
         { title: 'Número de Serie', data: 'altimetro_serie' },
         { title: 'Marca', data: 'altimetro_marca' },
-        { title: 'MODIFICAR', data: 'altimetro_id', searchable: false, orderable: false,
-          render: (data, type, row, meta) => {
-            return `<button class="btn btn-warning" data-id='${data}' data-serie='${row['altimetro_serie']}' data-marca='${row['altimetro_marca']}'>Modificar</button>` }
+        {
+            title: 'MODIFICAR', data: 'altimetro_id', searchable: false, orderable: false,
+            render: (data, type, row, meta) => {
+                return `<button class="btn btn-warning" data-id='${data}' data-serie='${row['altimetro_serie']}' data-marca='${row['altimetro_marca']}'>Modificar</button>`
+            }
         },
-        { title: 'ELIMINAR', 
-        data: 'altimetro_id',
-        searchable: false, orderable: false,
-          render: (data) => `<button class="btn btn-danger" data-id='${data}'>Eliminar</button>` 
+        {
+            title: 'ELIMINAR',
+            data: 'altimetro_id',
+            searchable: false, orderable: false,
+            render: (data) => `<button class="btn btn-danger" data-id='${data}'>Eliminar</button>`
         },
     ],
 });

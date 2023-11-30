@@ -11,7 +11,6 @@
     <h1 class="text-center">Formulario de Aeronave</h1>
     <div class="row justify-content-center mb-5">
         <form class="col-lg-8 border bg-light p-3" id="formularioAeronave">
-            <!-- <input type="hidden" name="aeronave_id" id="aeronave_id"> -->
             <div class="row mb-3">
                 <div class="col">
                     <label for="aer_desc_aeronave">Descripción de Aeronave</label>

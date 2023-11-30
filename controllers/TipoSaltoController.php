@@ -14,7 +14,6 @@ class TipoSaltoController
             'tipoSalto' => $tipoSalto,
         ]);
     }
-
     public static function guardarAPI()
     {
         try {

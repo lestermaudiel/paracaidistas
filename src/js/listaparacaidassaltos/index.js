@@ -56,22 +56,10 @@ const datatable = new Datatable('#tablaListaParacaidassaltos', {
             title: 'Fecha Caducidad',
             data: 'fecha_caducidad',
             createdCell: function (td, cellData, rowData, row, col) {
-                // cellData es la fecha caducidad formateada
-                // Agrega tu lógica de colores aquí para la fecha
-
-                // Convierte la fecha formateada a un objeto Date
                 const fechaCaducidad = new Date(cellData);
-
-                // Obtiene la fecha actual
                 const fechaActual = new Date();
-
-                // Calcula la diferencia en milisegundos
                 const diferenciaMilisegundos = fechaCaducidad - fechaActual;
-
-                // Calcula la diferencia en días
                 const diferenciaDias = diferenciaMilisegundos / (1000 * 60 * 60 * 24);
-
-                // Aplica colores basándote en la lógica que mencionaste
                 if (diferenciaDias > 365) {
                     $(td).css('background-color', 'lightgreen'); // Más de un año: verde
                 } else if (diferenciaDias > 180) {

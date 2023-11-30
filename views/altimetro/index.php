@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mantenimiento de Altímetros</title>
 </head>
-
 <body>
     <h1 class="text-center">Mantenimiento de Altímetros</h1>
     <div class="row justify-content-center mb-5">

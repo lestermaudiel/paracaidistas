@@ -27,14 +27,17 @@ const datatable = new Datatable('#tablaPista', {
         { title: 'Longitud', data: 'pista_salto_longitud' },
         { title: 'Dirección de Latitud', data: 'pista_salto_direc_latitud' },
         { title: 'Dirección de Longitud', data: 'pista_salto_direc_longitud' },
-        { title: 'MODIFICAR', data: 'pista_id', searchable: false, orderable: false,
-          render: (data, type, row, meta) => {
-            return `<button class="btn btn-warning" data-id='${data}' data-detalle='${row['pista_detalle']}' data-latitud='${row['pista_salto_latitud']}' data-longitud='${row['pista_salto_longitud']}' data-direc-latitud='${row['pista_salto_direc_latitud']}' data-direc-longitud='${row['pista_salto_direc_longitud']}'>Modificar</button>` }
+        {
+            title: 'MODIFICAR', data: 'pista_id', searchable: false, orderable: false,
+            render: (data, type, row, meta) => {
+                return `<button class="btn btn-warning" data-id='${data}' data-detalle='${row['pista_detalle']}' data-latitud='${row['pista_salto_latitud']}' data-longitud='${row['pista_salto_longitud']}' data-direc-latitud='${row['pista_salto_direc_latitud']}' data-direc-longitud='${row['pista_salto_direc_longitud']}'>Modificar</button>`
+            }
         },
-        { title: 'ELIMINAR', 
-        data: 'pista_id',
-        searchable: false, orderable: false,
-          render: (data) => `<button class="btn btn-danger" data-id='${data}'>Eliminar</button>` 
+        {
+            title: 'ELIMINAR',
+            data: 'pista_id',
+            searchable: false, orderable: false,
+            render: (data) => `<button class="btn btn-danger" data-id='${data}'>Eliminar</button>`
         },
     ],
 });

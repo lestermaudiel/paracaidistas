@@ -14,8 +14,8 @@ class ParacaidasController
         $tipoparacaidas = new TiposParacaidas();
         $tipoparacaidas = $tipoparacaidas->getTipoParacaidas();
         $router->render('paracaidas/index', [
-            
-            'tipoParacaidas'  => $tipoparacaidas,
+
+            'tipoParacaidas' => $tipoparacaidas,
         ]);
     }
 
@@ -127,7 +127,7 @@ class ParacaidasController
         }
     }
 
-    }
+}
 
 
 
