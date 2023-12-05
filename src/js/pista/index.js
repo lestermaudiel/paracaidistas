@@ -24,8 +24,8 @@ const datatable = new Datatable('#tablaPista', {
         { title: 'NO', render: () => contador++ },
         { title: 'Detalle de la Pista', data: 'pista_detalle' },
         { title: 'Latitud', data: 'pista_salto_latitud' },
-        { title: 'Longitud', data: 'pista_salto_longitud' },
         { title: 'Dirección de Latitud', data: 'pista_salto_direc_latitud' },
+        { title: 'Longitud', data: 'pista_salto_longitud' },
         { title: 'Dirección de Longitud', data: 'pista_salto_direc_longitud' },
         {
             title: 'MODIFICAR', data: 'pista_id', searchable: false, orderable: false,
