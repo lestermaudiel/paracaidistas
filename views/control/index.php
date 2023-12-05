@@ -79,10 +79,9 @@
                 </div>
                 <div class="modal-body">
                     <div class="progress-container" id="contenedorProgreso">
-                    <img src="./public/images/paracaidista.jpg" alt="Maestro"
-                style="width: 300px; height: auto; border-radius: 8px;">
+                        <img src="./public/images/paracaidista.jpg" alt="Maestro"
+                            style="width: 300px; height: auto; border-radius: 8px;">
                         <div class="row justify-content-center">
-                            
                             <div class="col-lg-5">
                                 <div class="progress-box">
                                     <h2>ALAS DE PARACAIDISMO EXPERTO</h2>
@@ -102,9 +101,9 @@
                                     <progress id="progresoJefe" value="0" max="100"></progress>
                                 </div>
                             </div>
-                            
+
                             <div class="col-lg-5">
-                                
+
                                 <div class="progress-box">
                                     <h2>ALAS DE PARACAIDISMO MAESTRO</h2>
                                     <img src="./public/images/maestro.jpg" alt="Maestro"
