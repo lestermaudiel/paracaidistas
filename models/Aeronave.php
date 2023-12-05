@@ -4,7 +4,7 @@ namespace Model;
 
 class Aeronave extends ActiveRecord
 {
-    public static $tabla = 'fag_tip_aeronave';
+    public static $tabla = 'par_aeronave';
     public static $columnasDB = ['aer_desc_aeronave', 'aer_tip_ala', 'aer_tip_situacion'];
     public static $idTabla = 'aer_tip_registro';
 
@@ -22,7 +22,7 @@ class Aeronave extends ActiveRecord
     }
 
     public function getAeronave(){
-    $sql = "SELECT * from fag_tip_aeronave where aer_tip_situacion = 1";
+    $sql = "SELECT * from par_aeronave where aer_tip_situacion = 1";
     return $this->fetchArray($sql);
 }
 }

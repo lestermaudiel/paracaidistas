@@ -83,7 +83,7 @@ class ReporteController
     INNER JOIN par_zona_salto PZ ON M.mani_zona_salto = PZ.zona_salto_id
     INNER JOIN par_paracaidas PAR ON DM.detalle_paracaidas = PAR.paraca_id
     INNER JOIN par_tipo_paracaidas TP ON PAR.paraca_tipo = TP.tipo_par_id
-    INNER JOIN fag_tip_aeronave TA ON M.mani_tipo_aeronave = TA.aer_tip_registro
+    INNER JOIN par_aeronave TA ON M.mani_tipo_aeronave = TA.aer_tip_registro
     INNER JOIN par_tipo_salto TS ON M.mani_tipo_salto = TS.tipo_salto_id
     INNER JOIN mper pj ON M.mani_jefe = pj.per_catalogo
     INNER JOIN grados G ON G.gra_codigo = pj.per_grado

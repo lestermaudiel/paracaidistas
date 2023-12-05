@@ -46,7 +46,7 @@ class AeronaveController
     {
         $aer_desc_aeronave = $_GET['aer_desc_aeronave'];
 
-        $sql = "SELECT * FROM fag_tip_aeronave where aer_tip_situacion = '1' ";
+        $sql = "SELECT * FROM par_aeronave where aer_tip_situacion = '1' ";
         if ($aer_desc_aeronave != '') {
             $sql .= " and aer_desc_aeronave like '%$aer_desc_aeronave%' ";
         }
