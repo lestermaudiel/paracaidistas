@@ -14,12 +14,6 @@
             <input type="hidden" name="tipo_par_id" id="tipo_par_id">
             <div class="row mb-3">
                 <div class="col">
-                    <label for="tipo_par_lote">Lote del Tipo de Paracaídas</label>
-                    <input type="text" name="tipo_par_lote" id="tipo_par_lote" class="form-control">
-                </div>
-            </div>
-            <div class="row mb-3">
-                <div class="col">
                     <label for="tipo_par_descripcion">Descripción del Tipo de Paracaídas</label>
                     <input type="text" name="tipo_par_descripcion" id="tipo_par_descripcion" class="form-control">
                 </div>

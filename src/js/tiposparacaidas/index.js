@@ -1,4 +1,3 @@
-import { Dropdown } from "bootstrap";
 import Datatable from "datatables.net-bs5";
 import { lenguaje } from "../lenguaje";
 import Swal from "sweetalert2";
@@ -24,22 +23,15 @@ const datatable = new Datatable('#tablaTipop', {
             render: () => contador++
         },
         {
-            title: 'Lote de paraidas',
-            data: 'tipo_par_lote',
-        },
-        {
             title: 'Tipo de paracaidas',
             data: 'tipo_par_descripcion',
         },
-        
         {
             title: 'MODIFICAR',
             data: 'tipo_par_id',
             searchable: false,
             orderable: false,
-            render: (data, type, row, meta) => {
-                console.log(row['tipo_par_lote'])
-                return `<button class="btn btn-warning" data-id='${data}' data-lote='${row['tipo_par_lote']}' data-descripcion='${row['tipo_par_descripcion']}'>Modificar</button>`}
+            render: (data, type, row, meta) => `<button class="btn btn-warning" data-id='${data}' data-descripcion='${row['tipo_par_descripcion']}'>Modificar</button>`
         },
         {
             title: 'ELIMINAR',
@@ -52,11 +44,8 @@ const datatable = new Datatable('#tablaTipop', {
 });
 
 const buscar = async () => {
-    let tipo_par_lote = formulario.tipo_par_lote.value;
     let tipo_par_descripcion = formulario.tipo_par_descripcion.value;
-    console.log(tipo_par_lote)
-    console.log(tipo_par_descripcion)
-    const url = `/paracaidistas/API/tiposparacaidas/buscar?tipo_par_lote=${tipo_par_lote}&tipo_par_descripcion=${tipo_par_descripcion}`;
+    const url = `/paracaidistas/API/tiposparacaidas/buscar?tipo_par_descripcion=${tipo_par_descripcion}`;
     const config = {
         method: 'GET'
     };
@@ -64,7 +53,6 @@ const buscar = async () => {
     try {
         const respuesta = await fetch(url, config);
         const data = await respuesta.json();
-        console.log(data)
         datatable.clear().draw();
         if (data) {
             contador = 1;
@@ -91,9 +79,6 @@ const guardar = async (evento) => {
     }
 
     const body = new FormData(formulario);
-    for (var pair of body.entries()) {
-        console.log(pair[0] + ', ' + pair[1]);
-    }
     const url = '/paracaidistas/API/tiposparacaidas/guardar';
     const config = {
         method: 'POST',
@@ -131,6 +116,7 @@ const guardar = async (evento) => {
         console.log(error);
     }
 };
+
 const eliminar = async (e) => {
     const button = e.target;
     const id = button.dataset.id;
@@ -146,8 +132,6 @@ const eliminar = async (e) => {
         try {
             const respuesta = await fetch(url, config);
             const data = await respuesta.json();
-            // console.log(data);
-
             const { codigo, mensaje, detalle } = data;
             let icon = 'info';
             switch (codigo) {
@@ -226,21 +210,17 @@ const modificar = async (e) => {
 const traeDatos = (e) => {
     const button = e.target;
     const id = button.dataset.id;
-    const tipo_par_lote = button.dataset.lote;
     const tipo_par_descripcion = button.dataset.descripcion;
 
     const dataset = {
         id,
-        tipo_par_lote,
         tipo_par_descripcion,
     };
-    console.log(dataset)
 
     colocarDatos(dataset);
 };
 
 const colocarDatos = (dataset) => {
-    formulario.tipo_par_lote.value = dataset.tipo_par_lote;
     formulario.tipo_par_descripcion.value = dataset.tipo_par_descripcion;
     formulario.tipo_par_id.value = dataset.id;
 
@@ -265,7 +245,6 @@ const cancelarAccion = () => {
     btnCancelar.disabled = true;
     btnCancelar.parentElement.style.display = 'none';
 };
-
 
 
 buscar();

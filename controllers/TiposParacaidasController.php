@@ -15,6 +15,7 @@ class TiposParacaidasController
             'tiposParacaidas' => $tiposParacaidas,
         ]);
     }
+
     public static function guardarAPI()
     {
         try {
@@ -97,13 +98,9 @@ class TiposParacaidasController
 
     public static function buscarAPI()
     {
-        $tipo_par_lote = $_GET['tipo_par_lote'];
         $tipo_par_descripcion = $_GET['tipo_par_descripcion'];
 
-        $sql = "SELECT * FROM par_tipo_paracaidas WHERE tipo_par_id > 0 and tipo_par_situacion = 1 ";
-        if ($tipo_par_lote !== '') {
-            $sql .= " AND tipo_par_lote LIKE '%$tipo_par_lote%' ";
-        }
+        $sql = "SELECT * FROM par_tipo_paracaidas WHERE tipo_par_id > 0 AND tipo_par_situacion = 1 ";
         if ($tipo_par_descripcion !== '') {
             $sql .= " AND tipo_par_descripcion LIKE '%$tipo_par_descripcion%' ";
         }
