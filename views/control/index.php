@@ -66,7 +66,6 @@
     </div>
     <button type="button" id="btnMostrarProgreso" class="btn btn-primary btn-block" data-toggle="modal"
         data-target="#modalProgreso">Proceso de Condecoraciones</button>
-
     <div class="modal fade" id="modalProgreso" tabindex="-1" role="dialog" aria-labelledby="modalProgresoLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">

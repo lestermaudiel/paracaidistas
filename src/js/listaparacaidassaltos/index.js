@@ -42,12 +42,15 @@ const datatable = new Datatable('#tablaListaParacaidassaltos', {
             data: 'saltos_disponibles',
             createdCell: function (td, cellData, rowData, row, col) {
                 if (cellData > 1000) {
-                    $(td).css('background-color', 'lightgreen');
+                    $(td).css('background-color', 'blue');
                 } else if (cellData > 100 && cellData <= 1000) {
-                    $(td).css('background-color', 'yellow');
+                    $(td).css('background-color', 'lightgreen');
                 } else if (cellData > 50 && cellData <= 100) {
+                    $(td).css('background-color', 'yellow');
+                } else if (cellData > 1 && cellData <= 50) {
                     $(td).css('background-color', 'orange');
-                } else if (cellData <= 50) {
+                }
+                else if (cellData <= 0) {
                     $(td).css('background-color', 'red');
                 }
             }
@@ -60,17 +63,20 @@ const datatable = new Datatable('#tablaListaParacaidassaltos', {
                 const fechaActual = new Date();
                 const diferenciaMilisegundos = fechaCaducidad - fechaActual;
                 const diferenciaDias = diferenciaMilisegundos / (1000 * 60 * 60 * 24);
+        
                 if (diferenciaDias > 365) {
-                    $(td).css('background-color', 'lightgreen'); // Más de un año: verde
+                    $(td).css('background-color', 'blue'); // Más de un año: azul
                 } else if (diferenciaDias > 180) {
-                    $(td).css('background-color', 'yellow'); // Más de 6 meses: amarillo
+                    $(td).css('background-color', 'green'); // Más de 6 meses: verde
                 } else if (diferenciaDias > 90) {
-                    $(td).css('background-color', 'orange'); // De 6 meses a 3 meses: naranja
+                    $(td).css('background-color', 'yellow'); // De 6 meses a 3 meses: amarillo
+                } else if (diferenciaDias > 30) {
+                    $(td).css('background-color', 'orange'); // De 3 meses a 1 mes: naranja
                 } else {
-                    $(td).css('background-color', 'red'); // Menos de 3 meses: rojo
+                    $(td).css('background-color', 'red'); // Menos de 1 mes: rojo
                 }
             }
-        },
+        }
     ],
 });
 
