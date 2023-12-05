@@ -83,6 +83,9 @@
                             <div class="col-lg-5">
                                 <div class="progress-box">
                                     <h2>ALAS DE PARACAIDISMO EXPERTO</h2>
+                                    <img src="./public/images/experto.jpg" alt="Experto"
+                                        style="width: 200px; height: auto; border-radius: 8px;">
+
                                     <p>Saltos Totales</p>
                                     <div id="divTotal"></div>
                                     <progress id="progresoTotal" value="0" max="100"></progress>
@@ -99,6 +102,8 @@
                             <div class="col-lg-5">
                                 <div class="progress-box">
                                     <h2>ALAS DE PARACAIDISMO MAESTRO</h2>
+                                    <img src="./public/images/maestro.jpg" alt="Maestro"
+                                        style="width: 200px; height: auto; border-radius: 8px;">
                                     <p>Saltos Totales</p>
                                     <div id="divTotalMaestro"></div>
                                     <progress id="progresoTotalMaestro" value="0" max="100"></progress>
