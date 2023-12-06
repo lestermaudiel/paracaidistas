@@ -185,63 +185,40 @@
     <div>
         <h1>CARTILLA DE SALTO LIBRE</h1>
         <table class="table table-bordered table-striped">
-            <thead>
-                <tr>
-                    <th rowspan="2">Salto No.</th>
-                    <th rowspan="2">Unidad</th>
-                    <th rowspan="2">Zona de Salto y Localización</th>
-                    <th rowspan="2">Fecha</th>
-                    <th rowspan="2">Número de Stick</th>
-                    <th rowspan="2">Tipo de Avión</th>
-                    <th rowspan="2">Tipo de Paracaídas</th>
-                    <th rowspan="2">Tipo de Salto</th>
-                    <th colspan="2">Oficial que Certifica</th>
-                    <th rowspan="2">Observaciones</th>
-                </tr>
-                <tr>
-                    <th>Nombre</th>
-                    <th>Grado</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($dataSet as $key => $data): ?>
-                    <tr>
-                        <td>
-                            <?= $key + 1 ?>
-                        </td>
-                        <td>
-                            <?= $data['unidad'] ?>
-                        </td>
-                        <td>
-                            <?= $data['zona_salto'] ?>
-                        </td>
-                        <td>
-                            <?= $data['fecha'] ?>
-                        </td>
-                        <td>
-                            <?= $data['stick'] ?>
-                        </td>
-                        <td>
-                            <?= $data['avion'] ?>
-                        </td>
-                        <td>
-                            <?= $data['tipo_paracaidas'] ?>
-                        </td>
-                        <td>
-                            <?= $data['tipo_salto'] ?>
-                        </td>
-                        <td>
-                            <?= $data['jefe'] ?>
-                        </td>
-                        <td>
-                            <?= $data['grado_jefe'] ?>
-                        </td>
-                        <td>
-                            <?= $data['observacion'] ?>
-                        </td>
-                    </tr>
-                <?php endforeach ?>
-            </tbody>
+    <thead>
+        <tr>
+            <th>Salto No.</th>
+            <th>Fecha</th>
+            <th>Localización</th>
+            <th>Tipo Avión</th>
+            <th>Certifica el salto</th>
+            <th>Paracaídas</th>
+            <th>Altura Salto</th>
+            <th>Retardo Segundos</th>
+            <th>Maniobras</th>
+            <th>Distancia del Blanco</th>
+            <th>Viento Superficie</th>
+            <th>Observaciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($dataSet as $key => $data): ?>
+            <tr>
+                <td><?= $key + 1 ?></td>
+                <td><?= $data['fecha'] ?></td>
+                <td><?= $data['zona_salto'] ?></td>
+                <td><?= $data['avion'] ?></td>
+                <td><?= $data['jefe'] ?></td>
+                <td><?= $data['tipo_paracaidas'] ?></td>
+                <td><?= $data['altura'] ?></td>
+                <td><?= $data['retardo'] ?></td>
+                <td><?= $data['maniobras'] ?></td>
+                <td><?= $data['distancia_del_blanco'] ?></td>
+                <td><?= $data['viento_superficie'] ?></td>
+                <td><?= $data['observacion'] ?></td>
+            </tr>
+        <?php endforeach ?>
+    </tbody>
         </table>
         <pagebreak />
     </div>

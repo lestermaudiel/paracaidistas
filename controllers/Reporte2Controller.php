@@ -77,22 +77,30 @@ class Reporte2Controller
         TS.tipo_salto_detalle AS TIPO_SALTO,
         trim(pj.per_nom1)||' '||trim(pj.per_nom2)||' '||trim(pj.per_ape1)||' '||trim(pj.per_ape2) AS JEFE,
         G.gra_desc_md AS GRADO_JEFE,
+        M.mani_altura AS ALTURA,
+        M.mani_retardo AS RETARDO,
+        M.mani_maniobra AS MANIOBRAS,
+        M.mani_distancia_blanco AS DISTANCIA_DEL_BLANCO,
+        M.mani_viento_superficie AS VIENTO_SUPERFICIE,
         M.mani_observacion AS OBSERVACION         
-    FROM par_detalle_manifiesto DM
-    INNER JOIN par_manifiesto M ON DM.detalle_mani_id = M.mani_id
-    LEFT JOIN par_paracaidista P ON DM.detalle_paracaidista = P.paraca_id
-    INNER JOIN mdep ON M.mani_unidad = mdep.dep_llave
-    INNER JOIN par_zona_salto PZ ON M.mani_zona_salto = PZ.zona_salto_id
-    INNER JOIN par_paracaidas PAR ON DM.detalle_paracaidas = PAR.paraca_id
-    INNER JOIN par_tipo_paracaidas TP ON PAR.paraca_tipo = TP.tipo_par_id
-    INNER JOIN par_aeronave TA ON M.mani_tipo_aeronave = TA.aer_tip_registro
-    INNER JOIN par_tipo_salto TS ON M.mani_tipo_salto = TS.tipo_salto_id
-    INNER JOIN mper pj ON M.mani_jefe = pj.per_catalogo
-    INNER JOIN grados G ON G.gra_codigo = pj.per_grado
-    WHERE (P.paraca_codigo = $id_paracaidista OR P.paraca_civil_dpi = $id_paracaidista)
-    AND NOT TS.tipo_salto_detalle = 'ENGANCHADO'
-    ORDER BY M.mani_id ASC
-       
+    FROM 
+        par_detalle_manifiesto DM
+        INNER JOIN par_manifiesto M ON DM.detalle_mani_id = M.mani_id
+        LEFT JOIN par_paracaidista P ON DM.detalle_paracaidista = P.paraca_id
+        INNER JOIN mdep ON M.mani_unidad = mdep.dep_llave
+        INNER JOIN par_zona_salto PZ ON M.mani_zona_salto = PZ.zona_salto_id
+        INNER JOIN par_paracaidas PAR ON DM.detalle_paracaidas = PAR.paraca_id
+        INNER JOIN par_tipo_paracaidas TP ON PAR.paraca_tipo = TP.tipo_par_id
+        INNER JOIN par_aeronave TA ON M.mani_tipo_aeronave = TA.aer_tip_registro
+        INNER JOIN par_tipo_salto TS ON M.mani_tipo_salto = TS.tipo_salto_id
+        INNER JOIN mper pj ON M.mani_jefe = pj.per_catalogo
+        INNER JOIN grados G ON G.gra_codigo = pj.per_grado
+    WHERE 
+        (P.paraca_codigo = $id_paracaidista OR P.paraca_civil_dpi = $id_paracaidista)
+        AND NOT TS.tipo_salto_detalle = 'ENGANCHADO'
+    ORDER BY 
+        M.mani_id ASC
+    
     ";
 
         $resultados = ActiveRecord::fetchArray($sql);
