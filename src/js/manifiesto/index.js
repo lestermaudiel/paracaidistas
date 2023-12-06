@@ -256,6 +256,8 @@ const getSaltosDisponibles = async (paracaidas) => {
 }
 
 const guardarDatos = async (id, paracaidistas) => {
+    let successCount = 0;
+
     for (const paracaidista of paracaidistas) {
         const formData = new FormData();
         formData.append("detalle_paracaidista", paracaidista['catalogo'])
@@ -275,21 +277,26 @@ const guardarDatos = async (id, paracaidistas) => {
             const respuesta = await fetch(url, config);
             const data = await respuesta.json();
             if (data.codigo === 1) {
-                Toast.fire({
-                    title: 'Registro guardado correctamente',
-                    icon: 'success'
-                });
-            } else {
-                Toast.fire({
-                    title: 'Ocurrió un error al guardar',
-                    icon: 'error'
-                });
+                successCount++;
             }
         } catch (error) {
             console.log(error);
         }
     }
+
+    if (successCount === paracaidistas.length) {
+        Toast.fire({
+            title: 'Todos los registros guardados correctamente',
+            icon: 'success'
+        });
+    } else {
+        Toast.fire({
+            title: 'Algunos registros no se guardaron correctamente',
+            icon: 'error'
+        });
+    }
 };
+
 
 
 
