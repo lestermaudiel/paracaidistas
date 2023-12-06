@@ -3,6 +3,9 @@ import Swal from "sweetalert2";
 import Chart from "chart.js/auto";
 import { Toast } from "../funciones";
 
+import Datatable from "datatables.net-bs5";
+import { lenguaje } from "../lenguaje";
+
 /* Canvas para las divisiones de los gráficos y evitar conflictos */
 const canvas = document.getElementById("chartparacaidas");
 
