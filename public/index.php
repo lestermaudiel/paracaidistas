@@ -99,6 +99,7 @@ $router->get('/API/manifiesto/buscar', [ManifiestoController::class, 'buscarAPI'
 $router->get('/API/manifiesto/getParacaidista', [ManifiestoController::class, 'getParacaidista']);
 $router->get('/API/manifiesto/getJefeSalto', [ManifiestoController::class, 'getJefeSaltoAPI']);
 $router->post('/API/manifiesto/guardarDetalle', [ManifiestoController::class, 'guardarDetalleAPI']);
+$router->get('/API/manifiesto/getSaltos', [ManifiestoController::class, 'getSalto']);
 
 $router->get('/paracaidista', [ParacaidistaController::class, 'index']);
 $router->post('/API/paracaidista/guardar', [ParacaidistaController::class, 'guardarAPI']);

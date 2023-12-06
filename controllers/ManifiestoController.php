@@ -199,6 +199,18 @@ class ManifiestoController
             ]);
         }
     }
+    public static function getSalto()
+    {
+
+        $paracaidas = $_GET['paracaidas'];
+        $sqlParacaidas = "  SELECT 
+                                paraca_saltos_total -  paraca_saltos_uso AS disponible
+                            FROM par_paracaidas
+                            WHERE paraca_cupula = '$paracaidas'";
+
+        $saltos = ActiveRecord::fetchArray($sqlParacaidas);
+        echo json_encode($saltos);      
+    }
 
     public static function guardarDetalleAPI()
     {

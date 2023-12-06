@@ -36,18 +36,20 @@ const datatable = new Datatable('#tablaManifiesto', {
             searchable: false, orderable: false,
             render: (data) => `<input type='file' class='btn btn-success' style='width: 220px' data-id='${data}' />`
         },
-        { title: 'APROBAR', 
-        data: 'mani_id',
-        searchable: false, orderable: false,
-          render: (data) => `<button class="btn btn-warning" data-id='${data}'>APROBAR</button>` 
+        {
+            title: 'APROBAR',
+            data: 'mani_id',
+            searchable: false, orderable: false,
+            render: (data) => `<button class="btn btn-warning" data-id='${data}'>APROBAR</button>`
         },
-        { title: 'DENEGAR', 
-        data: 'mani_id',
-        searchable: false, orderable: false,
-          render: (data) => `<button class="btn btn-danger" data-id='${data}'>DENEGAR</button>` 
+        {
+            title: 'DENEGAR',
+            data: 'mani_id',
+            searchable: false, orderable: false,
+            render: (data) => `<button class="btn btn-danger" data-id='${data}'>DENEGAR</button>`
         },
-       
-       
+
+
     ],
 });
 
@@ -65,7 +67,7 @@ const getJefeSalto = async (e) => {
 
     try {
         const respuesta = await fetch(url, config);
-        
+
         const data = await respuesta.json();
         console.log(respuesta);
         console.log(data);
@@ -156,13 +158,17 @@ const asignarParacaidas = async (evento) => {
 
     if (fileInput.files.length > 0) {
         const file = fileInput.files[0];
-        
 
         let json = new Promise((resolve, reject) => {
             Papa.parse(file, {
                 header: true,
                 complete(results) {
-                    resolve(results.data)
+                    console.log(results.data)
+                    const array = results.data.filter(function (dato) {
+                        return dato['catalogo'] != ''
+                    });
+
+                    resolve(array)
                 },
                 error(err) {
                     reject(err)
@@ -170,50 +176,121 @@ const asignarParacaidas = async (evento) => {
             })
         })
 
-        let paracaidistas = await json
-        console.log(paracaidistas)
+        let paracaidistas = await json;
+        var dataCell = ""
+        const tabla = await Promise.all(
+            paracaidistas.map(async (p) => {
 
-        for (const paracaidista of paracaidistas) {
-            const formData = new FormData();
-            formData.append("detalle_paracaidista", paracaidista['catalogo'])
-            formData.append("detalle_paracaidas", paracaidista['paracaidas'])
-            formData.append("detalle_altimetro", paracaidista['altimetro'])
-            formData.append("detalle_mani_id", id)
-            formData.append("detalle_stick", paracaidista['stick'])
-            for (var pair of formData.entries()) {
-                console.log(pair[0]+ ', ' + pair[1]); 
-            }
-            const url = '/paracaidistas/API/manifiesto/guardarDetalle';
-
-            const config = {
-                method: 'POST',
-                body: formData
-            };
-
-            try {
-                const respuesta =await fetch(url, config);
-                console.log(respuesta)
-                const data = await respuesta.json();
-                console.log(data)
-                if (data.codigo === 1) {
-                    Toast.fire({
-                        title: 'Registro guardado correctamente',
-                        icon: 'success'
-                    });
-                } else {
-                    Toast.fire({
-                        title: 'Ocurrió un error al guardar',
-                        icon: 'error'
-                    });
+                const disponible = await getSaltosDisponibles(p['paracaidas'])
+                console.log(disponible)
+                var cellColor = ""
+                if (disponible > 1000) {
+                    cellColor = 'background:#004dcf;';
+                } else if (disponible > 100 && disponible <= 1000) {
+                    cellColor = 'background:#8bc34a;';
+                } else if (disponible > 50 && disponible <= 100) {
+                    cellColor = 'background:#fccb00;';
+                } else if (disponible > 1 && disponible <= 50) {
+                    cellColor = 'background:#ff9800;';
+                } else if (disponible <= 0) {
+                    cellColor = 'background:#ff001f;';
                 }
-            } catch (error) {
-                console.log(error);
+
+                console.log(cellColor)
+                dataCell += `
+                <tr>
+                    <td>${p['catalogo']}</td>
+                    <td style=${cellColor}>${p['paracaidas']}</td>
+                    <td>${p['altimetro']}</td>
+                    <td>${p['stick']}</td>
+                </tr>
+            `}))
+
+        const tableHTML = `
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Catalogo</th>
+                        <th>Paracaidas</th>
+                        <th>Altimetro</th>
+                        <th>Stick</th>
+                    </tr>
+                </thead>
+                <tbody>
+                        ${dataCell}
+                </tbody>
+            </table>`;
+        Swal.fire({
+            title: 'Datos a guardar',
+            html: tableHTML,
+            icon: 'info',
+            showCancelButton: true,
+            confirmButtonText: 'Guardar',
+            cancelButtonText: 'Cancelar',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                guardarDatos(id, paracaidistas);
             }
+        });
+    }
+};
+
+const getSaltosDisponibles = async (paracaidas) => {
+    console.log(paracaidas)
+
+    const url = `/paracaidistas/API/manifiesto/getSaltos?paracaidas=${paracaidas}`;
+
+
+    const config = {
+        method: 'GET'
+    };
+
+    try {
+        const respuesta = await fetch(url, config);
+        const data = await respuesta.json();
+        console.log(data)
+        return data[0]['disponible']
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+const guardarDatos = async (id, paracaidistas) => {
+    for (const paracaidista of paracaidistas) {
+        const formData = new FormData();
+        formData.append("detalle_paracaidista", paracaidista['catalogo'])
+        formData.append("detalle_paracaidas", paracaidista['paracaidas'])
+        formData.append("detalle_altimetro", paracaidista['altimetro'])
+        formData.append("detalle_mani_id", id)
+        formData.append("detalle_stick", paracaidista['stick'])
+
+        const url = '/paracaidistas/API/manifiesto/guardarDetalle';
+
+        const config = {
+            method: 'POST',
+            body: formData
         };
 
+        try {
+            const respuesta = await fetch(url, config);
+            const data = await respuesta.json();
+            if (data.codigo === 1) {
+                Toast.fire({
+                    title: 'Registro guardado correctamente',
+                    icon: 'success'
+                });
+            } else {
+                Toast.fire({
+                    title: 'Ocurrió un error al guardar',
+                    icon: 'error'
+                });
+            }
+        } catch (error) {
+            console.log(error);
+        }
     }
-
 };
+
 
 
 
@@ -305,13 +382,13 @@ const denegar = async (e) => {
     }
 };
 maniTipoSalto.addEventListener('change', function (e) {
-const select = e.target
-const selectedValue = select.value;
-if (selectedValue === '9') {
-    divOculto.style.display = "none";
-} else {
-    divOculto.style.display = "block";
-}
+    const select = e.target
+    const selectedValue = select.value;
+    if (selectedValue === '9') {
+        divOculto.style.display = "none";
+    } else {
+        divOculto.style.display = "block";
+    }
 
 
 
