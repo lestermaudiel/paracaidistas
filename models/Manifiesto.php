@@ -20,6 +20,10 @@ class Manifiesto extends ActiveRecord
         'mani_unidad',
         'mani_situacion',
         'mani_observacion',
+        'mani_retardo',
+        'mani_maniobra',
+        'mani_distancia_blanco',
+        'mani_viento_superficie',
     ];
     public static $idTabla = 'mani_id';
 
@@ -39,6 +43,10 @@ class Manifiesto extends ActiveRecord
 
     public $mani_situacion;
     public $mani_observacion;
+    public $mani_retardo;
+    public $mani_maniobra;
+    public $mani_distancia_blanco;
+    public $mani_viento_superficie;
 
     public function __construct($args = [])
     {
@@ -57,5 +65,10 @@ class Manifiesto extends ActiveRecord
         $this->mani_unidad = $args['mani_unidad'] ?? null;
         $this->mani_observacion = $args['mani_observacion'] ?? null;
         $this->mani_situacion = $args['mani_situacion'] ?? 1;
+        $this->mani_retardo = $args['mani_retardo'] ?? null;
+        $this->mani_maniobra = $args['mani_maniobra'] ?? null;
+        $this->mani_distancia_blanco = $args['mani_distancia_blanco'] ?? null;
+        $this->mani_viento_superficie = $args['mani_viento_superficie'] ?? null;
+    
     }
 }

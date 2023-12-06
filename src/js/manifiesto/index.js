@@ -11,6 +11,9 @@ const inputJefe = document.getElementById('inputJefe');
 const btnGuardar = document.getElementById('btnGuardar');
 const inputParacaidista = document.getElementById('identificacion_paracaidista');
 
+const maniTipoSalto = document.getElementById('mani_tipo_salto');
+const camposAdicionales = document.querySelector('.ocultar-campos');
+const divOculto = document.getElementById('ocultar-campos')
 let contador = 1;
 
 const datatable = new Datatable('#tablaManifiesto', {
@@ -301,6 +304,18 @@ const denegar = async (e) => {
 
     }
 };
+maniTipoSalto.addEventListener('change', function (e) {
+const select = e.target
+const selectedValue = select.value;
+if (selectedValue === '9') {
+    divOculto.style.display = "none";
+} else {
+    divOculto.style.display = "block";
+}
+
+
+
+});
 
 buscar();
 
@@ -312,4 +327,5 @@ datatable.on('change', '.btn-success', (e) => {
     console.log("Here")
     asignarParacaidas(e)
 });
+
 

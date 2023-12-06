@@ -19,7 +19,6 @@
         </div>
     </div>
 </div>
-
 <script src="<?= asset('./build/js/estadisticas/index.js') ?>"></script>
 </body>
 </html>

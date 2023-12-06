@@ -105,11 +105,11 @@
             <div class="row mb-3">
                 <div class="col">
                     <label for="mani_jefe">Jefe de Salto</label>
-                    <input type="input" name="mani_jefe" id="inputJefe" class="form-control" >
+                    <input type="input" name="mani_jefe" id="inputJefe" class="form-control">
                 </div>
                 <div class="col">
                     <label for="nombre_jefe">Nombre del Jefe</label>
-                    <input type="input" name="nombre_jefe" id="nombre_jefe" class="form-control" >
+                    <input type="input" name="nombre_jefe" id="nombre_jefe" class="form-control">
                 </div>
             </div>
             <div class="row mb-3">
@@ -129,6 +129,25 @@
                     <textarea name="mani_observacion" id="mani_observacion" class="form-control"></textarea>
                 </div>
             </div>
+            <div class="row mb-3"  id="ocultar-campos">
+                <div class="col" >
+                    <label for="mani_retardo">Retardo</label>
+                    <input type="number" name="mani_retardo" id="mani_retardo" class="form-control">
+                </div>
+                <div class="col" >
+                    <label for="mani_maniobra">Maniobra</label>
+                    <input type="text" name="mani_maniobra" id="mani_maniobra" class="form-control">
+                </div>
+                <div class="col" >
+                    <label for="mani_distancia_blanco">Distancia al Blanco</label>
+                    <input type="text" name="mani_distancia_blanco" id="mani_distancia_blanco" class="form-control">
+                </div>
+                <div class="col" >
+                    <label for="mani_viento_superficie">Viento en Superficie</label>
+                    <input type="text" name="mani_viento_superficie" id="mani_viento_superficie" class="form-control">
+                </div>
+            </div>
+
             <div class="row mb-3">
                 <div class="col">
                     <label for="mani_situacion">Situación</label>
@@ -140,7 +159,7 @@
                     </select>
                 </div>
             </div>
-            
+
             <div class="row mb-3">
                 <div class="col">
                     <button type="submit" form="formularioManifiesto" id="btnGuardar"
