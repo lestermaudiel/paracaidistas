@@ -8,10 +8,12 @@ import { lenguaje } from "../lenguaje";
 
 /* Canvas para las divisiones de los gráficos y evitar conflictos */
 const canvas = document.getElementById("chartparacaidas");
+const canvasTipoParacaidas = document.getElementById("chartTipoParacaidas");
 
 const btnActualizar = document.getElementById("btnActualizar");
 
 const context = canvas.getContext("2d");
+const contextTipoParacaidas = canvasTipoParacaidas.getContext("2d");
 
 const chartparacaidas = new Chart(context, {
   type: "bar",
@@ -87,4 +89,77 @@ const getEstadisticas = async () => {
   }
 };
 
-btnActualizar.addEventListener('click', getEstadisticas)
+
+const chartTipoParacaidas = new Chart(contextTipoParacaidas, {
+  type: "bar",
+  data: {
+    labels: [],
+    datasets: [
+      {
+        label: "Tipo de Paracaídas",
+        data: [],
+        backgroundColor: [],
+      },
+    ],
+  },
+  options: {
+    indexAxis: "x",
+    scales: {
+      x: {
+        beginAtZero: true,
+      },
+      y: {
+        beginAtZero: true,
+      },
+    },
+  },
+});
+
+const getTipoParacaidas = async () => {
+  const url = `/paracaidistas/API/estadisticas/getTipoParacaidas`;
+  const config = {
+    method: "GET",
+  };
+
+  try {
+    const request = await fetch(url, config);
+    const data = await request.json();
+
+    console.log("Respuesta JSON (Tipo de Paracaídas):", data);
+    chartTipoParacaidas.data.labels = [];
+    chartTipoParacaidas.data.datasets[0].data = [];
+    chartTipoParacaidas.data.datasets[0].backgroundColor = [];
+
+    if (data && Object.keys(data).length > 0) {
+      data.forEach((registro) => {
+        chartTipoParacaidas.data.labels.push(registro.tipo_paracaida);
+        chartTipoParacaidas.data.datasets[0].data.push(registro.cantidad);
+        chartTipoParacaidas.data.datasets[0].backgroundColor.push(getRandomColor());
+      });
+
+      chartTipoParacaidas.update();
+    } else {
+      Toast.fire({
+        title: "No se encontraron registros para Tipo de Paracaídas",
+        icon: "info",
+      });
+    }
+  } catch (error) {
+    console.error("Error al obtener estadísticas de Tipo de Paracaídas:", error);
+    Toast.fire({
+      title: "Error al obtener estadísticas de Tipo de Paracaídas",
+      icon: "error",
+    });
+  }
+};
+
+
+
+
+
+
+
+btnActualizar.addEventListener('click', async () => {
+  await getEstadisticas();
+  await getTipoParacaidas();
+});

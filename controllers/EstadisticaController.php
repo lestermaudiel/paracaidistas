@@ -12,7 +12,30 @@ class EstadisticaController
     {
         $router->render('estadisticas/index', []);
     }
-
+    public static function getTipoParacaidas(Router $router)
+    {
+        $sql = "SELECT
+            tipo_par_descripcion AS tipo_paracaida,
+            COUNT(*) AS cantidad
+        FROM
+            par_paracaidas
+        JOIN
+            par_tipo_paracaidas ON par_paracaidas.paraca_tipo = par_tipo_paracaidas.tipo_par_id
+        GROUP BY
+            tipo_par_descripcion";
+    
+        try {
+            $resultados = Paracaidas::fetchArray($sql);
+            echo json_encode($resultados);
+        } catch (Exception $e) {
+            echo json_encode([
+                'detalle' => $e->getMessage(),
+                'mensaje' => 'Ocurrió un error al obtener estadísticas de Tipo de Paracaídas',
+                'codigo' => 0
+            ]);
+        }
+    }
+    
     public static function getDataAPI(Router $router)
     {
         $sql = "   SELECT
@@ -43,4 +66,9 @@ class EstadisticaController
 
         }
     }
+
+
+
+
+    
 }

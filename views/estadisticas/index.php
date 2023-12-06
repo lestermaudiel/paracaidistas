@@ -15,6 +15,11 @@
                     <h4>PARACAIDAS</h4>
                     <canvas id="chartparacaidas" width="100%"></canvas>
                 </div>
+
+                <div class="card col-lg-8 mb-5 item text-center">
+                    <h4>TIPO DE PARACAÍDAS</h4>
+                    <canvas id="chartTipoParacaidas" width="100%"></canvas>
+                </div>
             </div>
         </div>
     </div>
