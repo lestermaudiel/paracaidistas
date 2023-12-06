@@ -9,11 +9,16 @@ import { lenguaje } from "../lenguaje";
 /* Canvas para las divisiones de los gráficos y evitar conflictos */
 const canvas = document.getElementById("chartparacaidas");
 const canvasTipoParacaidas = document.getElementById("chartTipoParacaidas");
+const canvasCaducidad = document.getElementById("chartCaducidad");
+const canvasSaltos = document.getElementById("chartSaltos");
+
 
 const btnActualizar = document.getElementById("btnActualizar");
 
 const context = canvas.getContext("2d");
 const contextTipoParacaidas = canvasTipoParacaidas.getContext("2d");
+const contextCaducidad = canvasCaducidad.getContext("2d");
+const contextSaltos = canvasSaltos.getContext("2d");
 
 const chartparacaidas = new Chart(context, {
   type: "bar",
@@ -154,12 +159,135 @@ const getTipoParacaidas = async () => {
 };
 
 
+const chartCaducidad = new Chart(contextCaducidad, {
+  type: "bar",
+  data: {
+    labels: [],
+    datasets: [
+      {
+        label: "Disponibilidad por Fecha de Caducidad",
+        data: [],
+        backgroundColor: [],
+      },
+    ],
+  },
+  options: {
+    indexAxis: "x",
+    scales: {
+      x: {
+        beginAtZero: true,
+      },
+      y: {
+        beginAtZero: true,
+      },
+    },
+  },
+});
+
+const chartSaltos = new Chart(contextSaltos, {
+  type: "bar",
+  data: {
+    labels: [],
+    datasets: [
+      {
+        label: "Disponibilidad por Saltos",
+        data: [],
+        backgroundColor: [],
+      },
+    ],
+  },
+  options: {
+    indexAxis: "x",
+    scales: {
+      x: {
+        beginAtZero: true,
+      },
+      y: {
+        beginAtZero: true,
+      },
+    },
+  },
+});
 
 
+const getCaducidadParacaidas = async () => {
+  const url = `/paracaidistas/API/estadisticas/getCaducidadParacaidas`;
+  const config = {
+    method: "GET",
+  };
 
+  try {
+    const request = await fetch(url, config);
+    const data = await request.json();
 
+    console.log("Respuesta JSON (Fecha de Caducidad):", data);
+    chartCaducidad.data.labels = [];
+    chartCaducidad.data.datasets[0].data = [];
+    chartCaducidad.data.datasets[0].backgroundColor = [];
+
+    if (data && data.hasOwnProperty('tiempo_caducidad') && data.hasOwnProperty('cantidad')) {
+      // Procede con el bucle forEach
+      chartCaducidad.data.labels.push(data.tiempo_caducidad);
+      chartCaducidad.data.datasets[0].data.push(data.cantidad);
+      chartCaducidad.data.datasets[0].backgroundColor.push(getRandomColor());
+
+      chartCaducidad.update();
+    } else {
+      Toast.fire({
+        title: "No se encontraron registros para Fecha de Caducidad",
+        icon: "info",
+      });
+    }
+  } catch (error) {
+    console.error("Error al obtener estadísticas de Fecha de Caducidad:", error);
+    Toast.fire({
+      title: "Error al obtener estadísticas de Fecha de Caducidad",
+      icon: "error",
+    });
+  }
+};
+
+const getSaltosDisponibilidad = async () => {
+  const url = `/paracaidistas/API/estadisticas/getSaltosDisponibilidad`;
+  const config = {
+    method: "GET",
+  };
+
+  try {
+    const request = await fetch(url, config);
+    const data = await request.json();
+
+    console.log("Respuesta JSON (Saltos Disponibilidad):", data);
+    chartSaltos.data.labels = [];
+    chartSaltos.data.datasets[0].data = [];
+    chartSaltos.data.datasets[0].backgroundColor = [];
+
+    if (data && Object.keys(data).length > 0) {
+      data.forEach((registro) => {
+        chartSaltos.data.labels.push(registro.disponibilidad_saltos);
+        chartSaltos.data.datasets[0].data.push(registro.cantidad);
+        chartSaltos.data.datasets[0].backgroundColor.push(getRandomColor());
+      });
+
+      chartSaltos.update();
+    } else {
+      Toast.fire({
+        title: "No se encontraron registros para Disponibilidad por Saltos",
+        icon: "info",
+      });
+    }
+  } catch (error) {
+    console.error("Error al obtener estadísticas de Disponibilidad por Saltos:", error);
+    Toast.fire({
+      title: "Error al obtener estadísticas de Disponibilidad por Saltos",
+      icon: "error",
+    });
+  }
+};
 
 btnActualizar.addEventListener('click', async () => {
   await getEstadisticas();
   await getTipoParacaidas();
+  await getCaducidadParacaidas();
+  await getSaltosDisponibilidad();
 });

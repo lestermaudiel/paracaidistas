@@ -124,11 +124,16 @@ $router->get('/cartillalibre', [CartillaLibreController::class, 'index']);
 $router->get('/pdf', [ReporteController::class, 'pdf']);
 $router->get('/pdf2', [Reporte2Controller::class, 'pdf2']);
 
+
+
 $router->get('/estadisticas', [EstadisticaController::class, 'index']);
 $router->get('/API/estadisticas/getEstadisticas', [EstadisticaController::class, 'getDataAPI']);
 $router->get('/API/estadisticas/getTipoParacaidas', [EstadisticaController::class, 'getTipoParacaidas']);
-
+$router->get('/API/estadisticas/getCaducidadParacaidas', [EstadisticaController::class, 'getCaducidadParacaidasAPI']);
+$router->get('/API/estadisticas/getSaltosDisponibilidad', [EstadisticaController::class, 'getSaltosDisponibilidadAPI']);
 
 
 
 $router->comprobarRutas();
+
+
