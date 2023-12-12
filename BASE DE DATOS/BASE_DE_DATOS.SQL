@@ -147,7 +147,7 @@ CREATE TABLE par_manifiesto (
     mani_jefe INTEGER REFERENCES mper(per_catalogo),
     mani_unidad SMALLINT REFERENCES mdep(dep_llave),
     mani_observacion VARCHAR(255),
-    mani_situacion SMALLINT DEFAULT 1
+    mani_situacion SMALLINT DEFAULT 1,
     mani_retardo INTEGER,
     mani_maniobra VARCHAR(100),
     mani_distancia_blanco VARCHAR(100),
